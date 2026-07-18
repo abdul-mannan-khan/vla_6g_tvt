@@ -1,0 +1,1326 @@
+{
+  "method": "mlp_2k",
+  "architecture": "37 -> 256 -> BN -> 128 -> BN -> 64 -> 3",
+  "training_samples": 2000,
+  "training_time_s": 30.778527975082397,
+  "summary": {
+    "throughput_mbps": {
+      "mean": 170.16232325304358,
+      "std": 61.768898469328306,
+      "ci95": 12.167695438642033
+    },
+    "fairness_mean": 0.9529423288640159,
+    "coverage_mean": 0.6251666666666665,
+    "latency_ms": {
+      "mean": 0.40717525997024495,
+      "p50": 0.3422349982429296,
+      "p95": 0.483121003344422
+    }
+  },
+  "per_scenario": [
+    {
+      "scenario_id": 0,
+      "predicted_position": [
+        39.15509796142578,
+        42.52987289428711,
+        10.0
+      ],
+      "throughput": 159.217026271391,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 5.06765500176698,
+      "composite_score": 495.5302157628346
+    },
+    {
+      "scenario_id": 1,
+      "predicted_position": [
+        38.08799362182617,
+        42.81747817993164,
+        10.0
+      ],
+      "throughput": 293.4496964636222,
+      "fairness": 0.8944306733613829,
+      "coverage_rate": 0.7142857142857143,
+      "inference_ms": 0.47964200348360464,
+      "composite_score": 515.8275913151597
+    },
+    {
+      "scenario_id": 2,
+      "predicted_position": [
+        47.005470275878906,
+        54.08102035522461,
+        10.033136367797852
+      ],
+      "throughput": 113.36681633755452,
+      "fairness": 0.9410233074668827,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.549222000699956,
+      "composite_score": 450.3270820425975
+    },
+    {
+      "scenario_id": 3,
+      "predicted_position": [
+        45.92586898803711,
+        49.8927001953125,
+        10.0
+      ],
+      "throughput": 194.4374528280065,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.36328800342744216,
+      "composite_score": 516.6624716968039
+    },
+    {
+      "scenario_id": 4,
+      "predicted_position": [
+        46.04658126831055,
+        50.3934211730957,
+        10.357029914855957
+      ],
+      "throughput": 230.97005031820575,
+      "fairness": 1.0,
+      "coverage_rate": 0.8333333333333334,
+      "inference_ms": 0.33782999526010826,
+      "composite_score": 521.9153635242568
+    },
+    {
+      "scenario_id": 5,
+      "predicted_position": [
+        41.57281494140625,
+        50.643470764160156,
+        10.18736743927002
+      ],
+      "throughput": 240.61586899977857,
+      "fairness": 0.9344854391223079,
+      "coverage_rate": 0.5714285714285714,
+      "inference_ms": 0.3335450019221753,
+      "composite_score": 481.8580102794166
+    },
+    {
+      "scenario_id": 6,
+      "predicted_position": [
+        45.769256591796875,
+        41.79069900512695,
+        10.0
+      ],
+      "throughput": 181.96692654917706,
+      "fairness": 0.8980230988181068,
+      "coverage_rate": 0.4,
+      "inference_ms": 0.3427720002946444,
+      "composite_score": 418.58708557493827
+    },
+    {
+      "scenario_id": 7,
+      "predicted_position": [
+        47.79539489746094,
+        47.6772346496582,
+        10.0
+      ],
+      "throughput": 128.09878426426704,
+      "fairness": 0.9768694811221198,
+      "coverage_rate": 0.6,
+      "inference_ms": 0.3271120003773831,
+      "composite_score": 429.92011489519615
+    },
+    {
+      "scenario_id": 8,
+      "predicted_position": [
+        41.97132873535156,
+        50.47272872924805,
+        10.250306129455566
+      ],
+      "throughput": 249.39567813733137,
+      "fairness": 1.0000000000000002,
+      "coverage_rate": 0.8333333333333334,
+      "inference_ms": 0.7674209991819225,
+      "composite_score": 532.9707402157322
+    },
+    {
+      "scenario_id": 9,
+      "predicted_position": [
+        38.54859924316406,
+        47.9268798828125,
+        10.0
+      ],
+      "throughput": 190.1249617728729,
+      "fairness": 0.9186581775660129,
+      "coverage_rate": 0.8,
+      "inference_ms": 0.6618269981117919,
+      "composite_score": 469.6724303335276
+    },
+    {
+      "scenario_id": 10,
+      "predicted_position": [
+        44.31104278564453,
+        32.66796112060547,
+        10.0
+      ],
+      "throughput": 252.07233849054282,
+      "fairness": 0.858249805689533,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.8519699986209162,
+      "composite_score": 475.3850114678523
+    },
+    {
+      "scenario_id": 11,
+      "predicted_position": [
+        46.22412109375,
+        46.797420501708984,
+        10.001933097839355
+      ],
+      "throughput": 219.2833867156752,
+      "fairness": 0.979019865077831,
+      "coverage_rate": 0.8333333333333334,
+      "inference_ms": 0.41715699626365677,
+      "composite_score": 508.60932488608773
+    },
+    {
+      "scenario_id": 12,
+      "predicted_position": [
+        49.37584686279297,
+        41.01410675048828,
+        10.0
+      ],
+      "throughput": 297.89643617369336,
+      "fairness": 0.9979671322335072,
+      "coverage_rate": 0.8571428571428571,
+      "inference_ms": 0.37571999564534053,
+      "composite_score": 563.8422870885538
+    },
+    {
+      "scenario_id": 13,
+      "predicted_position": [
+        32.91899490356445,
+        40.71291732788086,
+        10.0
+      ],
+      "throughput": 324.6996921790199,
+      "fairness": 0.8337676079033275,
+      "coverage_rate": 0.7142857142857143,
+      "inference_ms": 0.3511670001898892,
+      "composite_score": 516.3786691069815
+    },
+    {
+      "scenario_id": 14,
+      "predicted_position": [
+        44.038002014160156,
+        48.220211029052734,
+        10.0
+      ],
+      "throughput": 242.16560088291882,
+      "fairness": 0.9280426810527365,
+      "coverage_rate": 0.8571428571428571,
+      "inference_ms": 0.3362499992363155,
+      "composite_score": 509.426450559858
+    },
+    {
+      "scenario_id": 15,
+      "predicted_position": [
+        46.731224060058594,
+        45.80805587768555,
+        10.0
+      ],
+      "throughput": 103.07601423390199,
+      "fairness": 0.9766717868294637,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.32857999758562073,
+      "composite_score": 388.1804779225136
+    },
+    {
+      "scenario_id": 16,
+      "predicted_position": [
+        54.014732360839844,
+        42.597843170166016,
+        10.324027061462402
+      ],
+      "throughput": 113.68988861800824,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.3508419977151789,
+      "composite_score": 434.88059983747155
+    },
+    {
+      "scenario_id": 17,
+      "predicted_position": [
+        44.2405891418457,
+        45.889827728271484,
+        10.0
+      ],
+      "throughput": 104.36645331409267,
+      "fairness": 0.8785118476738909,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.3311239997856319,
+      "composite_score": 359.50675962395616
+    },
+    {
+      "scenario_id": 18,
+      "predicted_position": [
+        47.03520965576172,
+        56.63682556152344,
+        11.157893180847168
+      ],
+      "throughput": 174.53735361575914,
+      "fairness": 0.9558198529394615,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.3365500015206635,
+      "composite_score": 458.1350347179606
+    },
+    {
+      "scenario_id": 19,
+      "predicted_position": [
+        46.4447021484375,
+        46.1264533996582,
+        10.0
+      ],
+      "throughput": 135.7729511043317,
+      "fairness": 0.9503050063331239,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.3476529964245856,
+      "composite_score": 416.5552725625362
+    },
+    {
+      "scenario_id": 20,
+      "predicted_position": [
+        52.752227783203125,
+        40.51018142700195,
+        10.336875915527344
+      ],
+      "throughput": 121.58893962557235,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.3477200007182546,
+      "composite_score": 406.28669710867666
+    },
+    {
+      "scenario_id": 21,
+      "predicted_position": [
+        48.941429138183594,
+        53.99723434448242,
+        10.0
+      ],
+      "throughput": 91.82854163033795,
+      "fairness": 0.9804935541372465,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.34810599754564464,
+      "composite_score": 415.91185788604344
+    },
+    {
+      "scenario_id": 22,
+      "predicted_position": [
+        46.61009216308594,
+        56.5826301574707,
+        10.223329544067383
+      ],
+      "throughput": 109.50173967280773,
+      "fairness": 0.9435346099201462,
+      "coverage_rate": 0.25,
+      "inference_ms": 0.3269680019002408,
+      "composite_score": 373.7614267797285
+    },
+    {
+      "scenario_id": 23,
+      "predicted_position": [
+        50.195335388183594,
+        47.94207763671875,
+        10.0
+      ],
+      "throughput": 67.47237110335962,
+      "fairness": 0.9915632208801457,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.3425389950280078,
+      "composite_score": 371.28572225939274
+    },
+    {
+      "scenario_id": 24,
+      "predicted_position": [
+        50.69577407836914,
+        42.77872848510742,
+        10.077712059020996
+      ],
+      "throughput": 121.95882750091687,
+      "fairness": 1.0000000000000002,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.34367899934295565,
+      "composite_score": 439.8419631672169
+    },
+    {
+      "scenario_id": 25,
+      "predicted_position": [
+        41.16767883300781,
+        48.48986053466797,
+        10.016467094421387
+      ],
+      "throughput": 200.80540434775068,
+      "fairness": 0.9277651968485535,
+      "coverage_rate": 0.8333333333333334,
+      "inference_ms": 0.3720280001289211,
+      "composite_score": 482.1461349965498
+    },
+    {
+      "scenario_id": 26,
+      "predicted_position": [
+        46.85963439941406,
+        52.80045700073242,
+        10.0
+      ],
+      "throughput": 116.26049810074834,
+      "fairness": 0.9377864044962312,
+      "coverage_rate": 0.75,
+      "inference_ms": 0.34968600084539503,
+      "composite_score": 426.0922202093184
+    },
+    {
+      "scenario_id": 27,
+      "predicted_position": [
+        44.04914093017578,
+        45.46406173706055,
+        10.0
+      ],
+      "throughput": 209.36433844637986,
+      "fairness": 0.9445435799717053,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.3631880026659928,
+      "composite_score": 442.31501039267283
+    },
+    {
+      "scenario_id": 28,
+      "predicted_position": [
+        49.53843688964844,
+        50.16648483276367,
+        10.0
+      ],
+      "throughput": 107.94257261937608,
+      "fairness": 1.0000000000000002,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.34415900154272094,
+      "composite_score": 431.4322102382924
+    },
+    {
+      "scenario_id": 29,
+      "predicted_position": [
+        55.8120231628418,
+        50.0280647277832,
+        10.703441619873047
+      ],
+      "throughput": 183.6042604530446,
+      "fairness": 0.9917054063909364,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.39937900146469474,
+      "composite_score": 474.3408448557744
+    },
+    {
+      "scenario_id": 30,
+      "predicted_position": [
+        44.402618408203125,
+        43.266056060791016,
+        10.0
+      ],
+      "throughput": 260.752274908438,
+      "fairness": 0.9133735404052153,
+      "coverage_rate": 0.5714285714285714,
+      "inference_ms": 0.3932859981432557,
+      "composite_score": 487.60628420948456
+    },
+    {
+      "scenario_id": 31,
+      "predicted_position": [
+        43.48434066772461,
+        46.70033645629883,
+        10.0
+      ],
+      "throughput": 150.87044440207535,
+      "fairness": 0.9714791132791712,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.3446180053288117,
+      "composite_score": 481.9660006249965
+    },
+    {
+      "scenario_id": 32,
+      "predicted_position": [
+        44.57139587402344,
+        38.988868713378906,
+        10.0
+      ],
+      "throughput": 202.72643796602603,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.35516299976734444,
+      "composite_score": 521.6358627796155
+    },
+    {
+      "scenario_id": 33,
+      "predicted_position": [
+        51.261146545410156,
+        53.52475357055664,
+        10.633480072021484
+      ],
+      "throughput": 190.70666279615614,
+      "fairness": 0.9959852993183551,
+      "coverage_rate": 0.16666666666666666,
+      "inference_ms": 0.38301199674606323,
+      "composite_score": 429.88625413986694
+    },
+    {
+      "scenario_id": 34,
+      "predicted_position": [
+        50.68362808227539,
+        33.17204284667969,
+        10.61320972442627
+      ],
+      "throughput": 140.55027786368888,
+      "fairness": 0.86794147145763,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.3418489941395819,
+      "composite_score": 394.7126081555023
+    },
+    {
+      "scenario_id": 35,
+      "predicted_position": [
+        48.35014724731445,
+        48.45161437988281,
+        10.0
+      ],
+      "throughput": 128.31590575154186,
+      "fairness": 0.9883161277469248,
+      "coverage_rate": 0.4,
+      "inference_ms": 0.34072299604304135,
+      "composite_score": 413.48438177500253
+    },
+    {
+      "scenario_id": 36,
+      "predicted_position": [
+        53.89105224609375,
+        40.28924560546875,
+        10.47893238067627
+      ],
+      "throughput": 118.97147703618867,
+      "fairness": 1.0,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.3248110006097704,
+      "composite_score": 438.0495528883799
+    },
+    {
+      "scenario_id": 37,
+      "predicted_position": [
+        49.4541015625,
+        50.6607551574707,
+        10.0
+      ],
+      "throughput": 94.3652348700497,
+      "fairness": 0.90406510468055,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.3576200033421628,
+      "composite_score": 377.8386723261948
+    },
+    {
+      "scenario_id": 38,
+      "predicted_position": [
+        45.73073959350586,
+        54.14744186401367,
+        10.0
+      ],
+      "throughput": 78.34051577683701,
+      "fairness": 0.9140566372023808,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.3903940014424734,
+      "composite_score": 354.5546339601498
+    },
+    {
+      "scenario_id": 39,
+      "predicted_position": [
+        49.174407958984375,
+        46.67142105102539,
+        10.0
+      ],
+      "throughput": 76.50437642016715,
+      "fairness": 0.9700794288245616,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.3254080002079718,
+      "composite_score": 370.2597878328021
+    },
+    {
+      "scenario_id": 40,
+      "predicted_position": [
+        39.25438690185547,
+        45.288970947265625,
+        10.0
+      ],
+      "throughput": 297.1427304594272,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.333673000568524,
+      "composite_score": 578.2856382756563
+    },
+    {
+      "scenario_id": 41,
+      "predicted_position": [
+        56.02815246582031,
+        41.4980354309082,
+        10.574766159057617
+      ],
+      "throughput": 151.396188459712,
+      "fairness": 0.9669542131981378,
+      "coverage_rate": 0.4,
+      "inference_ms": 0.32562399428570643,
+      "composite_score": 420.92397703526854
+    },
+    {
+      "scenario_id": 42,
+      "predicted_position": [
+        45.23285675048828,
+        45.588951110839844,
+        10.0
+      ],
+      "throughput": 207.52201963405165,
+      "fairness": 0.920236086489979,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.34609800059115514,
+      "composite_score": 467.2507043940914
+    },
+    {
+      "scenario_id": 43,
+      "predicted_position": [
+        42.890533447265625,
+        45.39188766479492,
+        10.0
+      ],
+      "throughput": 170.72309782395362,
+      "fairness": 0.8642759556253814,
+      "coverage_rate": 0.2857142857142857,
+      "inference_ms": 0.35559299431042746,
+      "composite_score": 390.28807395341516
+    },
+    {
+      "scenario_id": 44,
+      "predicted_position": [
+        42.48829650878906,
+        34.920204162597656,
+        10.0
+      ],
+      "throughput": 291.6644643364924,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.3504630003590137,
+      "composite_score": 574.9986786018954
+    },
+    {
+      "scenario_id": 45,
+      "predicted_position": [
+        51.00083923339844,
+        46.982295989990234,
+        10.0
+      ],
+      "throughput": 74.94849943107245,
+      "fairness": 0.8906683877876824,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.3150470001855865,
+      "composite_score": 345.5029493282815
+    },
+    {
+      "scenario_id": 46,
+      "predicted_position": [
+        44.04369354248047,
+        42.08320999145508,
+        10.0
+      ],
+      "throughput": 221.0940712694978,
+      "fairness": 0.8985284143060369,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.32159799593500793,
+      "composite_score": 452.2149670535097
+    },
+    {
+      "scenario_id": 47,
+      "predicted_position": [
+        45.719932556152344,
+        47.25992202758789,
+        10.0
+      ],
+      "throughput": 154.93329331300134,
+      "fairness": 0.9944412925160455,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.35529899469111115,
+      "composite_score": 491.29236374261444
+    },
+    {
+      "scenario_id": 48,
+      "predicted_position": [
+        39.94541549682617,
+        43.05295944213867,
+        10.0
+      ],
+      "throughput": 154.47791363481238,
+      "fairness": 1.0000000000000002,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.31770200439495966,
+      "composite_score": 492.6867481808875
+    },
+    {
+      "scenario_id": 49,
+      "predicted_position": [
+        35.27797317504883,
+        45.47317886352539,
+        10.0
+      ],
+      "throughput": 192.14057232462932,
+      "fairness": 0.9936701953918495,
+      "coverage_rate": 0.75,
+      "inference_ms": 0.3298739975434728,
+      "composite_score": 488.38540201233246
+    },
+    {
+      "scenario_id": 50,
+      "predicted_position": [
+        45.23753356933594,
+        48.16120147705078,
+        10.0
+      ],
+      "throughput": 167.19747597416952,
+      "fairness": 0.9177161197729471,
+      "coverage_rate": 0.6,
+      "inference_ms": 0.3114810024271719,
+      "composite_score": 435.6333215163858
+    },
+    {
+      "scenario_id": 51,
+      "predicted_position": [
+        47.0460205078125,
+        49.35453796386719,
+        10.0
+      ],
+      "throughput": 269.25936794180643,
+      "fairness": 1.0000000000000002,
+      "coverage_rate": 0.7142857142857143,
+      "inference_ms": 0.3806329987128265,
+      "composite_score": 532.9841921936554
+    },
+    {
+      "scenario_id": 52,
+      "predicted_position": [
+        41.79286575317383,
+        43.55332946777344,
+        10.0
+      ],
+      "throughput": 244.23981233672006,
+      "fairness": 1.0000000000000002,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.32885400287341326,
+      "composite_score": 546.543887402032
+    },
+    {
+      "scenario_id": 53,
+      "predicted_position": [
+        44.2994270324707,
+        50.389225006103516,
+        10.0
+      ],
+      "throughput": 226.74696509984508,
+      "fairness": 0.9394886981708888,
+      "coverage_rate": 0.42857142857142855,
+      "inference_ms": 0.3261070014559664,
+      "composite_score": 460.7519313683165
+    },
+    {
+      "scenario_id": 54,
+      "predicted_position": [
+        45.306800842285156,
+        44.6121940612793,
+        10.0
+      ],
+      "throughput": 178.45187457208593,
+      "fairness": 0.9106176407580434,
+      "coverage_rate": 0.8,
+      "inference_ms": 0.3186569956596941,
+      "composite_score": 460.2564169706646
+    },
+    {
+      "scenario_id": 55,
+      "predicted_position": [
+        46.276309967041016,
+        45.80421829223633,
+        10.0
+      ],
+      "throughput": 116.5366203519026,
+      "fairness": 0.9938039345625583,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.36095600080443546,
+      "composite_score": 401.3964859132424
+    },
+    {
+      "scenario_id": 56,
+      "predicted_position": [
+        47.96790313720703,
+        48.177734375,
+        10.0
+      ],
+      "throughput": 193.45300497784396,
+      "fairness": 1.0,
+      "coverage_rate": 0.8,
+      "inference_ms": 0.3294220005045645,
+      "composite_score": 496.07180298670636
+    },
+    {
+      "scenario_id": 57,
+      "predicted_position": [
+        49.95719909667969,
+        45.50081253051758,
+        10.0
+      ],
+      "throughput": 129.1841170296717,
+      "fairness": 0.9207052061510054,
+      "coverage_rate": 0.75,
+      "inference_ms": 0.3123119968222454,
+      "composite_score": 428.7220320631046
+    },
+    {
+      "scenario_id": 58,
+      "predicted_position": [
+        44.80907440185547,
+        50.60750961303711,
+        10.0
+      ],
+      "throughput": 163.21992590435465,
+      "fairness": 0.9270570390436587,
+      "coverage_rate": 0.8,
+      "inference_ms": 0.3208459966117516,
+      "composite_score": 456.0490672557104
+    },
+    {
+      "scenario_id": 59,
+      "predicted_position": [
+        43.60216522216797,
+        44.81884765625,
+        10.0
+      ],
+      "throughput": 157.74310084563464,
+      "fairness": 0.864263663473369,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.32638000266160816,
+      "composite_score": 387.2582928827248
+    },
+    {
+      "scenario_id": 60,
+      "predicted_position": [
+        44.469722747802734,
+        47.521846771240234,
+        10.0
+      ],
+      "throughput": 126.53148325168391,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.3425129980314523,
+      "composite_score": 475.91888995101027
+    },
+    {
+      "scenario_id": 61,
+      "predicted_position": [
+        53.42074966430664,
+        42.73080825805664,
+        10.049662590026855
+      ],
+      "throughput": 224.8783774953905,
+      "fairness": 0.9157645813185807,
+      "coverage_rate": 0.42857142857142855,
+      "inference_ms": 0.34019199665635824,
+      "composite_score": 452.51354374995134
+    },
+    {
+      "scenario_id": 62,
+      "predicted_position": [
+        46.56266784667969,
+        63.366634368896484,
+        11.28990364074707
+      ],
+      "throughput": 129.03482314132918,
+      "fairness": 0.9664178984670727,
+      "coverage_rate": 0.4,
+      "inference_ms": 0.3696080020745285,
+      "composite_score": 407.34626342491936
+    },
+    {
+      "scenario_id": 63,
+      "predicted_position": [
+        42.389915466308594,
+        45.32840347290039,
+        10.0
+      ],
+      "throughput": 202.95308259649823,
+      "fairness": 0.8660879810389794,
+      "coverage_rate": 0.5714285714285714,
+      "inference_ms": 0.3223729945602827,
+      "composite_score": 438.7411010124498
+    },
+    {
+      "scenario_id": 64,
+      "predicted_position": [
+        43.89641571044922,
+        53.73775863647461,
+        10.060774803161621
+      ],
+      "throughput": 148.66697944129987,
+      "fairness": 1.0,
+      "coverage_rate": 0.75,
+      "inference_ms": 0.34943900391226634,
+      "composite_score": 464.20018766477995
+    },
+    {
+      "scenario_id": 65,
+      "predicted_position": [
+        60.413597106933594,
+        46.02108383178711,
+        10.32102108001709
+      ],
+      "throughput": 139.74134214795686,
+      "fairness": 0.9636033274495566,
+      "coverage_rate": 0.2,
+      "inference_ms": 0.34195699845440686,
+      "composite_score": 392.92580352364104
+    },
+    {
+      "scenario_id": 66,
+      "predicted_position": [
+        46.44159698486328,
+        44.10841751098633,
+        10.0
+      ],
+      "throughput": 87.69288487491309,
+      "fairness": 0.8789379954661152,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.3599799965741113,
+      "composite_score": 349.6304628981157
+    },
+    {
+      "scenario_id": 67,
+      "predicted_position": [
+        46.085262298583984,
+        47.36374282836914,
+        10.0
+      ],
+      "throughput": 140.43515679163357,
+      "fairness": 0.972755738601897,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.33226999948965386,
+      "composite_score": 426.0878156555492
+    },
+    {
+      "scenario_id": 68,
+      "predicted_position": [
+        50.22710418701172,
+        41.196144104003906,
+        10.0
+      ],
+      "throughput": 211.67221420302596,
+      "fairness": 1.0,
+      "coverage_rate": 0.8,
+      "inference_ms": 0.3373750005266629,
+      "composite_score": 507.00332852181555
+    },
+    {
+      "scenario_id": 69,
+      "predicted_position": [
+        49.94655227661133,
+        44.96084213256836,
+        10.0
+      ],
+      "throughput": 130.04164933859005,
+      "fairness": 0.9312347047590731,
+      "coverage_rate": 0.4,
+      "inference_ms": 0.34938000317197293,
+      "composite_score": 397.3954010308759
+    },
+    {
+      "scenario_id": 70,
+      "predicted_position": [
+        50.016639709472656,
+        32.59294128417969,
+        10.65641975402832
+      ],
+      "throughput": 93.09624490951357,
+      "fairness": 0.8391039384674696,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.3587850005715154,
+      "composite_score": 340.9222618192823
+    },
+    {
+      "scenario_id": 71,
+      "predicted_position": [
+        47.39248275756836,
+        50.10019302368164,
+        10.07707405090332
+      ],
+      "throughput": 263.4019934574783,
+      "fairness": 1.0000000000000002,
+      "coverage_rate": 0.5714285714285714,
+      "inference_ms": 0.39149599615484476,
+      "composite_score": 515.1840532173442
+    },
+    {
+      "scenario_id": 72,
+      "predicted_position": [
+        42.29293441772461,
+        41.854270935058594,
+        10.0
+      ],
+      "throughput": 150.6522968564843,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.3354700020281598,
+      "composite_score": 490.39137811389054
+    },
+    {
+      "scenario_id": 73,
+      "predicted_position": [
+        60.302040100097656,
+        38.94373321533203,
+        11.273438453674316
+      ],
+      "throughput": 118.94707841835307,
+      "fairness": 0.9416303362322519,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.3637039990280755,
+      "composite_score": 403.8573479206874
+    },
+    {
+      "scenario_id": 74,
+      "predicted_position": [
+        42.800758361816406,
+        31.54088592529297,
+        10.0
+      ],
+      "throughput": 316.3098279876975,
+      "fairness": 0.856022439795953,
+      "coverage_rate": 0.7142857142857143,
+      "inference_ms": 0.3440189975663088,
+      "composite_score": 518.0212001599758
+    },
+    {
+      "scenario_id": 75,
+      "predicted_position": [
+        47.51927185058594,
+        46.16999435424805,
+        10.0
+      ],
+      "throughput": 77.32008608068688,
+      "fairness": 0.9422676701468955,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.349955000274349,
+      "composite_score": 329.07235269248076
+    },
+    {
+      "scenario_id": 76,
+      "predicted_position": [
+        51.63878631591797,
+        47.14627456665039,
+        10.0
+      ],
+      "throughput": 182.9036589324258,
+      "fairness": 1.0,
+      "coverage_rate": 0.6,
+      "inference_ms": 0.32778800232335925,
+      "composite_score": 469.7421953594555
+    },
+    {
+      "scenario_id": 77,
+      "predicted_position": [
+        48.71915817260742,
+        44.70970153808594,
+        10.0
+      ],
+      "throughput": 193.14307419217204,
+      "fairness": 0.9369765508218151,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.34624199906829745,
+      "composite_score": 396.97880976184774
+    },
+    {
+      "scenario_id": 78,
+      "predicted_position": [
+        46.09636688232422,
+        29.937236785888672,
+        10.286957740783691
+      ],
+      "throughput": 211.13843282339295,
+      "fairness": 0.8626716647976519,
+      "coverage_rate": 0.8,
+      "inference_ms": 0.35299700539326295,
+      "composite_score": 465.4845591333313
+    },
+    {
+      "scenario_id": 79,
+      "predicted_position": [
+        45.55857467651367,
+        45.31436538696289,
+        10.0
+      ],
+      "throughput": 126.93167252540941,
+      "fairness": 0.9990155740576769,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.33546899794600904,
+      "composite_score": 475.8636757325487
+    },
+    {
+      "scenario_id": 80,
+      "predicted_position": [
+        47.97602462768555,
+        54.4224739074707,
+        10.522732734680176
+      ],
+      "throughput": 238.7248869681879,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.7142857142857143,
+      "inference_ms": 0.33903300209203735,
+      "composite_score": 514.6635036094841
+    },
+    {
+      "scenario_id": 81,
+      "predicted_position": [
+        39.307430267333984,
+        50.339290618896484,
+        10.0
+      ],
+      "throughput": 112.84503421721976,
+      "fairness": 0.9862180784340246,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.34010300441877916,
+      "composite_score": 430.23911072720597
+    },
+    {
+      "scenario_id": 82,
+      "predicted_position": [
+        44.89896011352539,
+        54.949119567871094,
+        10.045157432556152
+      ],
+      "throughput": 77.53548435175465,
+      "fairness": 0.903510281116178,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.32828800613060594,
+      "composite_score": 350.9077082792395
+    },
+    {
+      "scenario_id": 83,
+      "predicted_position": [
+        46.94983673095703,
+        49.79025650024414,
+        10.0
+      ],
+      "throughput": 190.9320722034076,
+      "fairness": 1.0,
+      "coverage_rate": 0.8,
+      "inference_ms": 0.3945479984395206,
+      "composite_score": 494.55924332204455
+    },
+    {
+      "scenario_id": 84,
+      "predicted_position": [
+        44.76689147949219,
+        45.533164978027344,
+        10.0
+      ],
+      "throughput": 131.3592552964531,
+      "fairness": 1.0,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.3365299999131821,
+      "composite_score": 445.4822198445385
+    },
+    {
+      "scenario_id": 85,
+      "predicted_position": [
+        36.4995231628418,
+        49.87149429321289,
+        10.053698539733887
+      ],
+      "throughput": 156.02134639690013,
+      "fairness": 0.9372246471143496,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.3432649973547086,
+      "composite_score": 424.78020197244496
+    },
+    {
+      "scenario_id": 86,
+      "predicted_position": [
+        48.42027282714844,
+        37.91080093383789,
+        10.10119342803955
+      ],
+      "throughput": 184.98067740634585,
+      "fairness": 0.8970605223913426,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.36834100319538265,
+      "composite_score": 480.10656316121026
+    },
+    {
+      "scenario_id": 87,
+      "predicted_position": [
+        45.52195739746094,
+        45.46201705932617,
+        10.0
+      ],
+      "throughput": 107.9990031889789,
+      "fairness": 0.9766758269369534,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.3377399989403784,
+      "composite_score": 391.13548332780664
+    },
+    {
+      "scenario_id": 88,
+      "predicted_position": [
+        47.04865646362305,
+        51.62535095214844,
+        10.146674156188965
+      ],
+      "throughput": 256.92866541922797,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.3715960046974942,
+      "composite_score": 554.1571992515368
+    },
+    {
+      "scenario_id": 89,
+      "predicted_position": [
+        46.872249603271484,
+        46.68098449707031,
+        10.0
+      ],
+      "throughput": 157.23149113063397,
+      "fairness": 0.8791609612505957,
+      "coverage_rate": 0.6,
+      "inference_ms": 0.3253680042689666,
+      "composite_score": 418.0871830535591
+    },
+    {
+      "scenario_id": 90,
+      "predicted_position": [
+        46.50797653198242,
+        50.1860466003418,
+        10.277674674987793
+      ],
+      "throughput": 195.44440343461395,
+      "fairness": 0.9403511542041021,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.3309210005681962,
+      "composite_score": 449.37198832199897
+    },
+    {
+      "scenario_id": 91,
+      "predicted_position": [
+        47.225799560546875,
+        45.75226974487305,
+        10.0
+      ],
+      "throughput": 110.12291470209806,
+      "fairness": 0.9919684316129515,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.3408840057090856,
+      "composite_score": 430.33094497181094
+    },
+    {
+      "scenario_id": 92,
+      "predicted_position": [
+        37.94670867919922,
+        44.57280349731445,
+        10.0
+      ],
+      "throughput": 155.44970746936633,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.321008003083989,
+      "composite_score": 493.2698244816198
+    },
+    {
+      "scenario_id": 93,
+      "predicted_position": [
+        58.237266540527344,
+        50.403263092041016,
+        10.668642044067383
+      ],
+      "throughput": 114.65702180295193,
+      "fairness": 0.9912124810618216,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.3198260019416921,
+      "composite_score": 416.1579574003176
+    },
+    {
+      "scenario_id": 94,
+      "predicted_position": [
+        50.24365234375,
+        62.03947067260742,
+        12.09900951385498
+      ],
+      "throughput": 180.99235624965442,
+      "fairness": 0.9778540363915901,
+      "coverage_rate": 0.2857142857142857,
+      "inference_ms": 0.32186399766942486,
+      "composite_score": 430.5230532386982
+    },
+    {
+      "scenario_id": 95,
+      "predicted_position": [
+        47.71202850341797,
+        49.19514083862305,
+        10.0
+      ],
+      "throughput": 170.4916602050278,
+      "fairness": 0.9885724470994353,
+      "coverage_rate": 0.4,
+      "inference_ms": 0.33718300255713984,
+      "composite_score": 438.8667302528473
+    },
+    {
+      "scenario_id": 96,
+      "predicted_position": [
+        40.58995056152344,
+        50.049129486083984,
+        10.31828784942627
+      ],
+      "throughput": 258.8308547122375,
+      "fairness": 1.0000000000000002,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.3216070035705343,
+      "composite_score": 521.9651794940092
+    },
+    {
+      "scenario_id": 97,
+      "predicted_position": [
+        35.89848327636719,
+        48.58222579956055,
+        10.03247356414795
+      ],
+      "throughput": 105.40022290577343,
+      "fairness": 0.9484982626067179,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.3181229985784739,
+      "composite_score": 414.4562791921461
+    },
+    {
+      "scenario_id": 98,
+      "predicted_position": [
+        48.98872375488281,
+        33.63448715209961,
+        10.343420028686523
+      ],
+      "throughput": 93.75552658012947,
+      "fairness": 0.8392182210472413,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.33732500014593825,
+      "composite_score": 374.6854489289168
+    },
+    {
+      "scenario_id": 99,
+      "predicted_position": [
+        44.75016784667969,
+        45.0412483215332,
+        10.0
+      ],
+      "throughput": 257.32778691516256,
+      "fairness": 0.9972558277162532,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.31467900407733396,
+      "composite_score": 553.5734204639734
+    }
+  ],
+  "comparison": {
+    "analytical_mean_throughput": 118.39829322998838,
+    "mlp2k_vs_analytical_pct": 43.720250191870335
+  }
+}
