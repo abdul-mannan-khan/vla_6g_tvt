@@ -477,6 +477,44 @@ class SGACAgent:
         self.total_episodes = checkpoint['total_episodes']
         self.noise_std = checkpoint['noise_std']
 
+    def save_checkpoint(self, path: str, extra_data: dict = None):
+        """Save checkpoint with training state for resume capability."""
+        checkpoint = {
+            'actor': self.actor.state_dict(),
+            'critic': self.critic.state_dict(),
+            'actor_target': self.actor_target.state_dict(),
+            'critic_target': self.critic_target.state_dict(),
+            'actor_optimizer': self.actor_optimizer.state_dict(),
+            'critic_optimizer': self.critic_optimizer.state_dict(),
+            'training_step': self.training_step,
+            'total_episodes': self.total_episodes,
+            'noise_std': self.noise_std,
+            'config': self.config
+        }
+        if extra_data:
+            checkpoint.update(extra_data)
+        torch.save(checkpoint, path)
+
+    def load_checkpoint(self, path: str) -> dict:
+        """Load checkpoint and return extra training state."""
+        checkpoint = torch.load(path, map_location=self.device)
+        self.actor.load_state_dict(checkpoint['actor'])
+        self.critic.load_state_dict(checkpoint['critic'])
+        self.actor_target.load_state_dict(checkpoint['actor_target'])
+        self.critic_target.load_state_dict(checkpoint['critic_target'])
+        self.actor_optimizer.load_state_dict(checkpoint['actor_optimizer'])
+        self.critic_optimizer.load_state_dict(checkpoint['critic_optimizer'])
+        self.training_step = checkpoint['training_step']
+        self.total_episodes = checkpoint['total_episodes']
+        self.noise_std = checkpoint['noise_std']
+        # Return extra data for training loop
+        return {
+            'episode': checkpoint.get('episode', 0),
+            'training_history': checkpoint.get('training_history', []),
+            'best_throughput': checkpoint.get('best_throughput', 0),
+            'best_episode': checkpoint.get('best_episode', 0)
+        }
+
 
 if __name__ == "__main__":
     """Quick test of SGAC agent."""
