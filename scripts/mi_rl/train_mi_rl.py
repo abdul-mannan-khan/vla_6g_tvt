@@ -151,9 +151,22 @@ def evaluate_sgac(agent, scenarios, verbose=False):
 
 def train_sgac(config: SGACConfig, train_scenarios: list,
                eval_scenarios: list, num_episodes: int = 1000,
-               eval_interval: int = 100, verbose: bool = True):
+               eval_interval: int = 100, checkpoint_interval: int = 100,
+               checkpoint_dir: str = None, resume_from: str = None,
+               verbose: bool = True):
     """
-    Train SGAC agent with periodic evaluation.
+    Train SGAC agent with periodic evaluation and checkpointing.
+
+    Args:
+        config: SGAC configuration
+        train_scenarios: Training scenarios
+        eval_scenarios: Evaluation scenarios
+        num_episodes: Total episodes to train
+        eval_interval: Evaluate every N episodes
+        checkpoint_interval: Save checkpoint every N episodes
+        checkpoint_dir: Directory for checkpoints
+        resume_from: Path to checkpoint to resume from
+        verbose: Print progress
 
     Returns:
         agent: Trained SGAC agent
@@ -161,24 +174,37 @@ def train_sgac(config: SGACConfig, train_scenarios: list,
     """
     agent = SGACAgent(config)
     training_history = []
+    start_episode = 1
+    best_throughput = 0
+    best_episode = 0
+
+    # Resume from checkpoint if provided
+    if resume_from and os.path.exists(resume_from):
+        print(f"Resuming from checkpoint: {resume_from}")
+        checkpoint = agent.load_checkpoint(resume_from)
+        start_episode = checkpoint.get('episode', 0) + 1
+        training_history = checkpoint.get('training_history', [])
+        best_throughput = checkpoint.get('best_throughput', 0)
+        best_episode = checkpoint.get('best_episode', 0)
+        print(f"  Resuming from episode {start_episode}, best={best_throughput:.1f} Mbps")
 
     print(f"\nTraining SGAC for {num_episodes} episodes...")
     print(f"Device: {agent.device}")
     print(f"State dim: {agent.state_dim}, Action dim: {agent.action_dim}")
+    print(f"Checkpoint interval: {checkpoint_interval} episodes")
     print("-" * 60)
 
-    # Initial evaluation
-    eval_result = evaluate_sgac(agent, eval_scenarios, verbose=verbose)
-    training_history.append({
-        'episode': 0,
-        'throughput': eval_result['avg_throughput'],
-        'fairness': eval_result['avg_fairness']
-    })
+    # Initial evaluation if starting fresh
+    if start_episode == 1:
+        eval_result = evaluate_sgac(agent, eval_scenarios, verbose=verbose)
+        training_history.append({
+            'episode': 0,
+            'throughput': eval_result['avg_throughput'],
+            'fairness': eval_result['avg_fairness']
+        })
+        best_throughput = eval_result['avg_throughput']
 
-    best_throughput = eval_result['avg_throughput']
-    best_episode = 0
-
-    for episode in range(1, num_episodes + 1):
+    for episode in range(start_episode, num_episodes + 1):
         # Sample training scenario
         scenario = train_scenarios[episode % len(train_scenarios)]
 
@@ -203,6 +229,26 @@ def train_sgac(config: SGACConfig, train_scenarios: list,
                       f"throughput={eval_result['avg_throughput']:.1f} Mbps "
                       f"(best={best_throughput:.1f} @ ep {best_episode})")
 
+        # Save checkpoint periodically
+        if checkpoint_dir and episode % checkpoint_interval == 0:
+            checkpoint_path = os.path.join(checkpoint_dir, f'checkpoint_ep{episode}.pt')
+            agent.save_checkpoint(checkpoint_path, {
+                'episode': episode,
+                'training_history': training_history,
+                'best_throughput': best_throughput,
+                'best_episode': best_episode
+            })
+            print(f"  [Checkpoint saved: {checkpoint_path}]")
+
+            # Also save latest checkpoint for easy resume
+            latest_path = os.path.join(checkpoint_dir, 'checkpoint_latest.pt')
+            agent.save_checkpoint(latest_path, {
+                'episode': episode,
+                'training_history': training_history,
+                'best_throughput': best_throughput,
+                'best_episode': best_episode
+            })
+
     print("-" * 60)
     print(f"Training complete. Best: {best_throughput:.1f} Mbps @ episode {best_episode}")
 
@@ -215,6 +261,10 @@ def main():
                         help='Number of training episodes')
     parser.add_argument('--eval-interval', type=int, default=100,
                         help='Evaluation interval')
+    parser.add_argument('--checkpoint-interval', type=int, default=100,
+                        help='Checkpoint save interval')
+    parser.add_argument('--resume', type=str, default=None,
+                        help='Path to checkpoint to resume from (or "latest")')
     parser.add_argument('--hidden-dim', type=int, default=256,
                         help='Hidden dimension of networks')
     parser.add_argument('--sca-weight', type=float, default=0.3,
@@ -284,11 +334,29 @@ def main():
         lambda_gradient=0.05
     )
 
+    # Setup checkpoint directory
+    checkpoint_dir = os.path.join(output_dir, 'checkpoints')
+    os.makedirs(checkpoint_dir, exist_ok=True)
+
+    # Handle resume
+    resume_path = None
+    if args.resume:
+        if args.resume == 'latest':
+            resume_path = os.path.join(checkpoint_dir, 'checkpoint_latest.pt')
+        else:
+            resume_path = args.resume
+        if resume_path and not os.path.exists(resume_path):
+            print(f"Warning: Checkpoint not found: {resume_path}")
+            resume_path = None
+
     # Train SGAC
     agent, training_history = train_sgac(
         config, train_scenarios, eval_scenarios,
         num_episodes=args.episodes,
         eval_interval=args.eval_interval,
+        checkpoint_interval=args.checkpoint_interval,
+        checkpoint_dir=checkpoint_dir,
+        resume_from=resume_path,
         verbose=True
     )
 
