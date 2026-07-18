@@ -186,7 +186,7 @@ def extract_physics_features(p: np.ndarray, scenario: Scenario) -> np.ndarray:
     return np.array(features, dtype=np.float32)
 
 
-PHYSICS_FEATURE_DIM = 47
+PHYSICS_FEATURE_DIM = 39  # Actual feature count: 6+4+10+6+7+6=39
 
 
 def extract_sca_warm_start(scenario: Scenario, p_current: np.ndarray = None
