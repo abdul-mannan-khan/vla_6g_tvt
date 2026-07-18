@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+
+# Large files (use Git LFS if needed)
+*.pt
+*.zip
+*.pth
+*.bin
+*.safetensors
+
+# Data (too large for git)
+data/*.jsonl
+
+# Claude
+.claude/
