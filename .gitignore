@@ -37,3 +37,8 @@ data/*.jsonl
 
 # Claude
 .claude/
+
+# Secrets (API keys, credentials)
+.secrets/
+.env
+*.key
