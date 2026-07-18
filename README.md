@@ -2,7 +2,12 @@
 
 **Core Thesis: "A little bit of math + a little bit of RL = better than either alone"**
 
-Comparing classical optimization and learning paradigms for UAV relay positioning in 6G low-altitude wireless networks (LAWNs).
+Combining classical optimization theory with modern reinforcement learning for UAV relay positioning in 6G low-altitude wireless networks (LAWNs).
+
+## Version History
+
+- **v1.0**: VLA-based approach using TinyLlama-1.1B (archived)
+- **v2.0**: Math-Informed RL using SCA-Guided Actor-Critic (current)
 
 ## Overview
 
@@ -36,22 +41,20 @@ Unlike pure ML approaches that ignore domain knowledge, or pure optimization tha
 ```
 vla_6g_tvt/
 ├── scripts/
+│   ├── eval_common.py             # Core evaluation infrastructure
 │   ├── classical/                 # Classical optimization
 │   │   ├── sca_solver.py          # Successive Convex Approximation
 │   │   └── analytical_gradients.py # Closed-form channel gradients
-│   ├── mi_rl/                     # Math-Informed RL
-│   │   ├── physics_features.py    # Physics-informed state
+│   ├── mi_rl/                     # Math-Informed RL (main contribution)
+│   │   ├── physics_features.py    # Physics-informed state (47 dims)
 │   │   ├── sgac_agent.py          # SCA-Guided Actor-Critic
 │   │   ├── lyapunov_layer.py      # Safety projection layer
 │   │   └── train_mi_rl.py         # Main training script
-│   ├── baselines/                 # Comparison methods
-│   │   ├── train_eval_mlp.py      # MLP baseline
-│   │   ├── train_eval_drl.py      # Pure RL baselines
-│   │   └── train_eval_sac.py      # SAC implementation
-│   └── eval_common.py             # Shared utilities
-├── models/                        # Trained checkpoints
-├── results/                       # Evaluation results
-└── paper/                         # IEEE publication
+│   └── baselines/                 # Comparison methods
+│       ├── train_eval_mlp.py      # MLP baseline
+│       ├── train_eval_drl.py      # Pure RL baselines (PPO)
+│       └── train_eval_sac_td3.py  # SAC/TD3 implementations
+└── results/                       # Evaluation results & model checkpoints
 ```
 
 ## Quick Start
