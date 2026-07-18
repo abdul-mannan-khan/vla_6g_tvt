@@ -1,0 +1,150 @@
+Decision letter (Initial Submission)
+Distilling Evolutionary Optimization into Compact Language Models for Real-Time UAV Relay Positioning in Low-Altitude Vehicular THz Networks
+Subject	IEEE TVT - Decision on VTSI-2026-01558- Reject
+Date sent	19 May 2026 at 02:33 BST
+From	
+TVT_VTS@outlook.com
+To	
+khanabd@uwl.ac.uk
+CC	
+Hide 4 addresses
+khanabd@uwl.ac.uk, tvtlawn@gmail.com, eic-tvt@outlook.com, TVT_VTS@outlook.com
+Dear Dr. KHAN:
+
+The review of paper
+
+VTSI-2026-01558: Distilling Evolutionary Optimization into Compact Language Models for Real-Time UAV Relay Positioning in Low-Altitude Vehicular THz Networks
+
+has been completed.  Attached below please find the reviewers' comments.
+
+AE Comments: 
+
+After careful consideration of the reviewers' comments, the decision has been made not to publish this paper in the IEEE Transactions on Vehicular Technology. Please note that we do not accept submissions of a revised manuscript based on this rejected paper. This decision was taken after a thorough analysis of the paper and, when applicable, of all reviews made of it and its previous versions. We hope you will understand that, in fairness to all authors and reviewers, reject decisions are considered to be final decisions.
+
+
+Thank you for submitting your manuscript to the TRANSACTIONS. We look forward to the possibility of  receiving more submissions on your future technical work.
+
+Sincerely yours,
+
+LAWN SI TVT
+Guest Editor, IEEE Transactions on Vehicular Technology
+
+
+==============================================
+Reviews for VTSI-2026-01558
+
+*Please note that there may be attached files that contain additional
+comments from the reviewers. To see these files, please log on to
+your "Author Center" at the Manuscript Central web site
+(https://mc.manuscriptcentral.com/tvt-ieee) and select this paper to
+see and download the files.
+==============================================
+
+Reviewer: 1
+
+ADDITIONAL COMMENTS TO THE AUTHOR:
+1. Fundamental conceptual flaw: the "input extensibility" claim is misleading
+
+The authors position the language model's ability to absorb new input modalities (e.g., building obstructions) as the core advantage over MLP baselines. However, this is not an inherent property of language models—it is simply a consequence of the input representation. The MLP's "rigid feature vector" is an implementation choice, not a fundamental limitation. An MLP could equally accept textual features via embedding layers, or be retrained on augmented feature vectors. The authors artificially constrain the MLP baseline to a fixed 37-dimensional vector while allowing the VLA to accept arbitrary text, creating an unfair comparison. The claimed extensibility advantage is therefore an artifact of experimental design, not a genuine architectural benefit.
+
+2. MLP baseline actually outperforms the proposed method on core metrics
+
+Table II and Table VI clearly show that the MLP-2K achieves 170.2 Mbps, while the VLA achieves only 134.0 Mbps—a 27% disadvantage. The MLP also achieves higher fairness (0.958 vs. 0.963, essentially identical) and significantly higher coverage (62.5% vs. 47.0%). Despite these clear performance gaps, the authors attempt to dismiss the MLP as "rigid" and claim the VLA's "extensibility" justifies its adoption. This is unacceptable. A method that performs substantially worse on the primary task cannot be justified by a contrived extensibility scenario that could be addressed with trivial modifications to the MLP.
+
+3. Questionable "obstruction" experiment
+
+In the building obstruction experiment (Section V-I), the VLA fine-tuned on 500 obstacle-aware labels achieves 142.6 Mbps, compared to 137.8 Mbps for the "blind MLP." However:
+
+The authors do not report what happens when the MLP is simply retrained on the same obstacle-aware data—a straightforward and fair comparison. Instead, they compare a fine-tuned VLA against an MLP trained on the original data distribution, which is not an apples-to-apples comparison.
+
+The claim that the MLP would require "feature-vector redesign and full retraining" is exaggerated. Adding three binary obstacle flags to the 37-dimensional input would require trivial modification and retraining on the same 500 samples—exactly analogous to what was done for the VLA.
+
+The 20 dB NLoS penalty is arbitrary and its impact on the channel model is not validated against any real-world measurement data.
+
+4. Inappropriate baseline selection and missing comparisons
+
+The DRL baselines (PPO, SAC, TD3) are trained on only 100,000 timesteps, which is grossly insufficient for continuous control problems. The authors do not report whether these agents converged or performed hyperparameter tuning. Their poor performance (PPO and TD3 collapsing to 68.5 Mbps) reflects inadequate training, not inherent limitations of DRL for this problem. The DeepSets baselines similarly underperform, but the authors do not explore architectural variations or hyperparameter optimization. Including poorly implemented baselines to make the proposed method appear superior is not acceptable.
+
+5. Unconvincing latency analysis
+
+The inference latency numbers are presented deceptively:
+
+The "baseline" 10.4 seconds is an artifact of inefficient 4-bit dequantization, not a meaningful metric for the proposed method. The actual usable configuration (merged FP16) achieves 822 ms, which is still far too slow for real-time vehicular applications where 100 ms decision cycles are typical.
+
+The TensorRT estimate of 150-200 ms is presented as "preliminary" and not actually implemented or validated in the deployment pipeline. Promising future performance is not a substitute for demonstrated results.
+
+The Hybrid controller effectively admits that the VLA cannot operate at the required temporal resolution, requiring fallback to the centroid heuristic for fast tracking. This undermines the claim of real-time capability.
+
+6. Statistical significance is overstated
+
+The authors report a p-value of 0.0073 for the VLA vs. Analytical comparison, but after Bonferroni correction this becomes 0.044—barely significant. Cohen's d = 0.27 indicates a small effect size. The bootstrap confidence intervals overlap substantially (VLA: [125.2, 143.3]; Analytical: [110.1, 126.8]), indicating considerable uncertainty. The statistical evidence for superiority over even the simple centroid heuristic is weak.
+
+7. The distillation paradigm is not novel
+
+Training a surrogate model on optimizer outputs (learning to optimize) is a well-established technique in operations research and machine learning. The authors cite [22] on this topic but do not articulate what is new about applying it to relay positioning. The use of a language model as the surrogate is an engineering choice, not a conceptual contribution. The claim "first study that distills an evolutionary solver into a language model" is trivial—it merely combines existing techniques without methodological innovation.
+
+8. Problem formulation is oversimplified
+
+The relay positioning problem is reduced to a 3-dimensional optimization with a weighted sum objective. In practice, UAV relay placement involves trajectory planning, energy constraints, handover coordination, interference management, and dynamic obstacle avoidance—none of which are considered. The evaluation uses only 100×100 m area with 3-7 users, which is a trivial scenario. Claims about applicability to "real-world LAWN deployments" are unsupported.
+
+9. Missing critical validation
+
+No comparison against any existing UAV relay positioning algorithm from the literature.
+
+No real-world or hardware-in-the-loop validation.
+
+No analysis of how the model performs when the number of users exceeds the maximum seen during training (N > 7).
+
+No analysis of robustness to channel model parameters (e.g., absorption coefficient, path loss exponents).
+
+No analysis of how prediction accuracy degrades with increasing user mobility beyond the 120 km/h tested.
+
+10. Writing and presentation issues
+
+The manuscript contains multiple formatting issues (e.g., "text[[77, 745, 487, 888]]" placeholders on multiple pages, inconsistent citation numbering, duplicated text in Section IV-D). The paper is overly promotional, repeatedly emphasizing "input extensibility" as a transformative advantage while downplaying the method's significant performance disadvantages. The contributions list (six items) is inflated and contains redundant claims.
+
+11. The Hybrid controller reveals the method's fundamental weakness
+
+The proposed Hybrid controller (Table VIII) shows that the standalone VLA performs worse than the simple centroid heuristic at all speeds > 0 km/h. This is a damning result: a method that cannot keep up with moving users without falling back to a heuristic is not a viable solution for dynamic vehicular networks. The authors attempt to spin this as a feature ("Hybrid resolves this"), but it is an admission that the distilled model cannot operate at the required temporal resolution.
+
+12. Energy efficiency analysis is meaningless
+
+The energy efficiency analysis (Section V-E) concludes that because hovering energy dominates, throughput ranking determines efficiency. This renders the entire analysis circular and contributes nothing to the paper. The claimed "13.2% throughput-per-Joule gain" is simply a restatement of the throughput difference, not an independent insight.
+
+Recommendation: Reject
+
+The proposed method is outperformed by a simple MLP on the core task by a substantial margin. The claimed advantages (input extensibility, real-time latency, robustness) are either not convincingly demonstrated, achievable with trivial modifications to conventional methods, or dependent on unsupported assumptions. The experimental design is biased, the baselines are inadequately implemented, and the statistical evidence is weak. The paper does not present a sufficiently novel or well-validated contribution to merit publication in IEEE Transactions on Vehicular Technology.
+
+Reviewer: 2
+
+ADDITIONAL COMMENTS TO THE AUTHOR:
+The paper has an interesting idea, but the main claim is not supported by the results. The proposed VLA is supposed to enable real-time UAV relay positioning, yet the paper shows that the MLP baseline is much better in both throughput and latency. Even worse, the reported optimizer is faster than the VLA in Table II. This seriously weakens the motivation of the work. The claimed advantage of “input extensibility” is also not fairly demonstrated, since the obstacle-aware VLA is only compared with a blind MLP. In addition, the system model is too simplified, and the mobility results show that the standalone VLA is not practically strong. Overall, the paper does not provide convincing evidence for its main contributions.
+
+1. The paper is built around real-time deployment, but the VLA is slower than expected and clearly worse than the MLP. This is a fundamental problem.
+
+2. The paper compares an obstacle-aware VLA with a blind MLP. This is not a fair test. An obstacle-aware MLP baseline is missing.
+
+3. The standalone VLA loses to the analytical method at all tested speeds. The good results only come from the Hybrid controller, which means the VLA itself is not enough.
+
+4. The THz/UAV setting is oversimplified, with very limited realism in blockage, propagation, and dynamic network effects. This makes the practical value of the results questionable.
+
+5. The experiments are limited, the generalization claims are weak, and even the citation numbering appears inconsistent. The presentation does not look careful enough for publication.
+
+Reviewer: 3
+
+ADDITIONAL COMMENTS TO THE AUTHOR:
+This paper proposes an optimizer distillation framework that trains a compact language model to emulate evolutionary optimization for UAV relay positioning in low-altitude vehicular THz networks. The topic is timely and relevant, and the idea of leveraging language models for extensible optimization is interesting. The manuscript is generally well structured, and the experimental section is comprehensive, with multiple baselines and scenario analyses.
+
+However, I do not believe the paper is ready for publication in its current form.
+
+The main concern lies in the practical justification of the proposed approach. While the use of a language model is motivated by “input extensibility,” the results show that a relatively simple MLP baseline consistently achieves substantially higher throughput (e.g., ~170 Mbps vs. 134 Mbps) with orders-of-magnitude lower latency (milliseconds vs. hundreds of milliseconds) (Table II, page 8). This raises concerns about whether the added complexity of a language model is warranted for the core positioning task.
+
+Relatedly, the claimed advantage of extensibility is demonstrated through a relatively limited scenario (building obstructions with small fine-tuning data). While promising, this does not yet convincingly establish that the approach offers a clear and general advantage over more conventional models, especially considering the significant computational overhead and system complexity introduced by the LLM-based pipeline.
+
+A second concern is the reliance on fully simulated data and models. The entire evaluation is conducted using synthetic THz channel models, predefined topology distributions, and simulated impairments (Sections III–V). While the setup is detailed, it remains unclear how well the results translate to real-world UAV communication systems, where channel uncertainty, hardware variability, and environmental dynamics are more complex. A more critical discussion of these limitations would strengthen the paper.
+
+In addition, the methodological contribution appears incremental. The core idea—learning a surrogate model from optimization outputs (learning-to-optimize)—is well established, and the use of QLoRA for parameter-efficient fine-tuning is standard practice. The manuscript would benefit from a clearer articulation of what fundamentally new capability is enabled beyond combining these existing components.
+
+Finally, the presentation could be improved. While the paper is generally organized, parts of the methodology and experimental discussion are overly dense, making it difficult to extract the key insights. A more concise and focused exposition—particularly highlighting when and why the proposed approach should be preferred over simpler alternatives—would improve clarity.
+
+Overall, the paper explores an interesting direction, but the current version does not yet provide sufficiently strong evidence of practical benefit, novelty, or deployment relevance to meet the standard of a journal publication.

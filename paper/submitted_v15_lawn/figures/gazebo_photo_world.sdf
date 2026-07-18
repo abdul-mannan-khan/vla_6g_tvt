@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.9">
+  <world name="vla_6g_photo">
+
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Bright daytime sky -->
+    <scene>
+      <grid>false</grid>
+      <ambient>0.6 0.6 0.6 1</ambient>
+      <background>0.53 0.81 0.92 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- Sun -->
+    <light name="sun" type="directional">
+      <pose>0 0 500 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1.2</intensity>
+      <direction>-0.4 0.2 -0.85</direction>
+      <diffuse>1.0 0.98 0.92 1</diffuse>
+      <specular>0.4 0.4 0.4 1</specular>
+      <attenuation><range>2000</range><linear>0</linear><constant>1</constant><quadratic>0</quadratic></attenuation>
+    </light>
+    <light name="fill" type="directional">
+      <pose>0 0 300 0 0 0</pose>
+      <cast_shadows>false</cast_shadows>
+      <intensity>0.3</intensity>
+      <direction>0.5 -0.3 -0.7</direction>
+      <diffuse>0.7 0.75 0.85 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+    </light>
+
+    <!-- Ground plane -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="c"><geometry><plane><normal>0 0 1</normal><size>300 300</size></plane></geometry></collision>
+        <visual name="v"><geometry><plane><normal>0 0 1</normal><size>300 300</size></plane></geometry>
+          <material><ambient>0.25 0.42 0.18 1</ambient><diffuse>0.3 0.48 0.22 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ROADS -->
+    <model name="road_x"><static>true</static><pose>0 0 0.01 0 0 0</pose>
+      <link name="link">
+        <visual name="road"><geometry><box><size>120 10 0.02</size></box></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.18 0.18 0.18 1</diffuse></material></visual>
+        <visual name="cline"><pose>0 0 0.005 0 0 0</pose><geometry><box><size>120 0.15 0.01</size></box></geometry>
+          <material><ambient>0.9 0.9 0.0 1</ambient><diffuse>1.0 1.0 0.0 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="road_y"><static>true</static><pose>0 0 0.01 0 0 1.5708</pose>
+      <link name="link">
+        <visual name="road"><geometry><box><size>120 10 0.02</size></box></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.18 0.18 0.18 1</diffuse></material></visual>
+        <visual name="cline"><pose>0 0 0.005 0 0 0</pose><geometry><box><size>120 0.15 0.01</size></box></geometry>
+          <material><ambient>0.9 0.9 0.0 1</ambient><diffuse>1.0 1.0 0.0 1</diffuse></material></visual>
+      </link>
+    </model>
+    <!-- Sidewalks -->
+    <model name="sw_n"><static>true</static><pose>0 6.5 0.06 0 0 0</pose>
+      <link name="l"><visual name="v"><geometry><box><size>120 2.5 0.12</size></box></geometry>
+        <material><ambient>0.55 0.55 0.55 1</ambient><diffuse>0.65 0.65 0.65 1</diffuse></material></visual></link>
+    </model>
+    <model name="sw_s"><static>true</static><pose>0 -6.5 0.06 0 0 0</pose>
+      <link name="l"><visual name="v"><geometry><box><size>120 2.5 0.12</size></box></geometry>
+        <material><ambient>0.55 0.55 0.55 1</ambient><diffuse>0.65 0.65 0.65 1</diffuse></material></visual></link>
+    </model>
+
+    <!-- BUILDINGS -->
+    <model name="b1"><static>true</static><pose>18 18 12.5 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>12 12 25</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>12 12 25</size></box></geometry>
+          <material><ambient>0.4 0.5 0.6 1</ambient><diffuse>0.45 0.55 0.65 1</diffuse></material></visual></link>
+    </model>
+    <model name="b2"><static>true</static><pose>-18 18 8.5 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>14 10 17</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>14 10 17</size></box></geometry>
+          <material><ambient>0.6 0.45 0.35 1</ambient><diffuse>0.65 0.5 0.4 1</diffuse></material></visual></link>
+    </model>
+    <model name="b3"><static>true</static><pose>18 -18 6 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>16 12 12</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>16 12 12</size></box></geometry>
+          <material><ambient>0.55 0.55 0.5 1</ambient><diffuse>0.6 0.6 0.55 1</diffuse></material></visual></link>
+    </model>
+    <model name="b4"><static>true</static><pose>-18 -18 5 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>14 14 10</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>14 14 10</size></box></geometry>
+          <material><ambient>0.45 0.45 0.45 1</ambient><diffuse>0.55 0.55 0.55 1</diffuse></material></visual></link>
+    </model>
+    <model name="b5"><static>true</static><pose>-28 14 20 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>9 9 40</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>9 9 40</size></box></geometry>
+          <material><ambient>0.3 0.4 0.5 1</ambient><diffuse>0.35 0.45 0.55 1</diffuse></material></visual></link>
+    </model>
+    <model name="b6"><static>true</static><pose>28 -14 11 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>12 10 22</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>12 10 22</size></box></geometry>
+          <material><ambient>0.55 0.45 0.4 1</ambient><diffuse>0.6 0.5 0.45 1</diffuse></material></visual></link>
+    </model>
+
+    <!-- TREES -->
+    <model name="t1"><static>true</static><pose>-30 8 0 0 0 0</pose>
+      <link name="l">
+        <visual name="trunk"><pose>0 0 2 0 0 0</pose><geometry><cylinder><radius>0.22</radius><length>4</length></cylinder></geometry>
+          <material><ambient>0.35 0.2 0.1 1</ambient><diffuse>0.45 0.25 0.12 1</diffuse></material></visual>
+        <visual name="f"><pose>0 0 5.5 0 0 0</pose><geometry><sphere><radius>2.2</radius></sphere></geometry>
+          <material><ambient>0.15 0.42 0.12 1</ambient><diffuse>0.2 0.52 0.16 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="t2"><static>true</static><pose>-5 8 0 0 0 0.3</pose>
+      <link name="l">
+        <visual name="trunk"><pose>0 0 1.8 0 0 0</pose><geometry><cylinder><radius>0.2</radius><length>3.6</length></cylinder></geometry>
+          <material><ambient>0.35 0.2 0.1 1</ambient><diffuse>0.45 0.25 0.12 1</diffuse></material></visual>
+        <visual name="f"><pose>0 0 5 0 0 0</pose><geometry><sphere><radius>2.0</radius></sphere></geometry>
+          <material><ambient>0.12 0.38 0.1 1</ambient><diffuse>0.17 0.48 0.14 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="t3"><static>true</static><pose>5 8 0 0 0 0.6</pose>
+      <link name="l">
+        <visual name="trunk"><pose>0 0 2.2 0 0 0</pose><geometry><cylinder><radius>0.22</radius><length>4.4</length></cylinder></geometry>
+          <material><ambient>0.35 0.2 0.1 1</ambient><diffuse>0.45 0.25 0.12 1</diffuse></material></visual>
+        <visual name="f"><pose>0 0 6 0 0 0</pose><geometry><sphere><radius>2.3</radius></sphere></geometry>
+          <material><ambient>0.15 0.4 0.11 1</ambient><diffuse>0.2 0.5 0.15 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="t4"><static>true</static><pose>30 8 0 0 0 0.1</pose>
+      <link name="l">
+        <visual name="trunk"><pose>0 0 2 0 0 0</pose><geometry><cylinder><radius>0.2</radius><length>4</length></cylinder></geometry>
+          <material><ambient>0.35 0.2 0.1 1</ambient><diffuse>0.45 0.25 0.12 1</diffuse></material></visual>
+        <visual name="f"><pose>0 0 5.5 0 0 0</pose><geometry><sphere><radius>2.0</radius></sphere></geometry>
+          <material><ambient>0.14 0.4 0.1 1</ambient><diffuse>0.19 0.5 0.14 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="t5"><static>true</static><pose>-22 -8 0 0 0 0.4</pose>
+      <link name="l">
+        <visual name="trunk"><pose>0 0 1.9 0 0 0</pose><geometry><cylinder><radius>0.19</radius><length>3.8</length></cylinder></geometry>
+          <material><ambient>0.35 0.2 0.1 1</ambient><diffuse>0.45 0.25 0.12 1</diffuse></material></visual>
+        <visual name="f"><pose>0 0 5 0 0 0</pose><geometry><sphere><radius>1.8</radius></sphere></geometry>
+          <material><ambient>0.13 0.36 0.09 1</ambient><diffuse>0.18 0.46 0.13 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="t6"><static>true</static><pose>8 22 0 0 0 0.5</pose>
+      <link name="l">
+        <visual name="trunk"><pose>0 0 2 0 0 0</pose><geometry><cylinder><radius>0.2</radius><length>4</length></cylinder></geometry>
+          <material><ambient>0.35 0.2 0.1 1</ambient><diffuse>0.45 0.25 0.12 1</diffuse></material></visual>
+        <visual name="f"><pose>0 0 5.5 0 0 0</pose><geometry><sphere><radius>2.1</radius></sphere></geometry>
+          <material><ambient>0.15 0.41 0.12 1</ambient><diffuse>0.2 0.51 0.15 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- LIGHT POLES -->
+    <model name="lp1"><static>true</static><pose>-25 7.5 0 0 0 0</pose>
+      <link name="l">
+        <visual name="p"><pose>0 0 3.5 0 0 0</pose><geometry><cylinder><radius>0.08</radius><length>7</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.4 1</diffuse></material></visual>
+        <visual name="lamp"><pose>0 -0.5 6.8 0 0 0</pose><geometry><box><size>0.3 0.15 0.1</size></box></geometry>
+          <material><ambient>1 1 0.8 1</ambient><diffuse>1 1 0.9 1</diffuse><emissive>0.6 0.6 0.4 1</emissive></material></visual>
+      </link>
+    </model>
+    <model name="lp2"><static>true</static><pose>10 7.5 0 0 0 0</pose>
+      <link name="l">
+        <visual name="p"><pose>0 0 3.5 0 0 0</pose><geometry><cylinder><radius>0.08</radius><length>7</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.4 1</diffuse></material></visual>
+        <visual name="lamp"><pose>0 -0.5 6.8 0 0 0</pose><geometry><box><size>0.3 0.15 0.1</size></box></geometry>
+          <material><ambient>1 1 0.8 1</ambient><diffuse>1 1 0.9 1</diffuse><emissive>0.6 0.6 0.4 1</emissive></material></visual>
+      </link>
+    </model>
+    <model name="lp3"><static>true</static><pose>25 7.5 0 0 0 0</pose>
+      <link name="l">
+        <visual name="p"><pose>0 0 3.5 0 0 0</pose><geometry><cylinder><radius>0.08</radius><length>7</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.4 1</diffuse></material></visual>
+        <visual name="lamp"><pose>0 -0.5 6.8 0 0 0</pose><geometry><box><size>0.3 0.15 0.1</size></box></geometry>
+          <material><ambient>1 1 0.8 1</ambient><diffuse>1 1 0.9 1</diffuse><emissive>0.6 0.6 0.4 1</emissive></material></visual>
+      </link>
+    </model>
+
+    <!-- RSU TOWER -->
+    <model name="bs_tower"><static>true</static><pose>8 12 0 0 0 0</pose>
+      <link name="l">
+        <visual name="tower"><pose>0 0 15 0 0 0</pose><geometry><cylinder><radius>0.4</radius><length>30</length></cylinder></geometry>
+          <material><ambient>0.7 0.15 0.1 1</ambient><diffuse>0.8 0.2 0.15 1</diffuse></material></visual>
+        <collision name="tc"><pose>0 0 15 0 0 0</pose><geometry><cylinder><radius>0.4</radius><length>30</length></cylinder></geometry></collision>
+        <visual name="a1"><pose>0.6 0 29 0 0 0</pose><geometry><box><size>0.15 0.8 1.5</size></box></geometry>
+          <material><ambient>0.5 0.5 0.55 1</ambient><diffuse>0.6 0.6 0.65 1</diffuse></material></visual>
+        <visual name="a2"><pose>-0.3 0.52 29 0 0 2.094</pose><geometry><box><size>0.15 0.8 1.5</size></box></geometry>
+          <material><ambient>0.5 0.5 0.55 1</ambient><diffuse>0.6 0.6 0.65 1</diffuse></material></visual>
+        <visual name="a3"><pose>-0.3 -0.52 29 0 0 -2.094</pose><geometry><box><size>0.15 0.8 1.5</size></box></geometry>
+          <material><ambient>0.5 0.5 0.55 1</ambient><diffuse>0.6 0.6 0.65 1</diffuse></material></visual>
+        <visual name="beacon"><pose>0 0 30.5 0 0 0</pose><geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><ambient>1 0 0 1</ambient><diffuse>1 0.1 0.1 1</diffuse><emissive>0.8 0 0 1</emissive></material></visual>
+        <visual name="base"><pose>0 0 0.15 0 0 0</pose><geometry><box><size>3 3 0.3</size></box></geometry>
+          <material><ambient>0.4 0.4 0.4 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- ========== CARS (body + cabin + wheels) ========== -->
+    <!-- Car 1: Blue sedan, eastbound -->
+    <model name="car1"><static>true</static><pose>-15 2.5 0 0 0 0</pose>
+      <link name="l">
+        <visual name="body"><pose>0 0 0.45 0 0 0</pose><geometry><box><size>4.2 1.8 0.7</size></box></geometry>
+          <material><ambient>0.1 0.15 0.55 1</ambient><diffuse>0.15 0.2 0.65 1</diffuse></material></visual>
+        <visual name="cabin"><pose>-0.2 0 1.0 0 0 0</pose><geometry><box><size>2.0 1.6 0.6</size></box></geometry>
+          <material><ambient>0.5 0.65 0.8 1</ambient><diffuse>0.6 0.75 0.9 1</diffuse></material></visual>
+        <visual name="wfl"><pose>1.2 0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wfr"><pose>1.2 -0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wrl"><pose>-1.2 0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wrr"><pose>-1.2 -0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- Car 2: Red sedan, westbound -->
+    <model name="car2"><static>true</static><pose>5 -2.5 0 0 0 3.14159</pose>
+      <link name="l">
+        <visual name="body"><pose>0 0 0.45 0 0 0</pose><geometry><box><size>4.2 1.8 0.7</size></box></geometry>
+          <material><ambient>0.6 0.08 0.08 1</ambient><diffuse>0.75 0.12 0.12 1</diffuse></material></visual>
+        <visual name="cabin"><pose>-0.2 0 1.0 0 0 0</pose><geometry><box><size>2.0 1.6 0.6</size></box></geometry>
+          <material><ambient>0.5 0.65 0.8 1</ambient><diffuse>0.6 0.75 0.9 1</diffuse></material></visual>
+        <visual name="wfl"><pose>1.2 0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wfr"><pose>1.2 -0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wrl"><pose>-1.2 0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wrr"><pose>-1.2 -0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- Car 3: Silver sedan, eastbound -->
+    <model name="car3"><static>true</static><pose>20 2.5 0 0 0 0</pose>
+      <link name="l">
+        <visual name="body"><pose>0 0 0.45 0 0 0</pose><geometry><box><size>4.2 1.8 0.7</size></box></geometry>
+          <material><ambient>0.55 0.55 0.55 1</ambient><diffuse>0.7 0.7 0.7 1</diffuse></material></visual>
+        <visual name="cabin"><pose>-0.2 0 1.0 0 0 0</pose><geometry><box><size>2.0 1.6 0.6</size></box></geometry>
+          <material><ambient>0.5 0.65 0.8 1</ambient><diffuse>0.6 0.75 0.9 1</diffuse></material></visual>
+        <visual name="wfl"><pose>1.2 0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wfr"><pose>1.2 -0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wrl"><pose>-1.2 0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wrr"><pose>-1.2 -0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- Car 4: Green SUV, westbound -->
+    <model name="car4"><static>true</static><pose>-25 -2.5 0 0 0 3.14159</pose>
+      <link name="l">
+        <visual name="body"><pose>0 0 0.55 0 0 0</pose><geometry><box><size>4.8 1.9 0.9</size></box></geometry>
+          <material><ambient>0.08 0.35 0.08 1</ambient><diffuse>0.12 0.45 0.12 1</diffuse></material></visual>
+        <visual name="cabin"><pose>-0.3 0 1.2 0 0 0</pose><geometry><box><size>2.4 1.7 0.7</size></box></geometry>
+          <material><ambient>0.45 0.6 0.75 1</ambient><diffuse>0.55 0.7 0.85 1</diffuse></material></visual>
+        <visual name="wfl"><pose>1.4 1.0 0.3 1.5708 0 0</pose><geometry><cylinder><radius>0.3</radius><length>0.2</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wfr"><pose>1.4 -1.0 0.3 1.5708 0 0</pose><geometry><cylinder><radius>0.3</radius><length>0.2</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wrl"><pose>-1.4 1.0 0.3 1.5708 0 0</pose><geometry><cylinder><radius>0.3</radius><length>0.2</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wrr"><pose>-1.4 -1.0 0.3 1.5708 0 0</pose><geometry><cylinder><radius>0.3</radius><length>0.2</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- Car 5: Orange sedan, northbound on cross road -->
+    <model name="car5"><static>true</static><pose>2 15 0 0 0 1.5708</pose>
+      <link name="l">
+        <visual name="body"><pose>0 0 0.45 0 0 0</pose><geometry><box><size>4.2 1.8 0.7</size></box></geometry>
+          <material><ambient>0.6 0.35 0.08 1</ambient><diffuse>0.75 0.45 0.12 1</diffuse></material></visual>
+        <visual name="cabin"><pose>-0.2 0 1.0 0 0 0</pose><geometry><box><size>2.0 1.6 0.6</size></box></geometry>
+          <material><ambient>0.5 0.65 0.8 1</ambient><diffuse>0.6 0.75 0.9 1</diffuse></material></visual>
+        <visual name="wfl"><pose>1.2 0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wfr"><pose>1.2 -0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wrl"><pose>-1.2 0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+        <visual name="wrr"><pose>-1.2 -0.95 0.25 1.5708 0 0</pose><geometry><cylinder><radius>0.25</radius><length>0.18</length></cylinder></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- X500 QUADROTOR hovering (enlarged 3x for visibility) -->
+    <model name="x500_uav_visual">
+      <static>true</static>
+      <pose>0 2 22 0 0 0.3</pose>
+      <link name="body">
+        <!-- Main fuselage -->
+        <visual name="fuselage">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry><box><size>1.2 1.2 0.4</size></box></geometry>
+          <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material>
+        </visual>
+        <!-- Arms -->
+        <visual name="arm_fr"><pose>0.9 -0.9 0 0 0 -0.785</pose><geometry><box><size>1.8 0.15 0.12</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.15 0.15 0.15 1</diffuse></material></visual>
+        <visual name="arm_fl"><pose>0.9 0.9 0 0 0 0.785</pose><geometry><box><size>1.8 0.15 0.12</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.15 0.15 0.15 1</diffuse></material></visual>
+        <visual name="arm_rr"><pose>-0.9 -0.9 0 0 0 0.785</pose><geometry><box><size>1.8 0.15 0.12</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.15 0.15 0.15 1</diffuse></material></visual>
+        <visual name="arm_rl"><pose>-0.9 0.9 0 0 0 -0.785</pose><geometry><box><size>1.8 0.15 0.12</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.15 0.15 0.15 1</diffuse></material></visual>
+        <!-- Motor pods (4) -->
+        <visual name="m_fr"><pose>1.5 -1.5 0.1 0 0 0</pose><geometry><cylinder><radius>0.2</radius><length>0.25</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.35 0.35 0.35 1</diffuse></material></visual>
+        <visual name="m_fl"><pose>1.5 1.5 0.1 0 0 0</pose><geometry><cylinder><radius>0.2</radius><length>0.25</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.35 0.35 0.35 1</diffuse></material></visual>
+        <visual name="m_rr"><pose>-1.5 -1.5 0.1 0 0 0</pose><geometry><cylinder><radius>0.2</radius><length>0.25</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.35 0.35 0.35 1</diffuse></material></visual>
+        <visual name="m_rl"><pose>-1.5 1.5 0.1 0 0 0</pose><geometry><cylinder><radius>0.2</radius><length>0.25</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.35 0.35 0.35 1</diffuse></material></visual>
+        <!-- Propeller discs (translucent cyan for visibility) -->
+        <visual name="prop_fr"><pose>1.5 -1.5 0.25 0 0 0</pose><geometry><cylinder><radius>0.8</radius><length>0.03</length></cylinder></geometry>
+          <material><ambient>0.0 0.8 1.0 0.5</ambient><diffuse>0.0 0.9 1.0 0.5</diffuse><emissive>0.0 0.3 0.4 1</emissive></material></visual>
+        <visual name="prop_fl"><pose>1.5 1.5 0.25 0 0 0</pose><geometry><cylinder><radius>0.8</radius><length>0.03</length></cylinder></geometry>
+          <material><ambient>0.0 0.8 1.0 0.5</ambient><diffuse>0.0 0.9 1.0 0.5</diffuse><emissive>0.0 0.3 0.4 1</emissive></material></visual>
+        <visual name="prop_rr"><pose>-1.5 -1.5 0.25 0 0 0</pose><geometry><cylinder><radius>0.8</radius><length>0.03</length></cylinder></geometry>
+          <material><ambient>0.0 0.8 1.0 0.5</ambient><diffuse>0.0 0.9 1.0 0.5</diffuse><emissive>0.0 0.3 0.4 1</emissive></material></visual>
+        <visual name="prop_rl"><pose>-1.5 1.5 0.25 0 0 0</pose><geometry><cylinder><radius>0.8</radius><length>0.03</length></cylinder></geometry>
+          <material><ambient>0.0 0.8 1.0 0.5</ambient><diffuse>0.0 0.9 1.0 0.5</diffuse><emissive>0.0 0.3 0.4 1</emissive></material></visual>
+        <!-- Landing gear legs -->
+        <visual name="leg_l"><pose>0 0.6 -0.35 0 0 0</pose><geometry><cylinder><radius>0.04</radius><length>0.5</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.35 0.35 0.35 1</diffuse></material></visual>
+        <visual name="leg_r"><pose>0 -0.6 -0.35 0 0 0</pose><geometry><cylinder><radius>0.04</radius><length>0.5</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.35 0.35 0.35 1</diffuse></material></visual>
+        <visual name="skid_l"><pose>0 0.6 -0.6 0 1.5708 0</pose><geometry><cylinder><radius>0.03</radius><length>1.0</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.35 0.35 0.35 1</diffuse></material></visual>
+        <visual name="skid_r"><pose>0 -0.6 -0.6 0 1.5708 0</pose><geometry><cylinder><radius>0.03</radius><length>1.0</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.35 0.35 0.35 1</diffuse></material></visual>
+        <!-- Glow sphere for visibility -->
+        <visual name="glow"><pose>0 0 0 0 0 0</pose><geometry><sphere><radius>2.0</radius></sphere></geometry>
+          <material><ambient>0.0 0.6 1.0 0.12</ambient><diffuse>0.0 0.7 1.0 0.12</diffuse><emissive>0.0 0.2 0.4 1</emissive></material>
+          <transparency>0.85</transparency></visual>
+      </link>
+    </model>
+
+    <!-- ========== CAMERA for screenshot ========== -->
+    <model name="photo_camera">
+      <static>true</static>
+      <pose>-48 -38 38 0 0.45 0.68</pose>
+      <link name="link">
+        <sensor name="camera" type="camera">
+          <camera>
+            <horizontal_fov>1.2</horizontal_fov>
+            <image>
+              <width>1920</width>
+              <height>1080</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip><near>0.1</near><far>500</far></clip>
+          </camera>
+          <always_on>true</always_on>
+          <update_rate>1</update_rate>
+          <visualize>false</visualize>
+          <topic>/photo_camera</topic>
+        </sensor>
+      </link>
+    </model>
+
+  </world>
+</sdf>

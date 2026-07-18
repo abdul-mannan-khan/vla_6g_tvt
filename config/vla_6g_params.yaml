@@ -1,0 +1,88 @@
+# VLA-6G UAV Relay System Configuration
+# Simplified scenario without weather adaptation
+
+# =============================================================================
+# CHANNEL SIMULATOR PARAMETERS
+# =============================================================================
+channel_simulator:
+  ros__parameters:
+    # THz channel parameters
+    frequency_ghz: 300.0          # 300 GHz (THz band for 6G)
+    bandwidth_ghz: 10.0           # 10 GHz bandwidth
+    bs_tx_power_dbm: 30.0         # Base station transmit power
+    uav_tx_power_dbm: 20.0        # UAV relay transmit power
+    noise_figure_db: 10.0         # Receiver noise figure
+
+    # Base station position
+    bs_position_x: 0.0
+    bs_position_y: 0.0
+    bs_position_z: 30.0           # On tower/building
+
+    # Update rate
+    update_rate_hz: 10.0          # Channel state update rate
+
+# =============================================================================
+# GROUND USERS SIMULATOR PARAMETERS
+# =============================================================================
+users_simulator:
+  ros__parameters:
+    num_users: 5                  # Number of ground users
+    area_min_x: 20.0              # User area bounds
+    area_max_x: 80.0
+    area_min_y: 20.0
+    area_max_y: 80.0
+    moving_users_fraction: 0.0    # 0 = all static (simplified scenario)
+    max_user_speed: 2.0           # m/s for moving users
+    default_required_rate: 100.0  # QoS requirement in Mbps
+    update_rate_hz: 10.0
+
+# =============================================================================
+# VLA RELAY NODE PARAMETERS
+# =============================================================================
+vla_relay_node:
+  ros__parameters:
+    # Model selection: 'analytical', 'llama', 'vla'
+    model_type: 'analytical'      # Start with analytical baseline
+
+    # Decision parameters
+    update_rate_hz: 2.0           # VLA decision rate (slower than planner)
+    min_position_change: 2.0      # Minimum change to trigger new target (m)
+    confidence_threshold: 0.5     # Minimum confidence to act
+
+    # Model paths (for trained models)
+    model_path: '/home/it-services/ros2_ws/src/vla_6g_tvt/models/vla_6g_v1'
+    use_quantization: true        # Use 8-bit quantization for inference
+
+# =============================================================================
+# DATA COLLECTOR PARAMETERS
+# =============================================================================
+data_collector:
+  ros__parameters:
+    output_dir: '/home/it-services/ros2_ws/src/vla_6g_tvt/data'
+    samples_per_episode: 100
+    num_episodes: 50
+    randomize_users: true
+
+# =============================================================================
+# EVALUATION PARAMETERS
+# =============================================================================
+evaluation_node:
+  ros__parameters:
+    num_scenarios: 20
+    output_dir: '/home/it-services/ros2_ws/src/vla_6g_tvt/results'
+    methods:
+      - 'vla'
+      - 'analytical'
+      - 'random'
+      - 'static'
+
+# =============================================================================
+# EGO PLANNER INTEGRATION (reference only - not loaded as ROS2 parameters)
+# =============================================================================
+# These are reference values - modify in ego_planner's config files
+#
+# ego_planner settings:
+#   FSM: flight_type=1 (manual target from VLA)
+#   Manager: max_vel=4.0, max_acc=3.0, max_jerk=4.0
+#   Optimization: lambda_smooth=1000, lambda_collision=2000
+#   Safe distance: dist0=0.5, swarm_clearance=1.0
