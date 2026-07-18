@@ -1,0 +1,49 @@
+{
+  "test_scenarios": 100,
+  "methods": {
+    "analytical": {
+      "throughput_mbps": {
+        "mean": 124.17867244730517,
+        "std": 61.27939073426923,
+        "ci95": 12.071268576861167
+      },
+      "fairness_mean": 0.7992686030695352,
+      "coverage_mean": 0.28159523809523807
+    },
+    "mlp_obs_rich": {
+      "throughput_mbps": {
+        "mean": 138.86774813895306,
+        "std": 81.97763736702551,
+        "ci95": 16.14856260965558
+      },
+      "fairness_mean": 0.9359750861820935,
+      "coverage_mean": 0.4035
+    },
+    "hybrid": {
+      "throughput_mbps": {
+        "mean": 146.6501412748187,
+        "std": 86.95793893008336,
+        "ci95": 17.129619324500055
+      },
+      "fairness_mean": 0.922847016839777,
+      "coverage_mean": 0.429547619047619,
+      "mlp_wins": 86,
+      "analytical_wins": 14
+    },
+    "de_optimizer": {
+      "throughput_mbps": {
+        "mean": 185.87023296016702,
+        "std": 84.84922756878751,
+        "ci95": 16.714229731224513
+      },
+      "fairness_mean": 0.9361804438493039,
+      "coverage_mean": 0.708595238095238
+    }
+  },
+  "improvements": {
+    "mlp_vs_analytical_pct": 11.828984319252687,
+    "hybrid_vs_analytical_pct": 18.096077518504018,
+    "mlp_recovery_pct": 23.81051082114452,
+    "hybrid_recovery_pct": 36.42551532284313
+  }
+}

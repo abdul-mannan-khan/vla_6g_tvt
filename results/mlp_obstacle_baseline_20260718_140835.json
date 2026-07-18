@@ -1,0 +1,2054 @@
+{
+  "method": "mlp_obstacle",
+  "architecture": "40 -> 256 -> BN -> 128 -> BN -> 64 -> 3",
+  "training_samples": 500,
+  "training_time_s": 4.565305709838867,
+  "test_scenarios": 50,
+  "summary_mlp_obs": {
+    "throughput_mbps": {
+      "mean": 133.49308289078613,
+      "std": 76.17363035417075,
+      "ci95": 21.32861649916781,
+      "min": 43.25922521718965,
+      "max": 332.2061332753068
+    },
+    "fairness_mean": 0.9511431955082773,
+    "coverage_mean": 0.3897619047619048,
+    "latency_ms": {
+      "mean": 0.2440537029178813,
+      "p50": 0.23178552510216832,
+      "p95": 0.29385569941950945
+    }
+  },
+  "summary_mlp_blind": {
+    "throughput_mbps": {
+      "mean": 158.51689644740551,
+      "std": 74.14810715847574,
+      "ci95": 20.761470004373205
+    },
+    "fairness_mean": 0.9380449105865475,
+    "coverage_mean": 0.5097619047619047,
+    "latency_ms": {
+      "mean": 0.22344794182572514,
+      "p50": 0.21239649504423141,
+      "p95": 0.3167686401866376
+    }
+  },
+  "per_scenario_mlp_obs": [
+    {
+      "scenario_id": 0,
+      "predicted_position": [
+        42.5475959777832,
+        47.83392333984375,
+        13.160264015197754
+      ],
+      "throughput": 134.43549891086903,
+      "fairness": 0.9999999999999998,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.6118559977039695,
+      "composite_score": 480.66129934652133,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 1,
+      "predicted_position": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "throughput": 43.25922521718965,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.32689201179891825,
+      "composite_score": 325.9555351303137,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 2,
+      "predicted_position": [
+        59.06830596923828,
+        49.594215393066406,
+        15.198415756225586
+      ],
+      "throughput": 141.078911901867,
+      "fairness": 0.9048011841665983,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.24955300614237785,
+      "composite_score": 406.08770239109964,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 3,
+      "predicted_position": [
+        43.81743240356445,
+        45.59180450439453,
+        11.756075859069824
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.26607298059388995,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 2,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 4
+    },
+    {
+      "scenario_id": 4,
+      "predicted_position": [
+        46.16391372680664,
+        42.943603515625,
+        12.397642135620117
+      ],
+      "throughput": 166.5414878661027,
+      "fairness": 0.8234597445154828,
+      "coverage_rate": 0.4,
+      "inference_ms": 0.265590992057696,
+      "composite_score": 386.96281607430643,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 5,
+      "predicted_position": [
+        41.84764099121094,
+        31.797744750976562,
+        10.55312442779541
+      ],
+      "throughput": 302.8627074332008,
+      "fairness": 0.9059801318804511,
+      "coverage_rate": 0.7142857142857143,
+      "inference_ms": 0.22277000243775547,
+      "composite_score": 524.9402354526272,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 6,
+      "predicted_position": [
+        42.08206558227539,
+        41.62494659423828,
+        11.37912368774414
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.22615198395214975,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 3,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 4
+    },
+    {
+      "scenario_id": 7,
+      "predicted_position": [
+        51.306575775146484,
+        45.2670783996582,
+        12.0150146484375
+      ],
+      "throughput": 86.5184504343793,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.16666666666666666,
+      "inference_ms": 0.2158980059903115,
+      "composite_score": 368.5777369272942,
+      "num_obstacles": 2,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 6
+    },
+    {
+      "scenario_id": 8,
+      "predicted_position": [
+        38.52428436279297,
+        39.468666076660156,
+        11.113040924072266
+      ],
+      "throughput": 176.42837417914893,
+      "fairness": 1.0000000000000002,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.23732500267215073,
+      "composite_score": 505.8570245074894,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 9,
+      "predicted_position": [
+        100.0,
+        100.0,
+        40.0
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.24898300762288272,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 10,
+      "predicted_position": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "throughput": 100.93819217344252,
+      "fairness": 0.9999999999999997,
+      "coverage_rate": 0.2857142857142857,
+      "inference_ms": 0.240332999965176,
+      "composite_score": 389.1343438754939,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 3
+    },
+    {
+      "scenario_id": 11,
+      "predicted_position": [
+        47.15555953979492,
+        42.1553955078125,
+        12.465900421142578
+      ],
+      "throughput": 72.09870869531609,
+      "fairness": 1.0,
+      "coverage_rate": 0.2,
+      "inference_ms": 0.24768098955973983,
+      "composite_score": 363.2592252171896,
+      "num_obstacles": 2,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 3
+    },
+    {
+      "scenario_id": 12,
+      "predicted_position": [
+        46.22860336303711,
+        39.97658920288086,
+        11.600431442260742
+      ],
+      "throughput": 193.83914138871637,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.22648798767477274,
+      "composite_score": 516.3034848332298,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 13,
+      "predicted_position": [
+        46.345760345458984,
+        41.52935028076172,
+        11.846282005310059
+      ],
+      "throughput": 106.7855034254743,
+      "fairness": 0.8494721033219503,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.23495798814110458,
+      "composite_score": 385.5795997185364,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 14,
+      "predicted_position": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "throughput": 86.5184504343793,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.2233190170954913,
+      "composite_score": 351.9110702606275,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 15,
+      "predicted_position": [
+        49.9646110534668,
+        45.292484283447266,
+        11.642494201660156
+      ],
+      "throughput": 174.29191617880508,
+      "fairness": 0.9109943781446199,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.23166602477431297,
+      "composite_score": 444.5401298173357,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 16,
+      "predicted_position": [
+        32.46530532836914,
+        43.758880615234375,
+        10.245057106018066
+      ],
+      "throughput": 230.14048625533542,
+      "fairness": 0.8793588284379603,
+      "coverage_rate": 0.6,
+      "inference_ms": 0.24203798966482282,
+      "composite_score": 461.8919402845894,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 17,
+      "predicted_position": [
+        41.463191986083984,
+        35.15492630004883,
+        10.501635551452637
+      ],
+      "throughput": 297.4410317514946,
+      "fairness": 0.9727171505744917,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.24645900703035295,
+      "composite_score": 570.2797642232442,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 18,
+      "predicted_position": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "throughput": 43.25922521718965,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.2234519924968481,
+      "composite_score": 359.288868463647,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 19,
+      "predicted_position": [
+        44.94702911376953,
+        41.006256103515625,
+        10.98086929321289
+      ],
+      "throughput": 213.20772068410525,
+      "fairness": 0.9188158341588081,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.23239300935529172,
+      "composite_score": 453.5693826581055,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 20,
+      "predicted_position": [
+        48.368778228759766,
+        47.57502746582031,
+        13.511914253234863
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.25157901109196246,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 1,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 21,
+      "predicted_position": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "throughput": 100.93819217344252,
+      "fairness": 0.9999999999999997,
+      "coverage_rate": 0.14285714285714285,
+      "inference_ms": 0.225575000513345,
+      "composite_score": 374.84862958977965,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 22,
+      "predicted_position": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "throughput": 86.5184504343793,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.16666666666666666,
+      "inference_ms": 0.21686500986106694,
+      "composite_score": 368.5777369272942,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 23,
+      "predicted_position": [
+        100.0,
+        100.0,
+        37.45184326171875
+      ],
+      "throughput": 43.25922521718965,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.218248984310776,
+      "composite_score": 359.288868463647,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 24,
+      "predicted_position": [
+        42.1603889465332,
+        41.345184326171875,
+        10.279717445373535
+      ],
+      "throughput": 332.2061332753068,
+      "fairness": 0.9758547895910388,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.22682198323309422,
+      "composite_score": 592.0801168424957,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 25,
+      "predicted_position": [
+        38.46262741088867,
+        41.82899475097656,
+        10.771109580993652
+      ],
+      "throughput": 197.49518475759442,
+      "fairness": 0.7853472202939608,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.22791599621996284,
+      "composite_score": 387.43461027607816,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 26,
+      "predicted_position": [
+        100.0,
+        100.0,
+        40.0
+      ],
+      "throughput": 100.93819217344252,
+      "fairness": 0.9999999999999997,
+      "coverage_rate": 0.14285714285714285,
+      "inference_ms": 0.248255004407838,
+      "composite_score": 374.84862958977965,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 27,
+      "predicted_position": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "throughput": 86.5184504343793,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.2238050219602883,
+      "composite_score": 351.9110702606275,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 28,
+      "predicted_position": [
+        44.614707946777344,
+        38.687313079833984,
+        11.438661575317383
+      ],
+      "throughput": 206.97614531413598,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.2312130236532539,
+      "composite_score": 524.1856871884816,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 29,
+      "predicted_position": [
+        40.89253616333008,
+        41.87826919555664,
+        11.311300277709961
+      ],
+      "throughput": 268.80702148661055,
+      "fairness": 0.8368183627656323,
+      "coverage_rate": 0.7142857142857143,
+      "inference_ms": 0.21706600091420114,
+      "composite_score": 483.7582931502275,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 30,
+      "predicted_position": [
+        50.456844329833984,
+        39.13991165161133,
+        12.253026962280273
+      ],
+      "throughput": 180.3337346849351,
+      "fairness": 0.8206961628935142,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.2373289898969233,
+      "composite_score": 387.74242301234864,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 31,
+      "predicted_position": [
+        47.93215560913086,
+        49.07383728027344,
+        13.34615707397461
+      ],
+      "throughput": 113.00090101789522,
+      "fairness": 0.9626301660734672,
+      "coverage_rate": 0.25,
+      "inference_ms": 0.22478500613942742,
+      "composite_score": 381.58959043277724,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 32,
+      "predicted_position": [
+        34.388427734375,
+        43.89231872558594,
+        10.0
+      ],
+      "throughput": 86.5184504343793,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.22168600116856396,
+      "composite_score": 351.9110702606275,
+      "num_obstacles": 2,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 6
+    },
+    {
+      "scenario_id": 33,
+      "predicted_position": [
+        31.79206085205078,
+        51.19988250732422,
+        10.005666732788086
+      ],
+      "throughput": 127.37791227863725,
+      "fairness": 0.7750647394100217,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.24339600349776447,
+      "composite_score": 358.9461691901888,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 34,
+      "predicted_position": [
+        39.029117584228516,
+        35.872650146484375,
+        10.420319557189941
+      ],
+      "throughput": 160.25468598149212,
+      "fairness": 0.7576986123193123,
+      "coverage_rate": 0.6,
+      "inference_ms": 0.23213200620375574,
+      "composite_score": 383.46239528468897,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 35,
+      "predicted_position": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "throughput": 100.93819217344252,
+      "fairness": 0.9999999999999997,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.22387801436707377,
+      "composite_score": 360.56291530406537,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 36,
+      "predicted_position": [
+        48.905460357666016,
+        55.35681915283203,
+        14.584822654724121
+      ],
+      "throughput": 168.86449084129853,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.4,
+      "inference_ms": 0.22766398615203798,
+      "composite_score": 441.31869450477905,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 37,
+      "predicted_position": [
+        83.83972930908203,
+        46.81064987182617,
+        27.420244216918945
+      ],
+      "throughput": 43.25922521718965,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.23365099332295358,
+      "composite_score": 359.288868463647,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 38,
+      "predicted_position": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "throughput": 100.93819217344252,
+      "fairness": 0.9999999999999997,
+      "coverage_rate": 0.2857142857142857,
+      "inference_ms": 0.31658701482228935,
+      "composite_score": 389.1343438754939,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 39,
+      "predicted_position": [
+        51.161766052246094,
+        51.862937927246094,
+        14.211893081665039
+      ],
+      "throughput": 119.2508447760873,
+      "fairness": 0.9665509237507165,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.23593398509547114,
+      "composite_score": 411.5157839908673,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 40,
+      "predicted_position": [
+        42.95204162597656,
+        50.86692428588867,
+        12.808164596557617
+      ],
+      "throughput": 72.09870869531609,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.2482490090187639,
+      "composite_score": 343.2592252171896,
+      "num_obstacles": 2,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 41,
+      "predicted_position": [
+        36.43765640258789,
+        38.43193817138672,
+        10.578932762145996
+      ],
+      "throughput": 268.999978094313,
+      "fairness": 0.893655651652294,
+      "coverage_rate": 0.8,
+      "inference_ms": 0.2449739840812981,
+      "composite_score": 509.496682352276,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 42,
+      "predicted_position": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "throughput": 43.25922521718965,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.3333333333333333,
+      "inference_ms": 0.24900599964894354,
+      "composite_score": 359.288868463647,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 43,
+      "predicted_position": [
+        38.11174392700195,
+        50.52175521850586,
+        10.708808898925781
+      ],
+      "throughput": 152.42263410043668,
+      "fairness": 0.8167797005166607,
+      "coverage_rate": 0.2857142857142857,
+      "inference_ms": 0.20075900829397142,
+      "composite_score": 365.05891918668874,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 3
+    },
+    {
+      "scenario_id": 44,
+      "predicted_position": [
+        43.81819152832031,
+        42.475303649902344,
+        12.194482803344727
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.23190502543002367,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 3,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 4
+    },
+    {
+      "scenario_id": 45,
+      "predicted_position": [
+        47.75533676147461,
+        48.4455451965332,
+        13.384429931640625
+      ],
+      "throughput": 100.93819217344252,
+      "fairness": 0.9999999999999997,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.21551901591010392,
+      "composite_score": 360.56291530406537,
+      "num_obstacles": 1,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 46,
+      "predicted_position": [
+        100.0,
+        100.0,
+        40.0
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.22968099801801145,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 47,
+      "predicted_position": [
+        39.437477111816406,
+        42.015419006347656,
+        10.528907775878906
+      ],
+      "throughput": 148.5483939332167,
+      "fairness": 0.8325833538074018,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.2199350274167955,
+      "composite_score": 388.90404250215056,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 48,
+      "predicted_position": [
+        47.70770263671875,
+        49.90891647338867,
+        12.772409439086914
+      ],
+      "throughput": 86.5184504343793,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.23071301984600723,
+      "composite_score": 401.9110702606275,
+      "num_obstacles": 3,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 6
+    },
+    {
+      "scenario_id": 49,
+      "predicted_position": [
+        32.165855407714844,
+        51.07740020751953,
+        10.600906372070312
+      ],
+      "throughput": 261.75610316119776,
+      "fairness": 0.9678807371394803,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.2276770246680826,
+      "composite_score": 547.4178830385628,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    }
+  ],
+  "per_scenario_mlp_blind": [
+    {
+      "scenario_id": 0,
+      "predicted_position": [
+        40.83348083496094,
+        48.411949157714844,
+        10.0
+      ],
+      "throughput": 133.48161693298556,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.32633700175210834,
+      "composite_score": 480.0889701597913,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 1,
+      "predicted_position": [
+        60.11369323730469,
+        41.648494720458984,
+        11.200053215026855
+      ],
+      "throughput": 43.25922521718965,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.25520200142636895,
+      "composite_score": 325.9555351303137,
+      "num_obstacles": 3,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 2,
+      "predicted_position": [
+        43.54717254638672,
+        41.344791412353516,
+        10.0
+      ],
+      "throughput": 206.1360004010065,
+      "fairness": 0.8876159400655794,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.2159380237571895,
+      "composite_score": 439.96638226027767,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 3,
+      "predicted_position": [
+        45.07109069824219,
+        48.78715515136719,
+        10.0
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.2359120117034763,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 2,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 4
+    },
+    {
+      "scenario_id": 4,
+      "predicted_position": [
+        45.64042663574219,
+        49.73532485961914,
+        10.0
+      ],
+      "throughput": 146.5650165635522,
+      "fairness": 0.8531733118290713,
+      "coverage_rate": 0.4,
+      "inference_ms": 0.23278998560272157,
+      "composite_score": 383.8910034868527,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 5,
+      "predicted_position": [
+        40.402008056640625,
+        31.553302764892578,
+        10.0
+      ],
+      "throughput": 302.3942745800223,
+      "fairness": 0.8990009206782843,
+      "coverage_rate": 0.7142857142857143,
+      "inference_ms": 0.4722059820778668,
+      "composite_score": 522.5654123800701,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 6,
+      "predicted_position": [
+        47.65546798706055,
+        45.302032470703125,
+        10.0
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.2535770181566477,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 3,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 4
+    },
+    {
+      "scenario_id": 7,
+      "predicted_position": [
+        44.87450408935547,
+        46.1641845703125,
+        10.0
+      ],
+      "throughput": 86.5184504343793,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.16666666666666666,
+      "inference_ms": 0.2187610080000013,
+      "composite_score": 368.5777369272942,
+      "num_obstacles": 2,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 6
+    },
+    {
+      "scenario_id": 8,
+      "predicted_position": [
+        47.511558532714844,
+        38.386634826660156,
+        10.0
+      ],
+      "throughput": 143.22531356183651,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.22558201453648508,
+      "composite_score": 485.93518813710193,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 9,
+      "predicted_position": [
+        43.60997009277344,
+        43.22214889526367,
+        10.0
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.23065201821736991,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 3,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 10,
+      "predicted_position": [
+        45.37798309326172,
+        52.40790939331055,
+        10.099421501159668
+      ],
+      "throughput": 100.93819217344252,
+      "fairness": 0.9999999999999997,
+      "coverage_rate": 0.2857142857142857,
+      "inference_ms": 0.2219179878011346,
+      "composite_score": 389.1343438754939,
+      "num_obstacles": 1,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 7
+    },
+    {
+      "scenario_id": 11,
+      "predicted_position": [
+        47.7955436706543,
+        50.66923904418945,
+        10.0
+      ],
+      "throughput": 72.09870869531609,
+      "fairness": 1.0,
+      "coverage_rate": 0.2,
+      "inference_ms": 0.19680600962601602,
+      "composite_score": 363.2592252171896,
+      "num_obstacles": 2,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 12,
+      "predicted_position": [
+        48.73121643066406,
+        41.37112045288086,
+        10.0
+      ],
+      "throughput": 174.7696226557545,
+      "fairness": 1.0,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.2314849989488721,
+      "composite_score": 504.8617735934527,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 13,
+      "predicted_position": [
+        49.585636138916016,
+        45.84773635864258,
+        10.0
+      ],
+      "throughput": 92.8334177826926,
+      "fairness": 0.8752087149423475,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.22024099598638713,
+      "composite_score": 384.9293318189865,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 14,
+      "predicted_position": [
+        44.87082290649414,
+        42.374176025390625,
+        10.0
+      ],
+      "throughput": 164.93735007477144,
+      "fairness": 0.8605090655295937,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.22700297995470464,
+      "composite_score": 423.7817963704076,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 15,
+      "predicted_position": [
+        47.2569580078125,
+        48.62189865112305,
+        10.176294326782227
+      ],
+      "throughput": 176.5871613181423,
+      "fairness": 0.9190113045245176,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.20416401093825698,
+      "composite_score": 448.3223548149073,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 16,
+      "predicted_position": [
+        38.46782302856445,
+        51.548519134521484,
+        10.0
+      ],
+      "throughput": 158.34103130273002,
+      "fairness": 0.8348841048687053,
+      "coverage_rate": 0.4,
+      "inference_ms": 0.21960301091894507,
+      "composite_score": 385.4698502422496,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 17,
+      "predicted_position": [
+        40.15925598144531,
+        39.15277099609375,
+        10.0
+      ],
+      "throughput": 306.05723710608936,
+      "fairness": 0.9835393840259881,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.37062200135551393,
+      "composite_score": 578.69615747145,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 18,
+      "predicted_position": [
+        47.05884552001953,
+        45.62139129638672,
+        10.0
+      ],
+      "throughput": 86.01680908212157,
+      "fairness": 0.896860911158781,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.23976201191544533,
+      "composite_score": 420.6683587969072,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 19,
+      "predicted_position": [
+        43.83493423461914,
+        46.04520034790039,
+        10.0
+      ],
+      "throughput": 231.37717345048605,
+      "fairness": 0.9595004693902213,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.2173609973397106,
+      "composite_score": 493.3431115540247,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 20,
+      "predicted_position": [
+        46.37025833129883,
+        50.98442459106445,
+        10.0
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.22937598987482488,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 1,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 21,
+      "predicted_position": [
+        41.19849395751953,
+        40.590091705322266,
+        10.0
+      ],
+      "throughput": 249.0191508060601,
+      "fairness": 0.8210689402344002,
+      "coverage_rate": 0.5714285714285714,
+      "inference_ms": 0.20666600903496146,
+      "composite_score": 452.8750296968133,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 22,
+      "predicted_position": [
+        44.338748931884766,
+        39.58112716674805,
+        10.0
+      ],
+      "throughput": 208.54610795215075,
+      "fairness": 0.9104357882791647,
+      "coverage_rate": 0.8333333333333334,
+      "inference_ms": 0.22171600721776485,
+      "composite_score": 481.59173458837313,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 23,
+      "predicted_position": [
+        47.942848205566406,
+        43.85287094116211,
+        10.0
+      ],
+      "throughput": 90.50216473687472,
+      "fairness": 0.9766506202218195,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.18047899357043207,
+      "composite_score": 413.96315157533735,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 24,
+      "predicted_position": [
+        45.29065704345703,
+        46.874149322509766,
+        10.0
+      ],
+      "throughput": 294.3820271840796,
+      "fairness": 1.0000000000000002,
+      "coverage_rate": 0.8571428571428571,
+      "inference_ms": 0.2236030122730881,
+      "composite_score": 562.3435020247335,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 25,
+      "predicted_position": [
+        50.23432159423828,
+        43.38978576660156,
+        10.003596305847168
+      ],
+      "throughput": 186.3610418129963,
+      "fairness": 0.8722582868880479,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.1950470032170415,
+      "composite_score": 423.49411115421213,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 26,
+      "predicted_position": [
+        44.297325134277344,
+        45.3089714050293,
+        10.0
+      ],
+      "throughput": 249.12214591311238,
+      "fairness": 0.9111592278432722,
+      "coverage_rate": 0.42857142857142855,
+      "inference_ms": 0.18633701256476343,
+      "composite_score": 465.6781987579919,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 27,
+      "predicted_position": [
+        45.674285888671875,
+        44.85898208618164,
+        10.0
+      ],
+      "throughput": 164.5781797834991,
+      "fairness": 0.8232054463320896,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.183952011866495,
+      "composite_score": 395.7085417697263,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 28,
+      "predicted_position": [
+        45.7237548828125,
+        43.81440734863281,
+        10.0
+      ],
+      "throughput": 178.00697468801948,
+      "fairness": 1.0,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.17682599718682468,
+      "composite_score": 456.8041848128117,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 29,
+      "predicted_position": [
+        42.715797424316406,
+        43.239070892333984,
+        10.0
+      ],
+      "throughput": 259.83768765681083,
+      "fairness": 0.8721400031369357,
+      "coverage_rate": 0.7142857142857143,
+      "inference_ms": 0.19848698866553605,
+      "composite_score": 488.9731849637386,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 1
+    },
+    {
+      "scenario_id": 30,
+      "predicted_position": [
+        43.001930236816406,
+        37.034088134765625,
+        10.0
+      ],
+      "throughput": 228.47713896389595,
+      "fairness": 0.8140857845409805,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.18976000137627125,
+      "composite_score": 447.97868540729837,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 31,
+      "predicted_position": [
+        44.41048049926758,
+        47.977664947509766,
+        10.0
+      ],
+      "throughput": 125.25112732390772,
+      "fairness": 0.9216366510340005,
+      "coverage_rate": 0.25,
+      "inference_ms": 0.30507397605106235,
+      "composite_score": 376.6416717045448,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 32,
+      "predicted_position": [
+        41.4010009765625,
+        49.7474479675293,
+        10.160247802734375
+      ],
+      "throughput": 86.5184504343793,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.20547400345094502,
+      "composite_score": 351.9110702606275,
+      "num_obstacles": 2,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 33,
+      "predicted_position": [
+        45.0068359375,
+        51.11307144165039,
+        10.0
+      ],
+      "throughput": 107.27331140216039,
+      "fairness": 0.8960742675840859,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.23286000941880047,
+      "composite_score": 383.186267116522,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 34,
+      "predicted_position": [
+        44.28501892089844,
+        41.8499870300293,
+        10.0
+      ],
+      "throughput": 163.1264246004328,
+      "fairness": 0.9073542349825761,
+      "coverage_rate": 0.6,
+      "inference_ms": 0.20490100723691285,
+      "composite_score": 430.0821252550325,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 35,
+      "predicted_position": [
+        41.41825866699219,
+        45.195640563964844,
+        10.0
+      ],
+      "throughput": 253.40859954040866,
+      "fairness": 0.9239216930121587,
+      "coverage_rate": 0.5714285714285714,
+      "inference_ms": 0.21507099154405296,
+      "composite_score": 486.3645247707499,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 36,
+      "predicted_position": [
+        47.561676025390625,
+        50.73616409301758,
+        10.0
+      ],
+      "throughput": 184.9102766229353,
+      "fairness": 1.0,
+      "coverage_rate": 0.6,
+      "inference_ms": 0.19320400315336883,
+      "composite_score": 470.9461659737612,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 37,
+      "predicted_position": [
+        41.46550750732422,
+        33.19486999511719,
+        10.0
+      ],
+      "throughput": 173.65753694023238,
+      "fairness": 0.9887090726146729,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.20254901028238237,
+      "composite_score": 500.80724394854127,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 38,
+      "predicted_position": [
+        45.44999313354492,
+        46.49480056762695,
+        10.0
+      ],
+      "throughput": 241.2065191876111,
+      "fairness": 0.9262303680462611,
+      "coverage_rate": 0.7142857142857143,
+      "inference_ms": 0.1959140063263476,
+      "composite_score": 494.0215933550164,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 39,
+      "predicted_position": [
+        44.52082443237305,
+        46.71255874633789,
+        10.0
+      ],
+      "throughput": 137.4448500566243,
+      "fairness": 0.9485895680994533,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.19212599727325141,
+      "composite_score": 417.04378046381055,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 40,
+      "predicted_position": [
+        48.03866958618164,
+        52.850730895996094,
+        10.0
+      ],
+      "throughput": 72.09870869531609,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.20356898312456906,
+      "composite_score": 343.2592252171896,
+      "num_obstacles": 2,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 41,
+      "predicted_position": [
+        36.08992004394531,
+        44.07026290893555,
+        10.0
+      ],
+      "throughput": 241.9586794713802,
+      "fairness": 0.9384936245874046,
+      "coverage_rate": 0.8,
+      "inference_ms": 0.1982509857043624,
+      "composite_score": 506.7232950590495,
+      "num_obstacles": 3,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 42,
+      "predicted_position": [
+        49.763553619384766,
+        35.843345642089844,
+        10.241659164428711
+      ],
+      "throughput": 83.48169026580895,
+      "fairness": 0.7953533788656075,
+      "coverage_rate": 0.6666666666666666,
+      "inference_ms": 0.20972199854440987,
+      "composite_score": 355.3616944858343,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 43,
+      "predicted_position": [
+        40.44209289550781,
+        44.51027297973633,
+        10.0
+      ],
+      "throughput": 189.95532833473152,
+      "fairness": 0.8083685948493649,
+      "coverage_rate": 0.2857142857142857,
+      "inference_ms": 0.20902699907310307,
+      "composite_score": 385.0552040270769,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 2
+    },
+    {
+      "scenario_id": 44,
+      "predicted_position": [
+        43.600074768066406,
+        48.867244720458984,
+        10.0
+      ],
+      "throughput": 57.67896695625287,
+      "fairness": 1.0,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.20895700436085463,
+      "composite_score": 334.6073801737517,
+      "num_obstacles": 3,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 45,
+      "predicted_position": [
+        58.976409912109375,
+        50.466365814208984,
+        10.855782508850098
+      ],
+      "throughput": 208.46193101236886,
+      "fairness": 1.0,
+      "coverage_rate": 0.42857142857142855,
+      "inference_ms": 0.20576998940669,
+      "composite_score": 467.93430146456416,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 46,
+      "predicted_position": [
+        47.954010009765625,
+        52.32431411743164,
+        10.0
+      ],
+      "throughput": 107.18372645681752,
+      "fairness": 0.9038793117535603,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.21600699983537197,
+      "composite_score": 385.47402940015854,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 47,
+      "predicted_position": [
+        45.49155807495117,
+        47.244171142578125,
+        10.0
+      ],
+      "throughput": 149.37902323321978,
+      "fairness": 0.9816546684344322,
+      "coverage_rate": 0.0,
+      "inference_ms": 0.18068301142193377,
+      "composite_score": 384.12381447026155,
+      "num_obstacles": 2,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    },
+    {
+      "scenario_id": 48,
+      "predicted_position": [
+        50.279510498046875,
+        47.27114486694336,
+        10.132319450378418
+      ],
+      "throughput": 86.5184504343793,
+      "fairness": 0.9999999999999999,
+      "coverage_rate": 0.5,
+      "inference_ms": 0.17961201956495643,
+      "composite_score": 401.9110702606275,
+      "num_obstacles": 3,
+      "bs_uav_blocked": true,
+      "num_blocked_users": 6
+    },
+    {
+      "scenario_id": 49,
+      "predicted_position": [
+        37.12696838378906,
+        46.17274856567383,
+        10.0
+      ],
+      "throughput": 291.2461327462786,
+      "fairness": 0.9916718709740029,
+      "coverage_rate": 1.0,
+      "inference_ms": 0.20545499864965677,
+      "composite_score": 572.249240939968,
+      "num_obstacles": 1,
+      "bs_uav_blocked": false,
+      "num_blocked_users": 0
+    }
+  ],
+  "learning_curves": {
+    "train_losses": [
+      1278.813753797743,
+      1192.1644265407986,
+      1045.3487296549479,
+      803.4364545355903,
+      486.2929229736328,
+      210.26326158311633,
+      106.40741746690539,
+      82.41035602145725,
+      72.64328186035156,
+      73.05527235243055,
+      74.29299357096355,
+      88.8992148844401,
+      54.926288774278426,
+      60.96069380018446,
+      67.81792046440972,
+      68.84008114284939,
+      74.13675889756945,
+      53.49013146294488,
+      70.47026394314236,
+      107.0329059516059,
+      62.36709391276042,
+      44.22039287990994,
+      58.64534871419271,
+      77.90164849175348,
+      58.12751925998264,
+      73.00650783962674,
+      61.56339830186632,
+      67.32560167100695,
+      80.74474178738065,
+      79.2159514702691,
+      80.64566616482205,
+      62.315708855523006,
+      47.801087849934895,
+      107.65314249674479,
+      54.394991115993925,
+      60.01862379286024,
+      73.80609520806206,
+      45.124058430989585,
+      46.82947564019097,
+      89.29322523328993,
+      64.8440370686849,
+      49.3184437391493,
+      78.49636528862847,
+      44.099320814344615,
+      50.819332411024305,
+      62.58083879258898,
+      64.7188636610243,
+      56.320349900987416,
+      56.6149365234375,
+      47.606145256890194,
+      48.066111653645834,
+      55.18280470106337,
+      50.529130655924476,
+      55.75878255208333,
+      76.82113111707899,
+      62.69509769015842,
+      57.439652574327255,
+      41.62892768012153,
+      49.51974819607205,
+      68.10998453776041,
+      47.01688317192925,
+      38.445979546440974,
+      37.30356730143229,
+      38.43902323404948,
+      39.16720289442274,
+      40.049307386610245,
+      38.23346686469184,
+      45.02353963216146,
+      32.54922248840332,
+      36.14617811414931,
+      35.97213100857205,
+      35.83470126681858,
+      40.72401862250434,
+      36.53578850640191,
+      28.358248324924045,
+      35.43296634250217,
+      30.78212205674913,
+      36.95994569566515,
+      28.203895806206596,
+      32.14966827392578,
+      35.3815161980523,
+      31.68119344075521,
+      29.92604749891493,
+      27.37439432779948,
+      34.43411787245009,
+      30.564339463975696,
+      27.707402589586046,
+      30.09607401529948,
+      28.058931884765624,
+      29.56419795566135,
+      24.89558851453993,
+      25.36473597208659,
+      25.00944797092014,
+      24.87317867702908,
+      24.842525753445095,
+      24.709156782362196,
+      24.162599555121528,
+      26.98089680989583,
+      24.651564229329427,
+      24.468519049750434,
+      25.00985602484809,
+      25.313878716362847,
+      23.100584072536893,
+      27.369093424479168,
+      24.241365559895833,
+      24.810165150960287,
+      23.018699010213215,
+      22.593009338378906,
+      26.11842468261719,
+      22.334980943467883,
+      27.611815185546874,
+      22.521925031873916,
+      25.642230021158856,
+      21.88043045043945,
+      21.862385830349393,
+      21.721005181206596,
+      21.829258795844183,
+      23.37796626196967,
+      21.290797886318632,
+      22.280016072591145,
+      23.048566385904948,
+      22.98491692437066,
+      24.26974846733941,
+      22.312736303541396,
+      23.006077880859376,
+      23.13381907145182,
+      22.518859123653836,
+      21.08120736863878,
+      21.57806627061632,
+      21.133867094251844,
+      20.618036426968043,
+      21.53305337270101,
+      21.48319965786404,
+      23.734234212239585,
+      23.76112579345703,
+      21.796718410915798,
+      21.188412325117323,
+      20.047251866658527,
+      20.008786527845594,
+      20.13112996419271,
+      22.724242214626734,
+      20.572437947591144,
+      21.523431833055284,
+      20.857406751844618,
+      21.446783447265624,
+      22.283035583496094,
+      20.104198744032118,
+      20.475421600341797,
+      20.117597266303168,
+      20.494590564303927,
+      21.107436896430123,
+      20.306359371609158,
+      20.76207997216119,
+      22.4000250922309,
+      20.719822998046876,
+      21.380726521809894,
+      20.7527151828342,
+      21.72080593532986,
+      20.20681265089247,
+      19.267862010531957,
+      20.85849348280165,
+      21.00506578233507,
+      20.258084331088597,
+      21.326627536349825,
+      21.070064934624565,
+      20.81817172580295,
+      21.182806599934896,
+      20.13226094563802,
+      19.279933649698894,
+      19.518750695122613,
+      19.6277887556288,
+      19.20179463704427,
+      19.766475118001303,
+      19.707396511501734,
+      19.804473020765517,
+      19.45680034213596,
+      18.830780588785807,
+      18.99509598626031,
+      21.287999992370604,
+      20.319888644748264,
+      20.30892608642578,
+      19.599563496907553,
+      19.76083991156684,
+      20.23410413953993,
+      18.932428487141927,
+      19.216554056803385,
+      19.851078991360133,
+      19.401844935946993,
+      19.72264639960395,
+      21.35571750217014,
+      19.29339747958713,
+      19.157625359429254,
+      21.699725545247396,
+      19.07624716864692,
+      19.284430452982583,
+      18.694621785481772,
+      18.982207522922092,
+      20.466035461425783,
+      21.103290002610947,
+      19.34222439236111
+    ],
+    "val_losses": [
+      1137.72392578125,
+      1028.4244140625,
+      838.713955078125,
+      480.2877624511719,
+      227.16381713867187,
+      65.49271850585937,
+      28.75428253173828,
+      29.838785858154296,
+      30.16146339416504,
+      33.759921646118165,
+      78.01467010498047,
+      29.982916412353514,
+      26.455466232299806,
+      33.87909622192383,
+      23.619096145629882,
+      34.704221649169924,
+      24.601351852416993,
+      27.991135940551757,
+      27.55119209289551,
+      27.140586013793946,
+      29.129671630859374,
+      36.689770202636716,
+      40.97961486816406,
+      55.1942936706543,
+      25.26312438964844,
+      23.66408432006836,
+      28.313544311523437,
+      32.92412445068359,
+      37.66234283447265,
+      32.66506210327148,
+      41.818865356445315,
+      34.41943252563477,
+      38.10937316894531,
+      23.26781837463379,
+      26.40128562927246,
+      33.108231201171876,
+      37.61230941772461,
+      34.16150367736817,
+      26.908916244506838,
+      26.16358039855957,
+      29.142606048583986,
+      29.849546356201174,
+      30.719767227172852,
+      26.547459487915038,
+      32.74144226074219,
+      32.58882736206055,
+      31.82293556213379,
+      33.407330169677735,
+      34.9941227722168,
+      28.013988342285156,
+      25.20539566040039,
+      56.35029418945312,
+      27.52773078918457,
+      29.032216873168945,
+      23.828165969848634,
+      29.529651641845703,
+      26.903836135864257,
+      24.96898307800293,
+      28.587599792480468,
+      36.20479949951172,
+      29.13873565673828,
+      25.763517150878908,
+      20.724705505371094,
+      21.277600708007814,
+      22.18713882446289,
+      26.922516021728516,
+      25.519468078613283,
+      20.922524719238282,
+      23.926420364379883,
+      25.282798767089844,
+      24.584481506347657,
+      22.270881042480468,
+      23.341978988647462,
+      30.289821243286134,
+      25.06979591369629,
+      24.513935623168944,
+      21.25731475830078,
+      25.579019165039064,
+      21.61000228881836,
+      21.071827354431154,
+      23.274336166381836,
+      20.601110534667967,
+      21.864242553710938,
+      22.62449401855469,
+      22.736276321411133,
+      21.097583999633787,
+      20.336068267822267,
+      20.9186328125,
+      21.75667060852051,
+      21.682829208374024,
+      24.140527496337892,
+      23.33197036743164,
+      22.91468765258789,
+      20.603980712890625,
+      24.209788131713868,
+      21.23600929260254,
+      22.320045318603515,
+      21.12858024597168,
+      20.628619079589843,
+      20.98897102355957,
+      21.13334976196289,
+      21.227959518432616,
+      21.685578842163086,
+      21.88575973510742,
+      23.874873657226562,
+      21.673781661987306,
+      21.37975616455078,
+      22.566194534301758,
+      22.947928771972656,
+      22.150186920166014,
+      20.626448669433593,
+      23.210135803222656,
+      20.987338409423828,
+      23.42427604675293,
+      22.93585792541504,
+      23.12248031616211,
+      22.150416412353515,
+      21.248897094726562,
+      23.70837661743164,
+      21.426556091308594,
+      22.365528335571287,
+      21.72525245666504,
+      25.721412963867188,
+      22.046623916625975,
+      22.321643447875978,
+      21.973618850708007,
+      20.369996109008788,
+      21.851186676025392,
+      22.510574798583985,
+      22.0987996673584,
+      22.55522750854492,
+      21.61292449951172,
+      23.201358718872072,
+      22.463457260131836,
+      25.59447822570801,
+      27.64250961303711,
+      21.73171318054199,
+      21.70337829589844,
+      20.634903411865235,
+      20.742012176513672,
+      20.573149185180664,
+      21.345931701660156,
+      21.832355880737303,
+      24.023272857666015,
+      22.789958190917968,
+      23.492710189819334,
+      21.556189498901368,
+      21.718729705810546,
+      22.669054946899415,
+      21.870824661254883,
+      25.189850006103516,
+      22.25503189086914,
+      22.868098068237305,
+      22.23832893371582,
+      25.085523376464845,
+      22.47214530944824,
+      21.770336685180663,
+      20.723364486694337,
+      22.58616241455078,
+      21.75924674987793,
+      23.489065856933593,
+      21.181396484375,
+      20.889622955322267,
+      22.069205856323244,
+      22.268046264648437,
+      20.159046936035157,
+      26.36067039489746,
+      22.45259063720703,
+      20.667692260742186,
+      21.299048385620118,
+      22.701259994506835,
+      24.648940124511718,
+      21.752500228881836,
+      20.737285232543947,
+      21.361477966308595,
+      22.94036590576172,
+      20.70118667602539,
+      22.156190185546876,
+      22.696840896606446,
+      20.622365875244142,
+      23.711932678222656,
+      29.265942687988282,
+      26.34342842102051,
+      29.47131217956543,
+      20.283432235717772,
+      22.66360595703125,
+      22.38122268676758,
+      25.226987228393554,
+      23.19600761413574,
+      24.288890228271484,
+      22.060464324951173,
+      22.148839416503908,
+      24.621886520385743,
+      27.24566032409668,
+      21.067887268066407,
+      22.693291549682616,
+      27.40382469177246,
+      21.636080169677733,
+      22.08241661071777,
+      22.06542694091797
+    ]
+  },
+  "comparison": {
+    "analytical_mean_throughput": 129.07048068817804,
+    "mlp_obs_mean_throughput": 133.49308289078613,
+    "mlp_blind_mean_throughput": 158.51689644740551,
+    "mlp_obs_vs_blind_pct": -15.786212143588155,
+    "mlp_obs_vs_analytical_pct": 3.4265016904156993
+  }
+}

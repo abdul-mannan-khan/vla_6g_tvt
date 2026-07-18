@@ -1,0 +1,2904 @@
+{
+  "configs": [
+    {
+      "config_name": "baseline_4bit",
+      "max_new_tokens": 150,
+      "temperature": 0.3,
+      "do_sample": true,
+      "num_scenarios": 100,
+      "parse_failures": 5,
+      "latency_ms": {
+        "mean": 10419.981024770166,
+        "std": 6162.411058146031,
+        "p50": 11873.291891999543,
+        "p95": 18918.20489649963,
+        "min": 1070.6275019983877,
+        "max": 25017.840609001723
+      },
+      "throughput_mbps": {
+        "mean": 143.81674985177997,
+        "std": 50.93916234748439,
+        "ci95": 10.034373749622606
+      },
+      "fairness_mean": 0.9530028759690731,
+      "coverage_mean": 0.5121666666666665,
+      "per_scenario": [
+        {
+          "scenario_id": 0,
+          "latency_ms": 3283.464243002527,
+          "throughput": 157.98466994331943,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 1,
+          "latency_ms": 16952.794065997296,
+          "throughput": 276.66998132833254,
+          "fairness": 0.9508362057876781,
+          "coverage": 0.7142857142857143
+        },
+        {
+          "scenario_id": 2,
+          "latency_ms": 3475.0013970005966,
+          "throughput": 113.59407424488472,
+          "fairness": 0.8983964293681989,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 3,
+          "latency_ms": 16460.582747000444,
+          "throughput": 154.946439500199,
+          "fairness": 1.0,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 4,
+          "latency_ms": 15444.251397999324,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 5,
+          "latency_ms": 15350.794490001135,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 6,
+          "latency_ms": 15256.25057599973,
+          "throughput": 151.44965204852724,
+          "fairness": 0.8839720837422322,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 7,
+          "latency_ms": 15781.58494300078,
+          "throughput": 118.65831950684752,
+          "fairness": 0.9397609728943492,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 8,
+          "latency_ms": 15563.788772000407,
+          "throughput": 212.53209044142548,
+          "fairness": 1.0000000000000002,
+          "coverage": 0.8333333333333334
+        },
+        {
+          "scenario_id": 9,
+          "latency_ms": 15044.58083800273,
+          "throughput": 154.1520689437845,
+          "fairness": 0.591767540174042,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 10,
+          "latency_ms": 15649.898378000216,
+          "throughput": 240.4089033463809,
+          "fairness": 0.8972294281162211,
+          "coverage": 0.8333333333333334
+        },
+        {
+          "scenario_id": 11,
+          "latency_ms": 10728.294687000016,
+          "throughput": 165.4381673054816,
+          "fairness": 0.9484131088810958,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 12,
+          "latency_ms": 15512.76159400004,
+          "throughput": 296.91455502313926,
+          "fairness": 0.998483208908984,
+          "coverage": 0.8571428571428571
+        },
+        {
+          "scenario_id": 13,
+          "latency_ms": 15749.952668000333,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.2857142857142857
+        },
+        {
+          "scenario_id": 14,
+          "latency_ms": 14917.024451002362,
+          "throughput": 233.26240971205365,
+          "fairness": 0.9559348058703829,
+          "coverage": 0.8571428571428571
+        },
+        {
+          "scenario_id": 15,
+          "latency_ms": 15370.060155000829,
+          "throughput": 104.21684251105636,
+          "fairness": 0.951367477969595,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 16,
+          "latency_ms": 2967.9999199979648,
+          "throughput": 119.04635339568492,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 17,
+          "latency_ms": 15198.080964000837,
+          "throughput": 106.6236405370914,
+          "fairness": 0.8681810057498595,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 18,
+          "latency_ms": 15307.564013997762,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.16666666666666666
+        },
+        {
+          "scenario_id": 19,
+          "latency_ms": 3087.4944960014545,
+          "throughput": 136.42045352328668,
+          "fairness": 0.9683877130869237,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 20,
+          "latency_ms": 3139.7781550003856,
+          "throughput": 140.16274246279409,
+          "fairness": 1.0000000000000002,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 21,
+          "latency_ms": 3713.8498700005584,
+          "throughput": 88.38962405239951,
+          "fairness": 0.9650886604298844,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 22,
+          "latency_ms": 5514.913454000634,
+          "throughput": 111.15032023331513,
+          "fairness": 0.9173295599819025,
+          "coverage": 0.25
+        },
+        {
+          "scenario_id": 23,
+          "latency_ms": 5624.931663001917,
+          "throughput": 69.7283394327495,
+          "fairness": 0.9252508058432225,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 24,
+          "latency_ms": 4982.530967001367,
+          "throughput": 125.20752747846865,
+          "fairness": 1.0000000000000002,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 25,
+          "latency_ms": 15760.416406999866,
+          "throughput": 181.31751885487478,
+          "fairness": 0.9430821766480544,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 26,
+          "latency_ms": 3139.5273089983675,
+          "throughput": 115.26132286650322,
+          "fairness": 0.9239540923648679,
+          "coverage": 0.75
+        },
+        {
+          "scenario_id": 27,
+          "latency_ms": 15633.111060000374,
+          "throughput": 205.51970433812482,
+          "fairness": 0.992135006579574,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 28,
+          "latency_ms": 15560.732100002497,
+          "throughput": 123.69036983780826,
+          "fairness": 1.0,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 29,
+          "latency_ms": 9354.100501997891,
+          "throughput": 86.85453597194568,
+          "fairness": 0.9999251396020354,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 30,
+          "latency_ms": 15513.513885998691,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 31,
+          "latency_ms": 3285.9955839994655,
+          "throughput": 148.62238939113257,
+          "fairness": 0.9360407450730628,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 32,
+          "latency_ms": 3200.7429379991663,
+          "throughput": 211.62528125052083,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 33,
+          "latency_ms": 15201.770375999331,
+          "throughput": 143.83941516327474,
+          "fairness": 0.7634529164724457,
+          "coverage": 0.16666666666666666
+        },
+        {
+          "scenario_id": 34,
+          "latency_ms": 15501.983288999327,
+          "throughput": 126.27158989438277,
+          "fairness": 0.8859317101083413,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 35,
+          "latency_ms": 16060.848103999888,
+          "throughput": 141.91601559172096,
+          "fairness": 0.9548395972773421,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 36,
+          "latency_ms": 3510.948777999147,
+          "throughput": 109.51214478377034,
+          "fairness": 1.0000000000000002,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 37,
+          "latency_ms": 16174.08980899927,
+          "throughput": 93.55156905819061,
+          "fairness": 0.9073991331896872,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 38,
+          "latency_ms": 16297.098245999223,
+          "throughput": 76.70514923256115,
+          "fairness": 0.8609177545961956,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 39,
+          "latency_ms": 3052.817582996795,
+          "throughput": 75.78295567473026,
+          "fairness": 0.9904993869135639,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 40,
+          "latency_ms": 15317.092041997967,
+          "throughput": 276.2908581474203,
+          "fairness": 0.9999999999999998,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 41,
+          "latency_ms": 16266.967981999187,
+          "throughput": 138.5453372671363,
+          "fairness": 0.9607028473007796,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 42,
+          "latency_ms": 8938.73292400167,
+          "throughput": 127.69286935844933,
+          "fairness": 0.90672177366671,
+          "coverage": 0.16666666666666666
+        },
+        {
+          "scenario_id": 43,
+          "latency_ms": 16683.204394001223,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 44,
+          "latency_ms": 16518.5731950005,
+          "throughput": 159.60977986641922,
+          "fairness": 0.971626351215618,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 45,
+          "latency_ms": 3749.148882001464,
+          "throughput": 71.57957464150444,
+          "fairness": 0.9146980499258754,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 46,
+          "latency_ms": 18724.4330800022,
+          "throughput": 188.82400472705405,
+          "fairness": 0.9654915815647273,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 47,
+          "latency_ms": 3592.824622999615,
+          "throughput": 149.95719276099976,
+          "fairness": 0.951286267543354,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 48,
+          "latency_ms": 4479.418142000213,
+          "throughput": 169.50851901928812,
+          "fairness": 0.9999999999999999,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 49,
+          "latency_ms": 4384.214943998813,
+          "throughput": 170.62957677944672,
+          "fairness": 0.9836720966669675,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 50,
+          "latency_ms": 18979.833438999776,
+          "throughput": 142.3384817230911,
+          "fairness": 0.8856394621506879,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 51,
+          "latency_ms": 15306.96574600006,
+          "throughput": 180.1930890706146,
+          "fairness": 0.9949840372440366,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 52,
+          "latency_ms": 16436.7928319989,
+          "throughput": 226.56387519982053,
+          "fairness": 0.9999999999999999,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 53,
+          "latency_ms": 18914.96128899962,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 54,
+          "latency_ms": 16737.216511999577,
+          "throughput": 159.78775889961415,
+          "fairness": 0.9483677295214247,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 55,
+          "latency_ms": 11760.395347999292,
+          "throughput": 113.62046511713179,
+          "fairness": 0.9976769828242312,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 56,
+          "latency_ms": 14171.78898900238,
+          "throughput": 164.32727788236465,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 57,
+          "latency_ms": 4640.22006900268,
+          "throughput": 118.65882897877887,
+          "fairness": 0.9632980942235561,
+          "coverage": 0.25
+        },
+        {
+          "scenario_id": 58,
+          "latency_ms": 17891.85912299945,
+          "throughput": 140.81046214287923,
+          "fairness": 0.8733808117784282,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 59,
+          "latency_ms": 16904.21796100054,
+          "throughput": 147.71216196498486,
+          "fairness": 0.9967798483967513,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 60,
+          "latency_ms": 3125.884714001586,
+          "throughput": 129.2912949276286,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 61,
+          "latency_ms": 17816.43464300214,
+          "throughput": 267.47251067296077,
+          "fairness": 0.8693079559736192,
+          "coverage": 0.42857142857142855
+        },
+        {
+          "scenario_id": 62,
+          "latency_ms": 20455.32585500041,
+          "throughput": 131.7709724953959,
+          "fairness": 0.9560397098690337,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 63,
+          "latency_ms": 20331.711973001802,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 64,
+          "latency_ms": 3684.870901997783,
+          "throughput": 174.92481601886627,
+          "fairness": 1.0,
+          "coverage": 0.75
+        },
+        {
+          "scenario_id": 65,
+          "latency_ms": 25017.840609001723,
+          "throughput": 140.3657788709317,
+          "fairness": 0.9483893611762984,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 66,
+          "latency_ms": 21703.490763000445,
+          "throughput": 82.21168892794901,
+          "fairness": 0.920612117805974,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 67,
+          "latency_ms": 3005.7545880008547,
+          "throughput": 140.22485896400758,
+          "fairness": 0.9837991763383459,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 68,
+          "latency_ms": 14331.930041000305,
+          "throughput": 205.35909592181414,
+          "fairness": 0.9999999999999998,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 69,
+          "latency_ms": 13957.909813998413,
+          "throughput": 138.5252206561975,
+          "fairness": 0.9370841879284253,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 70,
+          "latency_ms": 2970.969710000645,
+          "throughput": 87.02308077930415,
+          "fairness": 0.8589547636459761,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 71,
+          "latency_ms": 14284.112366000045,
+          "throughput": 185.85691255692558,
+          "fairness": 0.7166099807303155,
+          "coverage": 0.42857142857142855
+        },
+        {
+          "scenario_id": 72,
+          "latency_ms": 2521.6173400003754,
+          "throughput": 148.964446331888,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 73,
+          "latency_ms": 2978.424961998826,
+          "throughput": 93.45626117687544,
+          "fairness": 0.8960242036477897,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 74,
+          "latency_ms": 12852.361947996542,
+          "throughput": 264.4711443034004,
+          "fairness": 0.9316411964839562,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 75,
+          "latency_ms": 2322.0974699979706,
+          "throughput": 74.18425595045943,
+          "fairness": 0.931573435873952,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 76,
+          "latency_ms": 11986.188435999793,
+          "throughput": 182.90872892514403,
+          "fairness": 1.0,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 77,
+          "latency_ms": 11207.93542300089,
+          "throughput": 185.1820814845925,
+          "fairness": 0.9812121626270524,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 78,
+          "latency_ms": 13585.992846001318,
+          "throughput": 180.0826343906699,
+          "fairness": 0.9188031443507811,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 79,
+          "latency_ms": 8398.321835000388,
+          "throughput": 123.57490297834578,
+          "fairness": 0.9905285325632055,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 80,
+          "latency_ms": 12125.981646000582,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 81,
+          "latency_ms": 1646.4384339997196,
+          "throughput": 112.19850539143832,
+          "fairness": 0.9429515604618972,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 82,
+          "latency_ms": 9742.634698002803,
+          "throughput": 71.68006025401698,
+          "fairness": 0.9319497533185593,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 83,
+          "latency_ms": 12324.88775299862,
+          "throughput": 191.54507535550422,
+          "fairness": 1.0,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 84,
+          "latency_ms": 2218.9966369987815,
+          "throughput": 144.36519503388598,
+          "fairness": 1.0000000000000004,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 85,
+          "latency_ms": 1393.7987579993205,
+          "throughput": 137.81696416813125,
+          "fairness": 0.9850416394835105,
+          "coverage": 0.25
+        },
+        {
+          "scenario_id": 86,
+          "latency_ms": 5271.929463000561,
+          "throughput": 167.1809216218998,
+          "fairness": 0.9406438088518262,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 87,
+          "latency_ms": 5172.662889002822,
+          "throughput": 103.76914847195604,
+          "fairness": 0.9937428007251109,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 88,
+          "latency_ms": 4655.6055520013615,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 89,
+          "latency_ms": 5642.64268399711,
+          "throughput": 136.0403912141606,
+          "fairness": 0.9246726916835839,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 90,
+          "latency_ms": 5372.729398000956,
+          "throughput": 199.52803679854964,
+          "fairness": 0.9078848180166538,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 91,
+          "latency_ms": 5432.538082000974,
+          "throughput": 112.24435776811094,
+          "fairness": 0.9870949570950496,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 92,
+          "latency_ms": 1070.6275019983877,
+          "throughput": 141.95838162825717,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 93,
+          "latency_ms": 5175.239549000253,
+          "throughput": 125.38373078795613,
+          "fairness": 0.9876235615709005,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 94,
+          "latency_ms": 5653.319633001956,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 95,
+          "latency_ms": 5462.026101002266,
+          "throughput": 121.86916990731467,
+          "fairness": 0.9672363864571939,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 96,
+          "latency_ms": 3153.320552002697,
+          "throughput": 202.77731014573763,
+          "fairness": 1.0,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 97,
+          "latency_ms": 5264.012666000781,
+          "throughput": 84.57531608240807,
+          "fairness": 0.9349525054227784,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 98,
+          "latency_ms": 5261.100854000688,
+          "throughput": 96.5143292567524,
+          "fairness": 0.8350935121084953,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 99,
+          "latency_ms": 5693.646994997835,
+          "throughput": 250.81952410106072,
+          "fairness": 0.9879170730441352,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "config_name": "reduced_tokens_4bit",
+      "max_new_tokens": 50,
+      "temperature": 0.3,
+      "do_sample": true,
+      "num_scenarios": 100,
+      "parse_failures": 4,
+      "latency_ms": {
+        "mean": 1764.9326241899325,
+        "std": 623.9728349004838,
+        "p50": 1788.949980002144,
+        "p95": 3229.761441399205,
+        "min": 984.8391340019589,
+        "max": 4209.696500001883
+      },
+      "throughput_mbps": {
+        "mean": 115.37322582965089,
+        "std": 32.072363395026464,
+        "ci95": 6.317851855200437
+      },
+      "fairness_mean": 0.9631531591543038,
+      "coverage_mean": 0.393595238095238,
+      "per_scenario": [
+        {
+          "scenario_id": 0,
+          "latency_ms": 1041.4286890008952,
+          "throughput": 146.36416886640814,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 1,
+          "latency_ms": 1786.4953810021689,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.2857142857142857
+        },
+        {
+          "scenario_id": 2,
+          "latency_ms": 1768.0821569992986,
+          "throughput": 113.25290460928052,
+          "fairness": 0.9018688573192102,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 3,
+          "latency_ms": 1870.2666960016359,
+          "throughput": 167.63245632619822,
+          "fairness": 0.9760759803350532,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 4,
+          "latency_ms": 1973.5192179978185,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 5,
+          "latency_ms": 1845.6477950021508,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 6,
+          "latency_ms": 1724.87528900092,
+          "throughput": 144.51657476264808,
+          "fairness": 0.8582625924174693,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 7,
+          "latency_ms": 1776.9923569976527,
+          "throughput": 72.09870869531609,
+          "fairness": 1.0,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 8,
+          "latency_ms": 1841.1141100004897,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 9,
+          "latency_ms": 1956.5795510025055,
+          "throughput": 154.1520689437845,
+          "fairness": 0.591767540174042,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 10,
+          "latency_ms": 1812.754460999713,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 11,
+          "latency_ms": 1791.4045790021191,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 12,
+          "latency_ms": 1805.2343710005516,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 13,
+          "latency_ms": 1822.5765070019406,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.2857142857142857
+        },
+        {
+          "scenario_id": 14,
+          "latency_ms": 1819.0966229994956,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 15,
+          "latency_ms": 1041.410439000174,
+          "throughput": 107.82497061296212,
+          "fairness": 0.9913919111459849,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 16,
+          "latency_ms": 1045.9104940018733,
+          "throughput": 121.83664631760851,
+          "fairness": 1.0000000000000002,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 17,
+          "latency_ms": 1082.0973409972794,
+          "throughput": 110.30294347152156,
+          "fairness": 0.8440818882004526,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 18,
+          "latency_ms": 1809.9407119989337,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.16666666666666666
+        },
+        {
+          "scenario_id": 19,
+          "latency_ms": 1058.4924800023146,
+          "throughput": 135.76766016525448,
+          "fairness": 0.9713612496743192,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 20,
+          "latency_ms": 1049.5617040032812,
+          "throughput": 142.00957472343558,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 21,
+          "latency_ms": 1857.4484270029643,
+          "throughput": 91.3959630106629,
+          "fairness": 0.9960567047494686,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 22,
+          "latency_ms": 1096.3646419986617,
+          "throughput": 112.04370329844383,
+          "fairness": 0.8984804456820411,
+          "coverage": 0.25
+        },
+        {
+          "scenario_id": 23,
+          "latency_ms": 1068.1164800007537,
+          "throughput": 67.69356459930003,
+          "fairness": 0.9846052330370054,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 24,
+          "latency_ms": 1883.2495409988042,
+          "throughput": 122.03916057563947,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 25,
+          "latency_ms": 1866.9673769982182,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 26,
+          "latency_ms": 1846.285887000704,
+          "throughput": 120.25305896035503,
+          "fairness": 0.8797854643593266,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 27,
+          "latency_ms": 1855.9248960009427,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 28,
+          "latency_ms": 1794.1147969977465,
+          "throughput": 120.62216950327476,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 29,
+          "latency_ms": 1767.2804609974264,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 30,
+          "latency_ms": 1854.5076359987434,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 31,
+          "latency_ms": 1087.2335879976163,
+          "throughput": 148.8401939257653,
+          "fairness": 0.9066058551039992,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 32,
+          "latency_ms": 1134.30340999912,
+          "throughput": 200.63330679666802,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 33,
+          "latency_ms": 1884.5032649987843,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 34,
+          "latency_ms": 1149.8300229977758,
+          "throughput": 129.83148688837406,
+          "fairness": 0.8824801783095325,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 35,
+          "latency_ms": 1919.2871560007916,
+          "throughput": 72.09870869531609,
+          "fairness": 1.0,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 36,
+          "latency_ms": 1877.1631580020767,
+          "throughput": 122.40247997509977,
+          "fairness": 0.9999999999999999,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 37,
+          "latency_ms": 1058.2853569976578,
+          "throughput": 96.59281883218449,
+          "fairness": 0.9044326049042637,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 38,
+          "latency_ms": 1039.8978470002476,
+          "throughput": 74.38287512020551,
+          "fairness": 0.9153483850760739,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 39,
+          "latency_ms": 1072.7720740032964,
+          "throughput": 72.82374108923261,
+          "fairness": 0.9415877252604942,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 40,
+          "latency_ms": 1837.8572089968657,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 41,
+          "latency_ms": 1771.0944239988748,
+          "throughput": 72.09870869531609,
+          "fairness": 1.0,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 42,
+          "latency_ms": 1863.1044260000635,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 43,
+          "latency_ms": 1996.340613997745,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 44,
+          "latency_ms": 2019.7264980015461,
+          "throughput": 159.60977986641922,
+          "fairness": 0.971626351215618,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 45,
+          "latency_ms": 1866.2721709988546,
+          "throughput": 68.05945397894729,
+          "fairness": 0.9326086391459669,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 46,
+          "latency_ms": 1957.8561980015365,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 47,
+          "latency_ms": 1153.7326830002712,
+          "throughput": 149.89000539490826,
+          "fairness": 0.9492757882924211,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 48,
+          "latency_ms": 1093.7135169988323,
+          "throughput": 148.01685942633594,
+          "fairness": 0.9999999999999999,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 49,
+          "latency_ms": 1315.5055999995966,
+          "throughput": 174.95745255199455,
+          "fairness": 0.9861823836662627,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 50,
+          "latency_ms": 2261.071361001086,
+          "throughput": 136.65780774487675,
+          "fairness": 0.8583551921055669,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 51,
+          "latency_ms": 2121.050548998028,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 52,
+          "latency_ms": 2201.9262119974883,
+          "throughput": 141.87181084241166,
+          "fairness": 0.943880480814535,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 53,
+          "latency_ms": 2051.6459190002934,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 54,
+          "latency_ms": 2014.629994999268,
+          "throughput": 162.67752087203738,
+          "fairness": 0.9379738210625089,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 55,
+          "latency_ms": 1053.5447139991447,
+          "throughput": 114.08755975385213,
+          "fairness": 0.937824861893412,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 56,
+          "latency_ms": 1752.0732259981742,
+          "throughput": 184.38525675976422,
+          "fairness": 1.0,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 57,
+          "latency_ms": 1812.8299710006104,
+          "throughput": 117.7001956282623,
+          "fairness": 0.9465635677493691,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 58,
+          "latency_ms": 1767.0699720001721,
+          "throughput": 151.01640879120808,
+          "fairness": 0.9590358988249048,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 59,
+          "latency_ms": 1929.9923239996133,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 60,
+          "latency_ms": 1192.355752998992,
+          "throughput": 141.5719107472977,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 61,
+          "latency_ms": 2027.0592859997123,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 62,
+          "latency_ms": 1994.817108999996,
+          "throughput": 124.04347478013848,
+          "fairness": 0.9702174157638647,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 63,
+          "latency_ms": 1838.0225000000792,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 64,
+          "latency_ms": 1056.532992002758,
+          "throughput": 176.9043539006094,
+          "fairness": 0.9968521107979597,
+          "coverage": 0.75
+        },
+        {
+          "scenario_id": 65,
+          "latency_ms": 1870.4652919986984,
+          "throughput": 142.26058969342222,
+          "fairness": 0.9610567710303632,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 66,
+          "latency_ms": 1875.9522719992674,
+          "throughput": 89.64222261531768,
+          "fairness": 0.8693079235575978,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 67,
+          "latency_ms": 1151.063860997965,
+          "throughput": 129.53673029351296,
+          "fairness": 0.9258702983563936,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 68,
+          "latency_ms": 2083.214828002383,
+          "throughput": 219.16073016457972,
+          "fairness": 1.0000000000000002,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 69,
+          "latency_ms": 1986.4998310004012,
+          "throughput": 133.4078936417589,
+          "fairness": 0.9331234154329376,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 70,
+          "latency_ms": 3229.7077139992325,
+          "throughput": 85.35790403239585,
+          "fairness": 0.85988056729713,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 71,
+          "latency_ms": 4059.946748002403,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 72,
+          "latency_ms": 2914.3249629996717,
+          "throughput": 137.32357582855977,
+          "fairness": 0.9999999999999998,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 73,
+          "latency_ms": 3230.7822619986837,
+          "throughput": 95.64026397773385,
+          "fairness": 0.9284653266647526,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 74,
+          "latency_ms": 4209.696500001883,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 75,
+          "latency_ms": 3684.055150999484,
+          "throughput": 76.81936755232556,
+          "fairness": 0.9550211571223307,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 76,
+          "latency_ms": 3482.207416996971,
+          "throughput": 96.69717323549948,
+          "fairness": 0.9669611607995482,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 77,
+          "latency_ms": 2735.3098899984616,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 78,
+          "latency_ms": 1822.155224999733,
+          "throughput": 147.7157496676483,
+          "fairness": 0.8598474196031894,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 79,
+          "latency_ms": 984.960391997447,
+          "throughput": 122.01351807730458,
+          "fairness": 0.9931163665074871,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 80,
+          "latency_ms": 1660.3841229989484,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 81,
+          "latency_ms": 986.0190559993498,
+          "throughput": 109.57844016974121,
+          "fairness": 0.8989332904710049,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 82,
+          "latency_ms": 1669.6970490011154,
+          "throughput": 71.97808631515548,
+          "fairness": 0.8546322641926457,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 83,
+          "latency_ms": 1692.8107120002096,
+          "throughput": 201.3780076228451,
+          "fairness": 1.0,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 84,
+          "latency_ms": 984.8391340019589,
+          "throughput": 141.1537943613622,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 85,
+          "latency_ms": 996.3159529979748,
+          "throughput": 133.62757944211074,
+          "fairness": 0.9802032284205877,
+          "coverage": 0.25
+        },
+        {
+          "scenario_id": 86,
+          "latency_ms": 1676.111814998876,
+          "throughput": 118.84762192590446,
+          "fairness": 0.9436844110000817,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 87,
+          "latency_ms": 1652.396792997024,
+          "throughput": 110.52168678879328,
+          "fairness": 0.9164228750027107,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 88,
+          "latency_ms": 1672.3420419984905,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 89,
+          "latency_ms": 1679.7897910000756,
+          "throughput": 135.7157774830198,
+          "fairness": 0.924588711630677,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 90,
+          "latency_ms": 1685.0782440014882,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 91,
+          "latency_ms": 1673.1165050005075,
+          "throughput": 109.67001523610388,
+          "fairness": 0.9906387177304252,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 92,
+          "latency_ms": 1685.298189000605,
+          "throughput": 151.16106478614319,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 93,
+          "latency_ms": 1015.3533539996715,
+          "throughput": 123.97742888048192,
+          "fairness": 0.9910184538501527,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 94,
+          "latency_ms": 1712.0702390020597,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 95,
+          "latency_ms": 1703.3896979992278,
+          "throughput": 169.7129741238187,
+          "fairness": 0.9706415775209104,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 96,
+          "latency_ms": 1747.551853000914,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.16666666666666666
+        },
+        {
+          "scenario_id": 97,
+          "latency_ms": 1036.8859710033576,
+          "throughput": 91.97311107238824,
+          "fairness": 0.942547357168796,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 98,
+          "latency_ms": 1755.782062002254,
+          "throughput": 115.66607531831484,
+          "fairness": 0.8147654949895324,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 99,
+          "latency_ms": 1700.8452910013148,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        }
+      ]
+    },
+    {
+      "config_name": "greedy_4bit",
+      "max_new_tokens": 50,
+      "temperature": 0.0,
+      "do_sample": false,
+      "num_scenarios": 100,
+      "parse_failures": 3,
+      "latency_ms": {
+        "mean": 1517.248559870095,
+        "std": 335.49123111340685,
+        "p50": 1708.753834998788,
+        "p95": 1799.9787738475789,
+        "min": 1008.5990820007282,
+        "max": 2068.0511060018034
+      },
+      "throughput_mbps": {
+        "mean": 117.46780506606477,
+        "std": 33.346194933731034,
+        "ci95": 6.56878063306735
+      },
+      "fairness_mean": 0.9645915740744896,
+      "coverage_mean": 0.3949285714285714,
+      "per_scenario": [
+        {
+          "scenario_id": 0,
+          "latency_ms": 1008.5990820007282,
+          "throughput": 157.44530147403376,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 1,
+          "latency_ms": 1697.896005000075,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.2857142857142857
+        },
+        {
+          "scenario_id": 2,
+          "latency_ms": 1021.1645979979949,
+          "throughput": 113.79919994630782,
+          "fairness": 0.9089582239876591,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 3,
+          "latency_ms": 1693.3333849992778,
+          "throughput": 167.76654484247743,
+          "fairness": 0.9868220178511028,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 4,
+          "latency_ms": 1707.8664760010724,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 5,
+          "latency_ms": 1700.162282999372,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 6,
+          "latency_ms": 1702.3224250006024,
+          "throughput": 149.46631414462678,
+          "fairness": 0.8721446528976983,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 7,
+          "latency_ms": 1724.9315360022592,
+          "throughput": 94.6313152307253,
+          "fairness": 0.9978823932498426,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 8,
+          "latency_ms": 1704.188569001417,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 9,
+          "latency_ms": 1714.4270349999715,
+          "throughput": 154.1520689437845,
+          "fairness": 0.591767540174042,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 10,
+          "latency_ms": 1714.420793003228,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 11,
+          "latency_ms": 1712.3243330024707,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 12,
+          "latency_ms": 1709.4835249990865,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 13,
+          "latency_ms": 1762.3203170005581,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.2857142857142857
+        },
+        {
+          "scenario_id": 14,
+          "latency_ms": 1758.9472210020176,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 15,
+          "latency_ms": 1042.9072919978353,
+          "throughput": 105.6963842613489,
+          "fairness": 0.9499909786629523,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 16,
+          "latency_ms": 1036.4379109996662,
+          "throughput": 124.36957187046953,
+          "fairness": 1.0,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 17,
+          "latency_ms": 1038.30454400304,
+          "throughput": 104.38862055155039,
+          "fairness": 0.8821458714180231,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 18,
+          "latency_ms": 1769.3979879986728,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.16666666666666666
+        },
+        {
+          "scenario_id": 19,
+          "latency_ms": 1055.5721689997881,
+          "throughput": 132.3581081666311,
+          "fairness": 0.9710350533594359,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 20,
+          "latency_ms": 1046.9859630029532,
+          "throughput": 142.273408083073,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 21,
+          "latency_ms": 1041.3680970013957,
+          "throughput": 90.3957676323536,
+          "fairness": 0.9376449172608607,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 22,
+          "latency_ms": 1054.1738989995793,
+          "throughput": 108.64797864504493,
+          "fairness": 0.9087383147590893,
+          "coverage": 0.25
+        },
+        {
+          "scenario_id": 23,
+          "latency_ms": 1041.5563749993453,
+          "throughput": 67.34864789225588,
+          "fairness": 0.9956812562877205,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 24,
+          "latency_ms": 1047.464803999901,
+          "throughput": 118.33364911122126,
+          "fairness": 1.0,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 25,
+          "latency_ms": 1773.3669730005204,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 26,
+          "latency_ms": 1053.9651940016483,
+          "throughput": 118.50595247994441,
+          "fairness": 0.8868336877126421,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 27,
+          "latency_ms": 1769.370584999706,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 28,
+          "latency_ms": 1046.9242129984195,
+          "throughput": 123.69036983780826,
+          "fairness": 1.0,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 29,
+          "latency_ms": 1771.8894080026075,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 30,
+          "latency_ms": 1748.7458949981374,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 31,
+          "latency_ms": 1039.4441990029009,
+          "throughput": 148.78971262749263,
+          "fairness": 0.9208523795296729,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 32,
+          "latency_ms": 1043.9281019971531,
+          "throughput": 199.4832366630927,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 33,
+          "latency_ms": 1722.5959269999294,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 34,
+          "latency_ms": 1049.8166090001178,
+          "throughput": 130.7351192325946,
+          "fairness": 0.8819806846541015,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 35,
+          "latency_ms": 1799.9590929975966,
+          "throughput": 96.83677908152865,
+          "fairness": 0.9967254281700709,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 36,
+          "latency_ms": 1786.5095870001824,
+          "throughput": 121.49254824936173,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 37,
+          "latency_ms": 1071.6049279981235,
+          "throughput": 96.41997137780683,
+          "fairness": 0.909926935903977,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 38,
+          "latency_ms": 1045.8318639975914,
+          "throughput": 73.00104292908136,
+          "fairness": 0.9106110414364907,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 39,
+          "latency_ms": 1800.8432799979346,
+          "throughput": 75.95994989049747,
+          "fairness": 0.9854569681954423,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 40,
+          "latency_ms": 1771.5785070031416,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 41,
+          "latency_ms": 1826.9574849982746,
+          "throughput": 122.56120248231706,
+          "fairness": 0.9039456301793866,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 42,
+          "latency_ms": 1978.3624219999183,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 43,
+          "latency_ms": 2068.0511060018034,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 44,
+          "latency_ms": 1787.095751002198,
+          "throughput": 159.60977986641922,
+          "fairness": 0.971626351215618,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 45,
+          "latency_ms": 1032.911966998654,
+          "throughput": 68.70589203215712,
+          "fairness": 0.929943966200798,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 46,
+          "latency_ms": 1759.7699319994717,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 47,
+          "latency_ms": 1049.1096320001816,
+          "throughput": 149.31060887323775,
+          "fairness": 0.9303856614955284,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 48,
+          "latency_ms": 1051.5473960003874,
+          "throughput": 154.09011567246165,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 49,
+          "latency_ms": 1089.4439929979853,
+          "throughput": 170.12685666738125,
+          "fairness": 0.9833954908597582,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 50,
+          "latency_ms": 1794.8141670021869,
+          "throughput": 138.39770838406133,
+          "fairness": 0.871774351625827,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 51,
+          "latency_ms": 1764.3440669999109,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 52,
+          "latency_ms": 1761.2583890004316,
+          "throughput": 141.87181084241166,
+          "fairness": 0.943880480814535,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 53,
+          "latency_ms": 1760.423127001559,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 54,
+          "latency_ms": 1765.8344240007864,
+          "throughput": 150.92477095440788,
+          "fairness": 0.8732958997863205,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 55,
+          "latency_ms": 1041.122334998363,
+          "throughput": 113.86649139082529,
+          "fairness": 0.931861634702899,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 56,
+          "latency_ms": 1756.8013749987585,
+          "throughput": 187.94510825386698,
+          "fairness": 0.9999999999999998,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 57,
+          "latency_ms": 1041.4236550022906,
+          "throughput": 117.81449084361554,
+          "fairness": 0.9498339931662562,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 58,
+          "latency_ms": 1713.5575489992334,
+          "throughput": 135.02064897575693,
+          "fairness": 0.8680830952038852,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 59,
+          "latency_ms": 1694.6630950005783,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 60,
+          "latency_ms": 1053.8758570000937,
+          "throughput": 137.61418156722516,
+          "fairness": 0.9999999999999998,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 61,
+          "latency_ms": 1708.233792000101,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 62,
+          "latency_ms": 1744.392279000749,
+          "throughput": 126.82834062403157,
+          "fairness": 0.9734416572600746,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 63,
+          "latency_ms": 1724.1877609994845,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 64,
+          "latency_ms": 1029.8005360018578,
+          "throughput": 174.428838532685,
+          "fairness": 1.0,
+          "coverage": 0.75
+        },
+        {
+          "scenario_id": 65,
+          "latency_ms": 1716.0609560014564,
+          "throughput": 143.95415809638817,
+          "fairness": 0.9674562069043573,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 66,
+          "latency_ms": 1696.8651409988524,
+          "throughput": 80.77286311160195,
+          "fairness": 0.929730776680468,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 67,
+          "latency_ms": 1015.7607199980703,
+          "throughput": 139.38797245280693,
+          "fairness": 0.9475594064278559,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 68,
+          "latency_ms": 1687.1129190003558,
+          "throughput": 217.8061742122081,
+          "fairness": 1.0,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 69,
+          "latency_ms": 1677.1401980004157,
+          "throughput": 136.47814924418162,
+          "fairness": 0.934278430426422,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 70,
+          "latency_ms": 1674.9177019992203,
+          "throughput": 85.35790403239585,
+          "fairness": 0.85988056729713,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 71,
+          "latency_ms": 1698.4204369982763,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 72,
+          "latency_ms": 1703.6512440026854,
+          "throughput": 140.81212996459402,
+          "fairness": 0.9999999999999997,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 73,
+          "latency_ms": 1029.0463310011546,
+          "throughput": 99.15541352417608,
+          "fairness": 0.9489525533933864,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 74,
+          "latency_ms": 1709.2738779974752,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 75,
+          "latency_ms": 1800.3527099972416,
+          "throughput": 77.87097389560675,
+          "fairness": 0.9265317039287508,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 76,
+          "latency_ms": 1723.2678619984654,
+          "throughput": 216.06535293084295,
+          "fairness": 0.9998200596227911,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 77,
+          "latency_ms": 1752.269974000228,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 78,
+          "latency_ms": 1760.6131190004817,
+          "throughput": 169.83887434204814,
+          "fairness": 0.9223468403141427,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 79,
+          "latency_ms": 1046.163252001861,
+          "throughput": 126.61068595057526,
+          "fairness": 0.9975094409051061,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 80,
+          "latency_ms": 1738.252218998241,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 81,
+          "latency_ms": 1053.4478949994082,
+          "throughput": 112.18640010423113,
+          "fairness": 0.9597381314002069,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 82,
+          "latency_ms": 1766.280932999507,
+          "throughput": 72.20020025191701,
+          "fairness": 0.8839093695678926,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 83,
+          "latency_ms": 1763.356322000618,
+          "throughput": 201.3761897247487,
+          "fairness": 0.9980142576320956,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 84,
+          "latency_ms": 1756.5377200007788,
+          "throughput": 140.84201242674564,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 85,
+          "latency_ms": 1052.5300359986431,
+          "throughput": 138.9869468537964,
+          "fairness": 0.9794397774642353,
+          "coverage": 0.25
+        },
+        {
+          "scenario_id": 86,
+          "latency_ms": 1760.7222990009177,
+          "throughput": 178.1154175694687,
+          "fairness": 0.9260265499055624,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 87,
+          "latency_ms": 1046.643817997392,
+          "throughput": 108.27240946999011,
+          "fairness": 0.9986389342630126,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 88,
+          "latency_ms": 1777.9029660014203,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 89,
+          "latency_ms": 1768.962193000334,
+          "throughput": 132.97421383638056,
+          "fairness": 0.9315621461944142,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 90,
+          "latency_ms": 1770.523838000372,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 91,
+          "latency_ms": 1768.2772490006755,
+          "throughput": 110.2052994015188,
+          "fairness": 0.9831131528557127,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 92,
+          "latency_ms": 1759.8360310003045,
+          "throughput": 149.70820657931532,
+          "fairness": 0.9999999999999999,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 93,
+          "latency_ms": 1048.7146279992885,
+          "throughput": 119.39634957958202,
+          "fairness": 0.9725437293160176,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 94,
+          "latency_ms": 1764.3172759999288,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 95,
+          "latency_ms": 1757.676392000576,
+          "throughput": 121.93969177864298,
+          "fairness": 0.9640672550771653,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 96,
+          "latency_ms": 1770.4564160012524,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.16666666666666666
+        },
+        {
+          "scenario_id": 97,
+          "latency_ms": 1698.7027670002135,
+          "throughput": 87.19756111625074,
+          "fairness": 0.9345005993793944,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 98,
+          "latency_ms": 1702.7544060001674,
+          "throughput": 88.33981486895897,
+          "fairness": 0.8668709604711268,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 99,
+          "latency_ms": 1707.1310589999484,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        }
+      ]
+    },
+    {
+      "config_name": "merged_fp16_greedy",
+      "max_new_tokens": 50,
+      "temperature": 0.0,
+      "do_sample": false,
+      "num_scenarios": 100,
+      "parse_failures": 0,
+      "latency_ms": {
+        "mean": 821.6444151696123,
+        "std": 152.99575673919705,
+        "p50": 770.0187999980699,
+        "p95": 1207.8636505004397,
+        "min": 759.3929760005267,
+        "max": 1648.0145040004572
+      },
+      "throughput_mbps": {
+        "mean": 122.56766331347193,
+        "std": 42.27319464053681,
+        "ci95": 8.3272872003683
+      },
+      "fairness_mean": 0.9686569513539868,
+      "coverage_mean": 0.42592857142857143,
+      "per_scenario": [
+        {
+          "scenario_id": 0,
+          "latency_ms": 763.1148019972898,
+          "throughput": 149.74299068199716,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 1,
+          "latency_ms": 768.9373220018751,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.2857142857142857
+        },
+        {
+          "scenario_id": 2,
+          "latency_ms": 768.4583619993646,
+          "throughput": 113.3808052299039,
+          "fairness": 0.8998961968496252,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 3,
+          "latency_ms": 770.0321999982407,
+          "throughput": 202.45943859450074,
+          "fairness": 0.9993726086480628,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 4,
+          "latency_ms": 770.2249989997654,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 5,
+          "latency_ms": 769.5839170010004,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 6,
+          "latency_ms": 769.0064370035543,
+          "throughput": 159.2767838046083,
+          "fairness": 0.935294052770591,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 7,
+          "latency_ms": 778.3757889992557,
+          "throughput": 128.84094211727125,
+          "fairness": 0.9643977416624849,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 8,
+          "latency_ms": 769.7008430004644,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 9,
+          "latency_ms": 770.597517999704,
+          "throughput": 190.53071517757846,
+          "fairness": 0.8954855741817265,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 10,
+          "latency_ms": 769.2855659988709,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 11,
+          "latency_ms": 769.027038000786,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 12,
+          "latency_ms": 769.4664349983213,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 13,
+          "latency_ms": 768.7323989994184,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.2857142857142857
+        },
+        {
+          "scenario_id": 14,
+          "latency_ms": 770.8099709998351,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 15,
+          "latency_ms": 762.4326320001273,
+          "throughput": 103.36344296969537,
+          "fairness": 0.9256436926263136,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 16,
+          "latency_ms": 762.4957359985274,
+          "throughput": 122.3260684117947,
+          "fairness": 0.9999999999999998,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 17,
+          "latency_ms": 763.1309139978839,
+          "throughput": 113.39238405721827,
+          "fairness": 0.8394395864871885,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 18,
+          "latency_ms": 770.0545759980741,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.16666666666666666
+        },
+        {
+          "scenario_id": 19,
+          "latency_ms": 769.5321450009942,
+          "throughput": 123.55139695312063,
+          "fairness": 0.9317147809128222,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 20,
+          "latency_ms": 763.9207819993317,
+          "throughput": 145.16188280525242,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 21,
+          "latency_ms": 764.1727539994463,
+          "throughput": 86.51500601941262,
+          "fairness": 0.9823135096080222,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 22,
+          "latency_ms": 769.6082029979152,
+          "throughput": 106.94884816148533,
+          "fairness": 0.9215426045764272,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 23,
+          "latency_ms": 761.7448620003415,
+          "throughput": 69.69114923436726,
+          "fairness": 0.9263116219290402,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 24,
+          "latency_ms": 761.2685929998406,
+          "throughput": 113.47569308166878,
+          "fairness": 1.0,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 25,
+          "latency_ms": 768.5742039975594,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 26,
+          "latency_ms": 769.9220299982699,
+          "throughput": 116.40366237056652,
+          "fairness": 0.9126740908079752,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 27,
+          "latency_ms": 769.1671419997874,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 28,
+          "latency_ms": 762.8787200010265,
+          "throughput": 120.87584221851091,
+          "fairness": 1.0000000000000002,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 29,
+          "latency_ms": 769.4762669998454,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 30,
+          "latency_ms": 770.1307679999445,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 31,
+          "latency_ms": 770.4765169983148,
+          "throughput": 148.5295439501723,
+          "fairness": 0.9178320536024807,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 32,
+          "latency_ms": 768.807011001627,
+          "throughput": 199.52363297844013,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 33,
+          "latency_ms": 769.3614609997894,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 34,
+          "latency_ms": 771.3422549968527,
+          "throughput": 132.30048319329717,
+          "fairness": 0.8849077689332816,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 35,
+          "latency_ms": 769.5666699983121,
+          "throughput": 129.79315518401302,
+          "fairness": 0.9632582314028297,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 36,
+          "latency_ms": 762.7089179986797,
+          "throughput": 105.82146127569703,
+          "fairness": 1.0,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 37,
+          "latency_ms": 771.0414819994185,
+          "throughput": 96.41997137780683,
+          "fairness": 0.909926935903977,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 38,
+          "latency_ms": 763.1274790001044,
+          "throughput": 74.76577831214448,
+          "fairness": 0.9211417319007268,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 39,
+          "latency_ms": 763.0080290000478,
+          "throughput": 75.69825133428981,
+          "fairness": 0.9928256693428276,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 40,
+          "latency_ms": 770.9839439994539,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 41,
+          "latency_ms": 770.7745900006557,
+          "throughput": 151.98147910798542,
+          "fairness": 0.9736094386279468,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 42,
+          "latency_ms": 769.069097997999,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 43,
+          "latency_ms": 769.6800859994255,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 44,
+          "latency_ms": 772.4319369990553,
+          "throughput": 289.95546708885104,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 45,
+          "latency_ms": 761.9240839994745,
+          "throughput": 70.07827896699455,
+          "fairness": 0.9242958078131097,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 46,
+          "latency_ms": 770.1301099987177,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 47,
+          "latency_ms": 771.2813389989606,
+          "throughput": 150.2470600277831,
+          "fairness": 0.9552121396682315,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 48,
+          "latency_ms": 763.8777140018647,
+          "throughput": 174.05944156501448,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 49,
+          "latency_ms": 772.0584050002799,
+          "throughput": 171.87640948847928,
+          "fairness": 0.9874742925885092,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 50,
+          "latency_ms": 770.3388209993136,
+          "throughput": 155.72536620678633,
+          "fairness": 0.9220721935387682,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 51,
+          "latency_ms": 770.4952839994803,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 52,
+          "latency_ms": 769.5567829978245,
+          "throughput": 283.184165076459,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 53,
+          "latency_ms": 769.7930619979161,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 54,
+          "latency_ms": 770.776258999831,
+          "throughput": 168.52504440099108,
+          "fairness": 0.9121594341248637,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 55,
+          "latency_ms": 762.5404049977078,
+          "throughput": 115.44309032465117,
+          "fairness": 0.9948446021699803,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 56,
+          "latency_ms": 770.8930520020658,
+          "throughput": 189.27896432770908,
+          "fairness": 1.0,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 57,
+          "latency_ms": 771.4112510002451,
+          "throughput": 113.03295850093504,
+          "fairness": 0.9807073257250394,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 58,
+          "latency_ms": 770.4918609997549,
+          "throughput": 157.81712951645207,
+          "fairness": 0.9230755553255975,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 59,
+          "latency_ms": 769.8510619993613,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 60,
+          "latency_ms": 763.6551840005268,
+          "throughput": 129.3850454726463,
+          "fairness": 1.0000000000000002,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 61,
+          "latency_ms": 769.8619509974378,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 62,
+          "latency_ms": 770.0413530001242,
+          "throughput": 126.82169983767908,
+          "fairness": 0.9642432464963018,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 63,
+          "latency_ms": 770.0053999978991,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 64,
+          "latency_ms": 771.2607009998464,
+          "throughput": 158.31259347672957,
+          "fairness": 1.0,
+          "coverage": 0.75
+        },
+        {
+          "scenario_id": 65,
+          "latency_ms": 770.4043699995964,
+          "throughput": 139.53467929711735,
+          "fairness": 0.9657104988233987,
+          "coverage": 0.2
+        },
+        {
+          "scenario_id": 66,
+          "latency_ms": 761.549582999578,
+          "throughput": 80.95976098796163,
+          "fairness": 0.9273610158082237,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 67,
+          "latency_ms": 772.5036049996561,
+          "throughput": 139.17911013544796,
+          "fairness": 0.8768075083559451,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 68,
+          "latency_ms": 770.8488919997762,
+          "throughput": 230.15158324298807,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 69,
+          "latency_ms": 769.9367560016981,
+          "throughput": 128.57154690247148,
+          "fairness": 0.947700374196349,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 70,
+          "latency_ms": 762.9443400001037,
+          "throughput": 85.48758253667744,
+          "fairness": 0.8591044725048596,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 71,
+          "latency_ms": 770.2379459988151,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 72,
+          "latency_ms": 765.0991230002546,
+          "throughput": 150.47457177554625,
+          "fairness": 1.0,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 73,
+          "latency_ms": 772.0588960000896,
+          "throughput": 108.82096703737551,
+          "fairness": 0.9239615324071935,
+          "coverage": 0.25
+        },
+        {
+          "scenario_id": 74,
+          "latency_ms": 772.3575589989196,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 75,
+          "latency_ms": 764.8518009991676,
+          "throughput": 77.05421159761113,
+          "fairness": 0.8550007942942469,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 76,
+          "latency_ms": 773.1050430011237,
+          "throughput": 203.91354577197123,
+          "fairness": 1.0000000000000002,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 77,
+          "latency_ms": 771.5229440000257,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 78,
+          "latency_ms": 771.78016200196,
+          "throughput": 173.86708169315466,
+          "fairness": 0.9011947245218827,
+          "coverage": 0.6
+        },
+        {
+          "scenario_id": 79,
+          "latency_ms": 763.3187999999791,
+          "throughput": 117.5142297545989,
+          "fairness": 0.9840378664172418,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 80,
+          "latency_ms": 770.5954360026226,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.14285714285714285
+        },
+        {
+          "scenario_id": 81,
+          "latency_ms": 763.9471859984042,
+          "throughput": 111.52290532899835,
+          "fairness": 0.9575814750757637,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 82,
+          "latency_ms": 763.4319110002252,
+          "throughput": 70.87504286796666,
+          "fairness": 0.9033023233220402,
+          "coverage": 0.3333333333333333
+        },
+        {
+          "scenario_id": 83,
+          "latency_ms": 817.3579370013613,
+          "throughput": 197.58695384232897,
+          "fairness": 0.9999905445850448,
+          "coverage": 0.8
+        },
+        {
+          "scenario_id": 84,
+          "latency_ms": 759.3929760005267,
+          "throughput": 137.90526425941994,
+          "fairness": 1.0,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 85,
+          "latency_ms": 772.88251400023,
+          "throughput": 135.1284765903192,
+          "fairness": 0.9815586159551807,
+          "coverage": 0.25
+        },
+        {
+          "scenario_id": 86,
+          "latency_ms": 771.1260059986671,
+          "throughput": 181.65315796948562,
+          "fairness": 0.9027346512610808,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 87,
+          "latency_ms": 951.6121039996506,
+          "throughput": 111.49025151832734,
+          "fairness": 0.996891954818633,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 88,
+          "latency_ms": 1041.7839379988436,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 89,
+          "latency_ms": 1134.3608259994653,
+          "throughput": 135.74509588336957,
+          "fairness": 0.91819946492515,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 90,
+          "latency_ms": 1206.8718320006155,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 91,
+          "latency_ms": 1330.6670099991607,
+          "throughput": 108.1224322297507,
+          "fairness": 0.9353782831667602,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 92,
+          "latency_ms": 1648.0145040004572,
+          "throughput": 142.62036721377,
+          "fairness": 0.9999999999999997,
+          "coverage": 1.0
+        },
+        {
+          "scenario_id": 93,
+          "latency_ms": 1338.6224709975068,
+          "throughput": 123.1244484177385,
+          "fairness": 0.9918046109383913,
+          "coverage": 0.5
+        },
+        {
+          "scenario_id": 94,
+          "latency_ms": 1173.1832130026305,
+          "throughput": 100.93819217344252,
+          "fairness": 0.9999999999999997,
+          "coverage": 0.0
+        },
+        {
+          "scenario_id": 95,
+          "latency_ms": 1003.5322199983057,
+          "throughput": 164.31293404049117,
+          "fairness": 0.9771958167494273,
+          "coverage": 0.4
+        },
+        {
+          "scenario_id": 96,
+          "latency_ms": 932.7506310000899,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.16666666666666666
+        },
+        {
+          "scenario_id": 97,
+          "latency_ms": 998.081968002225,
+          "throughput": 89.05873941038226,
+          "fairness": 0.9426873419792386,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 98,
+          "latency_ms": 1226.7082019970985,
+          "throughput": 91.7531360014328,
+          "fairness": 0.8558187770678849,
+          "coverage": 0.6666666666666666
+        },
+        {
+          "scenario_id": 99,
+          "latency_ms": 1280.5113279973739,
+          "throughput": 86.5184504343793,
+          "fairness": 0.9999999999999999,
+          "coverage": 0.0
+        }
+      ]
+    }
+  ]
+}
