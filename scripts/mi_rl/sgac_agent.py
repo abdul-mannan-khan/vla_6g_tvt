@@ -330,6 +330,18 @@ class SGACAgent:
 
         return final_pos
 
+    def add_experience(self, state: np.ndarray, action: np.ndarray,
+                       reward: float, next_state: np.ndarray, done: bool,
+                       info: dict = None) -> None:
+        """
+        Add a single experience to the replay buffer.
+
+        Used for parallel training where experiences are collected externally.
+        """
+        if info is None:
+            info = {}
+        self.buffer.push(state, action, reward, next_state, done, info)
+
     def update(self) -> Dict[str, float]:
         """
         Perform one gradient update on actor and critic.
