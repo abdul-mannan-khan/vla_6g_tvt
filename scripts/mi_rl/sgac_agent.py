@@ -240,8 +240,8 @@ class SGACAgent:
         else:
             self.safety_layer = None
 
-        # SCA solver for warm starts
-        self.sca_solver = SCASolver(SCAConfig(max_iterations=5))
+        # SCA solver for Residual RL (use 20 iterations for good baseline)
+        self.sca_solver = SCASolver(SCAConfig(max_iterations=20))
 
         # Noise for exploration
         self.noise_std = self.config.noise_std
