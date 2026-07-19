@@ -1,0 +1,87 @@
+{
+    "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/main/docs/settings.md",
+    "SettingsVersion": 1.2,
+
+    "SimMode": "Multirotor",
+    "ClockSpeed": 1.0,
+
+    "ViewMode": "SpringArmChase",
+    "RpcEnabled": true,
+    "EngineSound": false,
+
+    "Recording": {
+        "RecordOnMove": false,
+        "RecordInterval": 0.05,
+        "Cameras": [
+            {"CameraName": "front_center", "ImageType": 0, "PixelsAsFloat": false, "Compress": true}
+        ]
+    },
+
+    "CameraDefaults": {
+        "CaptureSettings": [
+            {
+                "ImageType": 0,
+                "Width": 1920,
+                "Height": 1080,
+                "FOV_Degrees": 90
+            }
+        ]
+    },
+
+    "Vehicles": {
+        "UAVRelay": {
+            "VehicleType": "SimpleFlight",
+            "AutoCreate": true,
+            "X": 0, "Y": 0, "Z": -25,
+            "Yaw": 0,
+            "Cameras": {
+                "front_center": {
+                    "CaptureSettings": [
+                        {
+                            "ImageType": 0,
+                            "Width": 1920,
+                            "Height": 1080,
+                            "FOV_Degrees": 90
+                        }
+                    ],
+                    "X": 0.0, "Y": 0.0, "Z": -0.5,
+                    "Pitch": -15, "Roll": 0, "Yaw": 0
+                },
+                "bottom": {
+                    "CaptureSettings": [
+                        {
+                            "ImageType": 0,
+                            "Width": 640,
+                            "Height": 480,
+                            "FOV_Degrees": 90
+                        }
+                    ],
+                    "X": 0.0, "Y": 0.0, "Z": 0.5,
+                    "Pitch": -90, "Roll": 0, "Yaw": 0
+                }
+            }
+        }
+    },
+
+    "SubWindows": [
+        {"WindowID": 0, "CameraName": "front_center", "ImageType": 0, "VehicleName": "UAVRelay", "Visible": true},
+        {"WindowID": 1, "CameraName": "bottom", "ImageType": 0, "VehicleName": "UAVRelay", "Visible": true}
+    ],
+
+    "OriginGeopoint": {
+        "Latitude": 47.641468,
+        "Longitude": -122.140165,
+        "Altitude": 122
+    },
+
+    "TimeOfDay": {
+        "Enabled": true,
+        "StartDateTime": "2024-06-15 10:00:00",
+        "CelestialClockSpeed": 1,
+        "UpdateIntervalSecs": 60
+    },
+
+    "Wind": {
+        "X": 0, "Y": 0, "Z": 0
+    }
+}
