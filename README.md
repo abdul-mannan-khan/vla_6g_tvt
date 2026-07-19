@@ -4,6 +4,12 @@
 
 Combining classical optimization theory with modern reinforcement learning for UAV relay positioning in 6G low-altitude wireless networks (LAWNs).
 
+## Demo
+
+![MI-RL Demo](results/mi_rl/simulation_outputs/mi_rl_demo.gif)
+
+*UAV relay positioning comparison: Random → Analytical → SCA → MI-RL*
+
 ## Version History
 
 - **v1.0**: VLA-based approach using TinyLlama-1.1B (archived)
@@ -84,6 +90,73 @@ python train_mi_rl.py --episodes 2000 --eval-interval 100
 cd scripts/classical
 python sca_solver.py
 ```
+
+## AirSim Demo (Realistic UAV Visualization)
+
+For a realistic 3D demonstration of MI-RL UAV relay positioning:
+
+### Docker Images
+
+| Image | Description | Docker Hub |
+|-------|-------------|------------|
+| `abdulmannan617/airsim-recorder:latest` | Base AirSim environment | [Link](https://hub.docker.com/r/abdulmannan617/airsim-recorder) |
+| `abdulmannan617/mi-rl-6g-airsim:latest` | MI-RL demo scripts | [Link](https://hub.docker.com/r/abdulmannan617/mi-rl-6g-airsim) |
+
+### System Configuration
+
+The `airsim-recorder` image is built for the following configuration:
+
+| Component | Version |
+|-----------|---------|
+| **Base Image** | `nvidia/cuda:12.2.0-runtime-ubuntu22.04` |
+| **OS** | Ubuntu 22.04 LTS |
+| **CUDA** | 12.2.0 |
+| **NVIDIA Driver** | ≥ 525 (CUDA 12.x compatible) |
+| **AirSim Binary** | AirSimNH v1.8.1 (~15 GB) |
+| **Python** | 3.10 with airsim v1.8.1 |
+| **Display** | Xvfb (headless at 1920×1080) |
+
+**Hardware Requirements:**
+- GPU: NVIDIA RTX 3060 or better (compute capability ≥ 7.0)
+- Disk: ≥ 80 GB (image is ~15 GB plus environment)
+- RAM: 16 GB minimum, 32 GB recommended
+
+### Quick Deploy to Vast.ai
+
+```bash
+# 1. Install CLI and set API key
+pip install vastai
+vastai set api-key YOUR_API_KEY
+
+# 2. Search for compatible GPU instance (driver >= 525, 80GB disk)
+vastai search offers 'reliability > 0.95 disk_space >= 80 gpu_name in [RTX_3060,RTX_3070,RTX_4060]' -o 'dph_total'
+
+# 3. Deploy the airsim-recorder container
+vastai create instance OFFER_ID \
+    --image abdulmannan617/airsim-recorder:latest \
+    --disk 100 --ssh
+
+# 4. SSH in and start AirSim (Vast.ai overrides Docker entrypoint)
+ssh -p PORT root@HOST
+/opt/entrypoint.sh
+
+# 5. Wait for "AirSim ready" message (~60-90 seconds)
+
+# 6. Run your recording script
+python3 /workspace/my_recording.py
+
+# 7. Download output
+scp -P PORT root@HOST:/workspace/output.mp4 ./
+```
+
+### Run Locally (Requires NVIDIA GPU)
+
+```bash
+docker run --gpus all -v $(pwd)/output:/workspace \
+    abdulmannan617/airsim-recorder:latest
+```
+
+See [`airsim_demo/README.md`](airsim_demo/README.md) for full documentation.
 
 ## Mathematical Foundation
 
