@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mi-rl-demo:
+    build:
+      context: ..
+      dockerfile: airsim_demo/Dockerfile
+    image: mi-rl-6g-demo:latest
+    container_name: mi_rl_demo
+
+    # GPU support
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - DISPLAY=:99
+
+    # Port mappings
+    ports:
+      - "8080:8080"    # noVNC web interface
+      - "5900:5900"    # VNC
+
+    # Volume mappings
+    volumes:
+      - ../results:/workspace/results
+      - ../videos:/workspace/videos
+
+    # Resource limits
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+    # Keep container running
+    tty: true
+    stdin_open: true
