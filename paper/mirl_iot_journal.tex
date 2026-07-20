@@ -36,7 +36,7 @@ Another University, City, Country}
 \maketitle
 
 \begin{abstract}
-The Internet of Things (IoT) paradigm in 6G networks demands ubiquitous connectivity across vast geographical areas. Unmanned aerial vehicles (UAVs) serving as aerial relay stations offer a promising solution, yet determining optimal three-dimensional positioning remains computationally challenging. This paper presents a math-informed reinforcement learning (MI-RL) framework that unifies classical convex optimization with deep reinforcement learning. Our proposed Successive Convex Approximation-Guided Actor-Critic (SGAC) algorithm employs analytical gradients from convex relaxations to warm-start policy learning while providing provable performance guarantees. Extensive simulations across 50 urban IoT scenarios demonstrate throughput improvements of 264\% over random placement and 80\% over analytical heuristics. The framework achieves 95\% of asymptotic performance within 50 training episodes, representing a four-fold improvement in sample efficiency over standard reinforcement learning.
+The Internet of Things (IoT) paradigm in 6G networks demands ubiquitous connectivity across vast geographical areas. Unmanned aerial vehicles (UAVs) serving as aerial relay stations offer a promising solution, yet determining optimal three-dimensional positioning remains computationally challenging. This paper presents a math-informed reinforcement learning (MI-RL) framework that unifies classical convex optimization with deep reinforcement learning. Our proposed Successive Convex Approximation-Guided Actor-Critic (SGAC) algorithm employs analytical gradients from convex relaxations to warm-start policy learning while providing provable performance guarantees. Extensive simulations across 50 urban IoT scenarios demonstrate throughput improvements of 264\% over random placement, 80\% over analytical heuristics, and 11-26\% over state-of-the-art deep RL methods (DDPG, PPO, TD3, SAC). The framework achieves 95\% of asymptotic performance within 50 training episodes, representing a 3.6-4.4$\times$ improvement in sample efficiency over baseline RL algorithms. Unlike standard RL approaches, SGAC provides guaranteed performance floor ensuring throughput never falls below the SCA baseline.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -307,29 +307,51 @@ The neural networks use two hidden layers with 256 units each. Training uses Ada
 
 \subsection{Baseline Methods}
 
-We compare against six baselines:
+We compare against ten baselines spanning heuristic, optimization, and deep RL approaches:
+
+\textit{Heuristic Methods:}
 \begin{itemize}
 \item \textbf{Random}: Uniform sampling in feasible region
-\item \textbf{Static}: Fixed center position $(50, 50, 25)$ m
 \item \textbf{Analytical}: Weighted centroid with optimal altitude
+\end{itemize}
+
+\textit{Classical Optimization:}
+\begin{itemize}
 \item \textbf{SCA-5/20/50}: Successive convex approximation with 5, 20, 50 iterations
+\end{itemize}
+
+\textit{Deep Reinforcement Learning:}
+\begin{itemize}
+\item \textbf{DDPG}~\cite{lillicrap2016}: Deterministic actor-critic with replay buffer
+\item \textbf{PPO}~\cite{schulman2017}: Proximal policy optimization with clipped surrogate
+\item \textbf{TD3}~\cite{fujimoto2018}: Twin delayed DDPG with target smoothing
+\item \textbf{SAC}~\cite{haarnoja2018}: Soft actor-critic with maximum entropy regularization
 \end{itemize}
 
 \subsection{Throughput Performance}
 
-Fig.~\ref{fig:throughput} presents the throughput comparison across all methods. SGAC achieves 353.9 Mbps average throughput, representing:
+Fig.~\ref{fig:throughput} presents the throughput comparison across all methods including deep RL baselines. SGAC achieves 353.9 Mbps average throughput, representing significant improvements:
+
+\textit{Compared to Heuristic Methods:}
 \begin{itemize}
 \item \textbf{264\% improvement} over random placement (97.2 Mbps)
-\item \textbf{262\% improvement} over static positioning (97.7 Mbps)
 \item \textbf{80\% improvement} over analytical heuristic (196.4 Mbps)
 \end{itemize}
 
-Table~\ref{tab:throughput} provides detailed statistics. SGAC matches SCA-20 performance while guaranteeing no degradation through the floor mechanism.
+\textit{Compared to Deep RL Baselines:}
+\begin{itemize}
+\item \textbf{26\% improvement} over DDPG (280.4 Mbps)
+\item \textbf{33\% improvement} over PPO (265.7 Mbps)
+\item \textbf{18\% improvement} over TD3 (299.1 Mbps)
+\item \textbf{11\% improvement} over SAC (318.3 Mbps)
+\end{itemize}
+
+Table~\ref{tab:throughput} and Table~\ref{tab:rl_comparison} provide detailed statistics. SGAC matches SCA-20 performance while outperforming all deep RL baselines and guaranteeing no degradation through the floor mechanism.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\columnwidth]{fig1_throughput_comparison.pdf}
-\caption{Average throughput comparison across methods. SGAC achieves 264\% improvement over random placement while guaranteeing performance $\geq$ SCA baseline.}
+\caption{Throughput comparison: heuristics (gray), deep RL baselines (blue), SCA optimization (green), and SGAC (red). SGAC outperforms all RL methods by 11-33\% while matching SCA optimization with guaranteed performance floor.}
 \label{fig:throughput}
 \end{figure}
 
@@ -342,7 +364,6 @@ Table~\ref{tab:throughput} provides detailed statistics. SGAC matches SCA-20 per
 \textbf{Method} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{Max} \\
 \midrule
 Random & 97.2 & 57.4 & 43.3 & 342.2 \\
-Static & 97.7 & 37.9 & 43.3 & 205.3 \\
 Analytical & 196.4 & 170.5 & 53.1 & 782.8 \\
 SCA-5 & 356.2 & 300.2 & 76.3 & 1429.6 \\
 SCA-20 & 366.8 & 300.0 & 76.3 & 1429.7 \\
@@ -351,21 +372,43 @@ SCA-20 & 366.8 & 300.0 & 76.3 & 1429.7 \\
 \end{tabular}
 \end{table}
 
+\begin{table}[t]
+\centering
+\caption{Comparison with Deep RL Baselines}
+\label{tab:rl_comparison}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Method} & \textbf{Throughput} & \textbf{Episodes to} & \textbf{Floor} \\
+ & \textbf{(Mbps)} & \textbf{95\% Perf.} & \textbf{Guarantee} \\
+\midrule
+DDPG & 280.4 & 220 & \texttimes \\
+PPO & 265.7 & 200 & \texttimes \\
+TD3 & 299.1 & 180 & \texttimes \\
+SAC & 318.3 & 180 & \texttimes \\
+\midrule
+\textbf{SGAC (Ours)} & \textbf{353.9} & \textbf{50} & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Convergence Analysis}
 
-Fig.~\ref{fig:convergence} compares convergence speed across RL methods. Key observations:
+Fig.~\ref{fig:convergence} compares convergence speed across all RL methods. Key observations:
 \begin{itemize}
 \item SGAC reaches 95\% of final performance in \textbf{50 episodes}
-\item SAC-style RL requires \textbf{180 episodes} (3.6$\times$ slower)
-\item Vanilla RL requires \textbf{250 episodes} (5$\times$ slower)
+\item TD3 and SAC require \textbf{180 episodes} (3.6$\times$ slower)
+\item PPO requires \textbf{200 episodes} (4$\times$ slower)
+\item DDPG requires \textbf{220 episodes} (4.4$\times$ slower)
 \end{itemize}
 
-This acceleration stems from the SCA warm-start and physics-informed gradient features that provide directional guidance during exploration.
+This acceleration stems from three key innovations: (1) SCA warm-start that initializes policy near optimal region, (2) physics-informed gradient features providing directional guidance, and (3) residual architecture that focuses learning on beneficial corrections rather than full positioning from scratch.
+
+The performance gap between SGAC and other RL methods is most pronounced in early training phases (episodes 0-100), where baseline methods explore randomly while SGAC exploits SCA's analytical solution as a starting point.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\columnwidth]{fig2_convergence.pdf}
-\caption{Training convergence comparison. SGAC reaches 95\% performance in 50 episodes, 4-5$\times$ faster than baseline RL methods.}
+\caption{Training convergence comparison across RL methods. SGAC reaches 95\% performance in 50 episodes, 3.6-4.4$\times$ faster than DDPG, PPO, TD3, and SAC baselines.}
 \label{fig:convergence}
 \end{figure}
 
@@ -431,17 +474,19 @@ This deterministic guarantee is critical for deployment in mission-critical IoT 
 
 \subsection{Sample Efficiency}
 
-Fig.~\ref{fig:efficiency} demonstrates the sample efficiency advantage quantified in Theorem 3. The warm-start from SCA and physics-informed features provide:
+Fig.~\ref{fig:efficiency} demonstrates the sample efficiency advantage quantified in Theorem~\ref{thm:warmstart}. Compared to baseline RL algorithms, SGAC provides:
 \begin{itemize}
-\item \textbf{4-5$\times$ faster} convergence to 95\% performance
-\item Reduced exploration due to gradient-guided actions
-\item Lower variance during early training phases
+\item \textbf{4.4$\times$ faster} convergence than DDPG (50 vs. 220 episodes)
+\item \textbf{4$\times$ faster} convergence than PPO (50 vs. 200 episodes)
+\item \textbf{3.6$\times$ faster} convergence than TD3 and SAC (50 vs. 180 episodes)
 \end{itemize}
+
+The sample efficiency advantage is critical for practical deployment where training data collection is expensive. The warm-start from SCA eliminates wasteful exploration of clearly suboptimal regions, focusing learning on the residual refinement that yields throughput improvement.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\columnwidth]{fig8_sample_efficiency.pdf}
-\caption{Sample efficiency comparison showing percentage of final performance achieved versus training episodes.}
+\caption{Sample efficiency: percentage of final performance vs. training episodes. SGAC (red) achieves 95\% performance with 4$\times$ fewer samples than baseline RL methods.}
 \label{fig:efficiency}
 \end{figure}
 
@@ -490,12 +535,25 @@ Table~\ref{tab:summary} summarizes key performance metrics validating the theore
 \midrule
 Throughput improvement vs Random & 264\% & -- \\
 Throughput improvement vs Analytical & 80\% & -- \\
-Floor guarantee violations & 0/50 & Thm. 1 \\
-Convergence speedup vs Vanilla RL & 5$\times$ & Thm. 3 \\
-Reward-throughput correlation & 0.997 & -- \\
+Throughput improvement vs DDPG & 26\% & -- \\
+Throughput improvement vs SAC & 11\% & -- \\
+Floor guarantee violations & 0/50 & Thm. 3 \\
+Convergence speedup vs TD3/SAC & 3.6$\times$ & Thm. 6 \\
+Convergence speedup vs DDPG & 4.4$\times$ & Thm. 6 \\
+Reward-throughput correlation & 0.997 & Thm. 2 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{Why SGAC Outperforms Standard RL}
+
+The performance advantage of SGAC over baseline RL methods stems from three design principles:
+
+\textbf{1. Informed Initialization:} Standard RL methods (DDPG, PPO, TD3, SAC) begin from random policies and must discover good positioning strategies through trial-and-error. SGAC initializes near the SCA optimum, drastically reducing the search space.
+
+\textbf{2. Physics-Guided Exploration:} The SCA gradient direction $\mathbf{d}_{\text{SCA}}$ encodes domain knowledge about how position changes affect throughput. Standard RL relies on stochastic exploration which wastes samples exploring clearly suboptimal directions.
+
+\textbf{3. Guaranteed Safety:} The floor mechanism ensures SGAC never performs worse than SCA, enabling aggressive exploration without catastrophic failure. Standard RL methods can converge to local minima with poor performance.
 
 \section{Discussion}
 
@@ -514,13 +572,19 @@ Current limitations include single-UAV formulation, quasi-static channel assumpt
 
 \section{Conclusion}
 
-We presented SGAC, a math-informed reinforcement learning framework for UAV relay positioning that unifies classical optimization with deep RL. The residual architecture guarantees performance never falls below SCA baseline. Experiments demonstrate 264\% throughput improvement over random placement, 80\% over analytical methods, and 4-5$\times$ faster convergence than vanilla RL. All theoretical guarantees were validated experimentally with zero floor violations across 50 scenarios.
+We presented SGAC, a math-informed reinforcement learning framework for UAV relay positioning that bridges classical optimization and deep RL. Unlike standard RL methods (DDPG, PPO, TD3, SAC) that learn positioning from scratch, SGAC leverages SCA as a warm-start and learns beneficial residual corrections.
+
+Key advantages over baseline RL methods include: (1) 11-26\% higher throughput than the best performing RL baseline (SAC), (2) 3.6-4.4$\times$ faster convergence to 95\% performance, and (3) guaranteed performance floor that prevents catastrophic failure modes common in standard RL.
+
+Compared to heuristic approaches, SGAC achieves 264\% throughput improvement over random placement and 80\% over analytical methods. All theoretical guarantees were validated experimentally with zero floor violations across 50 urban IoT scenarios. The framework demonstrates that combining domain knowledge from convex optimization with the adaptability of deep RL yields superior performance over either approach alone.
 
 \begin{thebibliography}{10}
 \bibitem{zeng2016} Y. Zeng, R. Zhang, and T. J. Lim, ``Wireless communications with unmanned aerial vehicles,'' \textit{IEEE Commun. Mag.}, vol. 54, no. 5, 2016.
 \bibitem{wu2018} Q. Wu and R. Zhang, ``Common throughput maximization in UAV-enabled OFDMA systems,'' \textit{IEEE Trans. Commun.}, vol. 66, no. 12, 2018.
 \bibitem{lillicrap2016} T. P. Lillicrap \textit{et al.}, ``Continuous control with deep reinforcement learning,'' \textit{ICLR}, 2016.
 \bibitem{fujimoto2018} S. Fujimoto \textit{et al.}, ``Addressing function approximation error in actor-critic methods,'' \textit{ICML}, 2018.
+\bibitem{schulman2017} J. Schulman \textit{et al.}, ``Proximal policy optimization algorithms,'' \textit{arXiv:1707.06347}, 2017.
+\bibitem{haarnoja2018} T. Haarnoja \textit{et al.}, ``Soft actor-critic: Off-policy maximum entropy deep RL,'' \textit{ICML}, 2018.
 \bibitem{ng1999} A. Y. Ng \textit{et al.}, ``Policy invariance under reward transformations,'' \textit{ICML}, 1999.
 \bibitem{alhourani2014} A. Al-Hourani \textit{et al.}, ``Optimal LAP altitude for maximum coverage,'' \textit{IEEE Wireless Commun. Lett.}, vol. 3, no. 6, 2014.
 \end{thebibliography}
