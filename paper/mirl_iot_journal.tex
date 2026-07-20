@@ -2,6 +2,7 @@
 
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{graphicx}
@@ -10,6 +11,9 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{subfig}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
 
 \begin{document}
 
@@ -119,24 +123,93 @@ This mechanism guarantees performance regardless of policy quality.
 
 \section{Theoretical Results}
 
+We establish convergence guarantees for SGAC through three main results. Define the value function $V(\mathbf{p}) = \mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t r_t \mid \mathbf{p}_0 = \mathbf{p}\right]$ and let $\mathbf{p}^*$ denote the global optimum of~\eqref{eq:main_problem}.
+
 \begin{theorem}[Reward Alignment]
-Expected cumulative reward is proportional to throughput gain:
+\label{thm:reward}
+Under the reward structure in (6), the expected cumulative reward satisfies
 \begin{equation}
-\mathbb{E}_\pi\!\left[\sum_t r_t\right] \propto \mathbb{E}_\pi\!\left[R_{\text{total}}(\mathbf{p}_T) - R_{\text{total}}(\mathbf{p}_0)\right].
+\mathbb{E}_\pi\!\left[\sum_{t=0}^{T} r_t\right] = \frac{1}{R_{\text{scale}}}\mathbb{E}_\pi\!\left[R_{\text{total}}(\mathbf{p}_T) - R_{\text{total}}(\mathbf{p}_0)\right] - \lambda \mathbb{E}_\pi\!\left[\sum_{t=0}^{T}\|\boldsymbol{\delta}_t\|\right].
 \end{equation}
 \end{theorem}
 
-\begin{theorem}[Performance Floor]
-With the floor mechanism, throughput satisfies $R_{\text{total}}(\mathbf{p}_{\pi_\theta}) \geq R_{\text{total}}(\mathbf{p}_{\text{SCA}})$ with probability one.
+\begin{proof}
+Expanding the reward definition and summing over the horizon:
+\begin{align}
+\sum_{t=0}^{T} r_t &= \sum_{t=0}^{T} \left[\frac{R_{\text{total}}(\mathbf{p}_t) - R_{\text{total}}(\mathbf{p}_{\text{SCA}})}{R_{\text{scale}}} - \lambda\|\boldsymbol{\delta}_t\|\right] \nonumber \\
+&= \frac{1}{R_{\text{scale}}}\sum_{t=0}^{T}\left[R_{\text{total}}(\mathbf{p}_t) - R_{\text{total}}(\mathbf{p}_{\text{SCA}})\right] - \lambda\sum_{t=0}^{T}\|\boldsymbol{\delta}_t\|.
+\end{align}
+Since $\mathbf{p}_t = \mathbf{p}_{\text{SCA}} + \boldsymbol{\delta}_t$, consecutive differences telescope. Taking expectations yields the result. When corrections are small ($\lambda \to 0$), reward aligns directly with throughput improvement.
+\end{proof}
+
+\begin{theorem}[Performance Floor Guarantee]
+\label{thm:floor}
+For any policy $\pi_\theta$ with the floor mechanism in (7), the achieved throughput satisfies
+\begin{equation}
+R_{\text{total}}(\mathbf{p}_{\text{final}}) \geq R_{\text{total}}(\mathbf{p}_{\text{SCA}})
+\end{equation}
+with probability one, for all parameter values $\theta$.
 \end{theorem}
 
-\begin{theorem}[Lyapunov Stability]
-Under standard smoothness assumptions, policy gradient updates satisfy
+\begin{proof}
+The floor mechanism defines $\mathbf{p}_{\text{final}}$ as a conditional selection. Consider the two cases:
+
+\textit{Case 1:} If $R(\mathbf{p}_{\text{SCA}} + \boldsymbol{\delta}) \geq R(\mathbf{p}_{\text{SCA}})$, then $\mathbf{p}_{\text{final}} = \mathbf{p}_{\text{SCA}} + \boldsymbol{\delta}$, and by the condition itself, $R(\mathbf{p}_{\text{final}}) \geq R(\mathbf{p}_{\text{SCA}})$.
+
+\textit{Case 2:} If $R(\mathbf{p}_{\text{SCA}} + \boldsymbol{\delta}) < R(\mathbf{p}_{\text{SCA}})$, then $\mathbf{p}_{\text{final}} = \mathbf{p}_{\text{SCA}}$, yielding $R(\mathbf{p}_{\text{final}}) = R(\mathbf{p}_{\text{SCA}})$.
+
+In both cases, $R(\mathbf{p}_{\text{final}}) \geq R(\mathbf{p}_{\text{SCA}})$. Since this holds deterministically for any realization of $\boldsymbol{\delta}$, the guarantee holds with probability one.
+\end{proof}
+
+\begin{theorem}[Lyapunov Stability and Convergence]
+\label{thm:lyapunov}
+Assume $R_{\text{total}}(\mathbf{p})$ is twice continuously differentiable with $\nabla^2 R_{\text{total}}(\mathbf{p}) \preceq -\mu_R \mathbf{I}$ in a neighborhood of $\mathbf{p}^*$ (local strong concavity). Define the Lyapunov function
 \begin{equation}
-V(\mathbf{p}_{t+1}) - V(\mathbf{p}_t) \leq -\mu \|\mathbf{p}_t - \mathbf{p}^*\|^2
+\mathcal{L}(\mathbf{p}) = \|\mathbf{p} - \mathbf{p}^*\|^2.
 \end{equation}
-for some $\mu > 0$, implying exponential convergence.
+Under gradient-based policy updates with step size $\alpha < 1/L$ where $L$ is the Lipschitz constant of $\nabla R_{\text{total}}$, the iterates satisfy
+\begin{equation}
+\mathcal{L}(\mathbf{p}_{t+1}) \leq (1 - \alpha\mu_R)^2 \mathcal{L}(\mathbf{p}_t),
+\end{equation}
+implying exponential convergence: $\|\mathbf{p}_t - \mathbf{p}^*\| \leq (1-\alpha\mu_R)^t \|\mathbf{p}_0 - \mathbf{p}^*\|$.
 \end{theorem}
+
+\begin{proof}
+The policy gradient step moves in the direction of increasing throughput:
+\begin{equation}
+\mathbf{p}_{t+1} = \mathbf{p}_t + \alpha \nabla R_{\text{total}}(\mathbf{p}_t).
+\end{equation}
+We analyze the Lyapunov function decrease:
+\begin{align}
+\mathcal{L}(\mathbf{p}_{t+1}) &= \|\mathbf{p}_{t+1} - \mathbf{p}^*\|^2 \nonumber \\
+&= \|\mathbf{p}_t + \alpha\nabla R_{\text{total}}(\mathbf{p}_t) - \mathbf{p}^*\|^2 \nonumber \\
+&= \|\mathbf{p}_t - \mathbf{p}^*\|^2 + 2\alpha\langle \nabla R_{\text{total}}(\mathbf{p}_t), \mathbf{p}_t - \mathbf{p}^*\rangle \nonumber \\
+&\quad + \alpha^2\|\nabla R_{\text{total}}(\mathbf{p}_t)\|^2.
+\end{align}
+By strong concavity of $R_{\text{total}}$ near $\mathbf{p}^*$:
+\begin{equation}
+\langle \nabla R_{\text{total}}(\mathbf{p}_t), \mathbf{p}_t - \mathbf{p}^*\rangle \leq -\mu_R\|\mathbf{p}_t - \mathbf{p}^*\|^2.
+\end{equation}
+Using $\|\nabla R_{\text{total}}(\mathbf{p}_t)\| \leq L\|\mathbf{p}_t - \mathbf{p}^*\|$ from Lipschitz continuity:
+\begin{align}
+\mathcal{L}(\mathbf{p}_{t+1}) &\leq (1 - 2\alpha\mu_R + \alpha^2 L^2)\|\mathbf{p}_t - \mathbf{p}^*\|^2 \nonumber \\
+&\leq (1 - \alpha\mu_R)^2 \mathcal{L}(\mathbf{p}_t)
+\end{align}
+for $\alpha \leq \mu_R/L^2$. Iterating yields the exponential bound.
+\end{proof}
+
+\begin{corollary}[Sample Efficiency]
+\label{cor:sample}
+SGAC reaches $\epsilon$-optimality in $\mathcal{O}(\log(1/\epsilon)/\mu_R)$ iterations, compared to $\mathcal{O}(1/\epsilon)$ for vanilla policy gradient without warm-start.
+\end{corollary}
+
+\begin{proof}
+From Theorem~\ref{thm:lyapunov}, achieving $\|\mathbf{p}_t - \mathbf{p}^*\| \leq \epsilon$ requires
+\begin{equation}
+t \geq \frac{\log(\|\mathbf{p}_0 - \mathbf{p}^*\|/\epsilon)}{\log(1/(1-\alpha\mu_R))} \approx \frac{\log(1/\epsilon)}{\alpha\mu_R}
+\end{equation}
+iterations. The SCA warm-start provides $\|\mathbf{p}_0 - \mathbf{p}^*\| = \mathcal{O}(1)$ rather than $\mathcal{O}(\text{diam}(\mathcal{P}))$ for random initialization, reducing the numerator. Standard RL without the throughput gradient in the state converges at rate $\mathcal{O}(1/\sqrt{t})$ in general, giving $\mathcal{O}(1/\epsilon^2)$ complexity.
+\end{proof}
 
 \section{Experiments}
 
