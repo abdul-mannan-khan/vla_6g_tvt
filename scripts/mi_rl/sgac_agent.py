@@ -303,13 +303,22 @@ class SGACAgent:
 
     def get_position(self, scenario: Scenario,
                      current_pos: np.ndarray = None,
-                     deterministic: bool = True) -> np.ndarray:
+                     deterministic: bool = True,
+                     ensure_floor: bool = True) -> np.ndarray:
         """
         Get optimal position using Residual RL.
 
         Final position = SCA_solution + RL_correction
 
-        This guarantees that even with zero RL output, we get SCA performance.
+        Args:
+            scenario: The scenario to solve
+            current_pos: Current UAV position for state computation
+            deterministic: Use deterministic policy
+            ensure_floor: If True, only apply correction if it improves over SCA
+                         This guarantees the performance floor (Theorem 3.3)
+
+        Returns:
+            Optimal UAV position
         """
         # Get SCA base solution (this is the strong baseline)
         sca_pos = self._get_sca_solution(scenario)
@@ -327,6 +336,16 @@ class SGACAgent:
         final_pos[0] = np.clip(final_pos[0], 0, 100)
         final_pos[1] = np.clip(final_pos[1], 0, 100)
         final_pos[2] = np.clip(final_pos[2], 10, 40)
+
+        # Performance floor guarantee (Theorem 3.3):
+        # Only use corrected position if it improves over SCA baseline
+        if ensure_floor:
+            sca_metrics = compute_channel_metrics(sca_pos, scenario)
+            final_metrics = compute_channel_metrics(final_pos, scenario)
+
+            if final_metrics['total_throughput'] < sca_metrics['total_throughput']:
+                # Correction hurts - fall back to SCA baseline
+                return sca_pos.copy()
 
         return final_pos
 
@@ -532,7 +551,7 @@ class SGACAgent:
 
     def load_checkpoint(self, path: str) -> dict:
         """Load checkpoint and return extra training state."""
-        checkpoint = torch.load(path, map_location=self.device)
+        checkpoint = torch.load(path, map_location=self.device, weights_only=False)
         self.actor.load_state_dict(checkpoint['actor'])
         self.critic.load_state_dict(checkpoint['critic'])
         self.actor_target.load_state_dict(checkpoint['actor_target'])
