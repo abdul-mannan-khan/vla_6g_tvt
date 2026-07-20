@@ -418,7 +418,7 @@ Fig.~\ref{fig:scalability} examines performance across varying numbers of IoT de
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.95\columnwidth]{fig3_scalability.pdf}
+\includegraphics[width=0.95\columnwidth]{fig4_scalability.pdf}
 \caption{Scalability with number of IoT devices. SGAC maintains performance parity with SCA across varying network sizes.}
 \label{fig:scalability}
 \end{figure}
@@ -429,7 +429,7 @@ Fig.~\ref{fig:fairness} presents Jain's fairness index across methods. Random an
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.95\columnwidth]{fig4_fairness.pdf}
+\includegraphics[width=0.95\columnwidth]{fig5_fairness.pdf}
 \caption{Jain's fairness index comparison. SGAC balances throughput maximization with fair resource allocation.}
 \label{fig:fairness}
 \end{figure}
@@ -474,7 +474,7 @@ This deterministic guarantee is critical for deployment in mission-critical IoT 
 
 \subsection{Sample Efficiency}
 
-Fig.~\ref{fig:efficiency} demonstrates the sample efficiency advantage quantified in Theorem~\ref{thm:warmstart}. Compared to baseline RL algorithms, SGAC provides:
+The sample efficiency advantage demonstrated in Fig.~\ref{fig:convergence} validates Theorem~\ref{thm:warmstart}. Compared to baseline RL algorithms, SGAC provides:
 \begin{itemize}
 \item \textbf{4.4$\times$ faster} convergence than DDPG (50 vs. 220 episodes)
 \item \textbf{4$\times$ faster} convergence than PPO (50 vs. 200 episodes)
@@ -482,13 +482,6 @@ Fig.~\ref{fig:efficiency} demonstrates the sample efficiency advantage quantifie
 \end{itemize}
 
 The sample efficiency advantage is critical for practical deployment where training data collection is expensive. The warm-start from SCA eliminates wasteful exploration of clearly suboptimal regions, focusing learning on the residual refinement that yields throughput improvement.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.95\columnwidth]{fig8_sample_efficiency.pdf}
-\caption{Sample efficiency: percentage of final performance vs. training episodes. SGAC (red) achieves 95\% performance with 4$\times$ fewer samples than baseline RL methods.}
-\label{fig:efficiency}
-\end{figure}
 
 \subsection{3D Positioning Visualization}
 
