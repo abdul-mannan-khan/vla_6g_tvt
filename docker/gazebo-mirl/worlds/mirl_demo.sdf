@@ -1,0 +1,527 @@
+<?xml version="1.0" ?>
+<!--
+  MI-RL UAV Relay Demo World
+
+  Controls:
+  - Use keyboard to control drone via velocity commands
+  - Camera: Right-click drag to rotate, scroll to zoom, middle-click to pan
+
+  To fly the drone, send motor commands:
+    gz topic -t /X3/gazebo/command/motor_speed --msgtype gz.msgs.Actuators -p 'velocity:[700, 700, 700, 700]'
+-->
+<sdf version="1.9">
+  <world name="mirl_demo">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact"/>
+
+    <!-- Sky and atmosphere -->
+    <scene>
+      <ambient>0.6 0.6 0.7 1</ambient>
+      <background>0.4 0.6 0.9 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- Sun light -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>50 50 100 0 0 0</pose>
+      <diffuse>1.0 0.95 0.9 1</diffuse>
+      <specular>0.5 0.5 0.5 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 -0.3 -0.9</direction>
+    </light>
+
+    <!-- Ground plane with grass texture -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>200 200</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>200 200</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.3 0.4 0.25 1</ambient>
+            <diffuse>0.35 0.45 0.3 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- East-West Road -->
+    <model name="road_ew">
+      <static>true</static>
+      <pose>0 0 0.02 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box><size>180 12 0.04</size></box>
+          </geometry>
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.2 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- North-South Road -->
+    <model name="road_ns">
+      <static>true</static>
+      <pose>0 0 0.02 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box><size>12 180 0.04</size></box>
+          </geometry>
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.2 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Building 1 - NE (Blue glass tower) -->
+    <model name="building_ne">
+      <static>true</static>
+      <pose>45 45 25 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box><size>18 18 50</size></box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.3 0.6 1</ambient>
+            <diffuse>0.3 0.45 0.75 1</diffuse>
+            <specular>0.8 0.8 0.9 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Building 2 - NW (White office) -->
+    <model name="building_nw">
+      <static>true</static>
+      <pose>-40 50 20 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box><size>20 16 40</size></box>
+          </geometry>
+          <material>
+            <ambient>0.75 0.75 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.9 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Building 3 - SE (Dark blue) -->
+    <model name="building_se">
+      <static>true</static>
+      <pose>50 -40 22 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box><size>16 16 44</size></box>
+          </geometry>
+          <material>
+            <ambient>0.15 0.2 0.45 1</ambient>
+            <diffuse>0.2 0.3 0.55 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Building 4 - SW (Purple) -->
+    <model name="building_sw">
+      <static>true</static>
+      <pose>-45 -45 17 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box><size>14 14 34</size></box>
+          </geometry>
+          <material>
+            <ambient>0.4 0.25 0.5 1</ambient>
+            <diffuse>0.5 0.35 0.6 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Base Station Tower -->
+    <model name="base_station">
+      <static>true</static>
+      <pose>50 50 0 0 0 0</pose>
+      <link name="tower">
+        <visual name="tower_visual">
+          <pose>0 0 7 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.6</radius>
+              <length>14</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.5 0.15 0.15 1</ambient>
+            <diffuse>0.6 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+        <!-- Antenna panel 1 -->
+        <visual name="antenna1">
+          <pose>1.2 0 12 0 0 0</pose>
+          <geometry>
+            <box><size>0.3 1.0 1.8</size></box>
+          </geometry>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+          </material>
+        </visual>
+        <!-- Antenna panel 2 -->
+        <visual name="antenna2">
+          <pose>-0.6 1.0 12 0 0 2.094</pose>
+          <geometry>
+            <box><size>0.3 1.0 1.8</size></box>
+          </geometry>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+          </material>
+        </visual>
+        <!-- Antenna panel 3 -->
+        <visual name="antenna3">
+          <pose>-0.6 -1.0 12 0 0 -2.094</pose>
+          <geometry>
+            <box><size>0.3 1.0 1.8</size></box>
+          </geometry>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+          </material>
+        </visual>
+        <!-- Red beacon light -->
+        <visual name="beacon">
+          <pose>0 0 14.5 0 0 0</pose>
+          <geometry>
+            <sphere><radius>0.4</radius></sphere>
+          </geometry>
+          <material>
+            <ambient>1.0 0.1 0.05 1</ambient>
+            <diffuse>1.0 0.2 0.1 1</diffuse>
+            <emissive>1.0 0.1 0.05 1</emissive>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Ground User 1 (Red) -->
+    <model name="user_1">
+      <static>true</static>
+      <pose>-25 15 0 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <pose>0 0 1 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.5</radius>
+              <length>2</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.15 0.1 1</ambient>
+            <diffuse>0.9 0.2 0.15 1</diffuse>
+          </material>
+        </visual>
+        <visual name="head">
+          <pose>0 0 2.3 0 0 0</pose>
+          <geometry>
+            <sphere><radius>0.4</radius></sphere>
+          </geometry>
+          <material>
+            <ambient>0.85 0.7 0.55 1</ambient>
+            <diffuse>0.9 0.75 0.6 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Ground User 2 (Green) -->
+    <model name="user_2">
+      <static>true</static>
+      <pose>30 -20 0 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <pose>0 0 1 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.5</radius>
+              <length>2</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.1 0.7 0.2 1</ambient>
+            <diffuse>0.15 0.8 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="head">
+          <pose>0 0 2.3 0 0 0</pose>
+          <geometry>
+            <sphere><radius>0.4</radius></sphere>
+          </geometry>
+          <material>
+            <ambient>0.85 0.7 0.55 1</ambient>
+            <diffuse>0.9 0.75 0.6 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Ground User 3 (Orange) -->
+    <model name="user_3">
+      <static>true</static>
+      <pose>-15 -30 0 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <pose>0 0 1 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.5</radius>
+              <length>2</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.9 0.5 0.1 1</ambient>
+            <diffuse>0.95 0.6 0.15 1</diffuse>
+          </material>
+        </visual>
+        <visual name="head">
+          <pose>0 0 2.3 0 0 0</pose>
+          <geometry>
+            <sphere><radius>0.4</radius></sphere>
+          </geometry>
+          <material>
+            <ambient>0.85 0.7 0.55 1</ambient>
+            <diffuse>0.9 0.75 0.6 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Ground User 4 (Blue) -->
+    <model name="user_4">
+      <static>true</static>
+      <pose>20 35 0 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <pose>0 0 1 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.5</radius>
+              <length>2</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.15 0.5 0.9 1</ambient>
+            <diffuse>0.2 0.6 0.95 1</diffuse>
+          </material>
+        </visual>
+        <visual name="head">
+          <pose>0 0 2.3 0 0 0</pose>
+          <geometry>
+            <sphere><radius>0.4</radius></sphere>
+          </geometry>
+          <material>
+            <ambient>0.85 0.7 0.55 1</ambient>
+            <diffuse>0.9 0.75 0.6 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Ground User 5 (Purple) -->
+    <model name="user_5">
+      <static>true</static>
+      <pose>-35 -10 0 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <pose>0 0 1 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.5</radius>
+              <length>2</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.1 0.6 1</ambient>
+            <diffuse>0.9 0.15 0.7 1</diffuse>
+          </material>
+        </visual>
+        <visual name="head">
+          <pose>0 0 2.3 0 0 0</pose>
+          <geometry>
+            <sphere><radius>0.4</radius></sphere>
+          </geometry>
+          <material>
+            <ambient>0.85 0.7 0.55 1</ambient>
+            <diffuse>0.9 0.75 0.6 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- X3 UAV Quadcopter (from Fuel) -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/X3 UAV</uri>
+      <pose>0 0 15 0 0 0</pose>
+      <plugin filename="gz-sim-multicopter-motor-model-system"
+              name="gz::sim::systems::MulticopterMotorModel">
+        <robotNamespace>X3</robotNamespace>
+        <jointName>X3/rotor_0_joint</jointName>
+        <linkName>X3/rotor_0</linkName>
+        <turningDirection>ccw</turningDirection>
+        <timeConstantUp>0.0125</timeConstantUp>
+        <timeConstantDown>0.025</timeConstantDown>
+        <maxRotVelocity>800.0</maxRotVelocity>
+        <motorConstant>8.54858e-06</motorConstant>
+        <momentConstant>0.016</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <actuator_number>0</actuator_number>
+        <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+        <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/0</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+      </plugin>
+      <plugin filename="gz-sim-multicopter-motor-model-system"
+              name="gz::sim::systems::MulticopterMotorModel">
+        <robotNamespace>X3</robotNamespace>
+        <jointName>X3/rotor_1_joint</jointName>
+        <linkName>X3/rotor_1</linkName>
+        <turningDirection>ccw</turningDirection>
+        <timeConstantUp>0.0125</timeConstantUp>
+        <timeConstantDown>0.025</timeConstantDown>
+        <maxRotVelocity>800.0</maxRotVelocity>
+        <motorConstant>8.54858e-06</motorConstant>
+        <momentConstant>0.016</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <actuator_number>1</actuator_number>
+        <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+        <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/1</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+      </plugin>
+      <plugin filename="gz-sim-multicopter-motor-model-system"
+              name="gz::sim::systems::MulticopterMotorModel">
+        <robotNamespace>X3</robotNamespace>
+        <jointName>X3/rotor_2_joint</jointName>
+        <linkName>X3/rotor_2</linkName>
+        <turningDirection>cw</turningDirection>
+        <timeConstantUp>0.0125</timeConstantUp>
+        <timeConstantDown>0.025</timeConstantDown>
+        <maxRotVelocity>800.0</maxRotVelocity>
+        <motorConstant>8.54858e-06</motorConstant>
+        <momentConstant>0.016</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <actuator_number>2</actuator_number>
+        <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+        <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/2</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+      </plugin>
+      <plugin filename="gz-sim-multicopter-motor-model-system"
+              name="gz::sim::systems::MulticopterMotorModel">
+        <robotNamespace>X3</robotNamespace>
+        <jointName>X3/rotor_3_joint</jointName>
+        <linkName>X3/rotor_3</linkName>
+        <turningDirection>cw</turningDirection>
+        <timeConstantUp>0.0125</timeConstantUp>
+        <timeConstantDown>0.025</timeConstantDown>
+        <maxRotVelocity>800.0</maxRotVelocity>
+        <motorConstant>8.54858e-06</motorConstant>
+        <momentConstant>0.016</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <actuator_number>3</actuator_number>
+        <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+        <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/3</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+      </plugin>
+      <plugin filename="gz-sim-multicopter-control-system"
+              name="gz::sim::systems::MulticopterVelocityControl">
+        <robotNamespace>X3</robotNamespace>
+        <commandTopic>cmd_vel</commandTopic>
+        <enableSubTopic>enable</enableSubTopic>
+        <comLinkName>X3/base_link</comLinkName>
+        <velocityGain>2.7 2.7 2.7</velocityGain>
+        <attitudeGain>2 3 0.15</attitudeGain>
+        <angularRateGain>0.4 0.52 0.18</angularRateGain>
+        <maximumLinearAcceleration>2 2 2</maximumLinearAcceleration>
+        <maximumLinearVelocity>5 5 3</maximumLinearVelocity>
+        <maximumAngularVelocity>3 3 1</maximumAngularVelocity>
+        <linearVelocityNoiseMean>0 0 0</linearVelocityNoiseMean>
+        <linearVelocityNoiseStdDev>0 0 0</linearVelocityNoiseStdDev>
+        <angularVelocityNoiseMean>0 0 0</angularVelocityNoiseMean>
+        <angularVelocityNoiseStdDev>0 0 0</angularVelocityNoiseStdDev>
+        <rotorConfiguration>
+          <rotor>
+            <jointName>X3/rotor_0_joint</jointName>
+            <forceConstant>8.54858e-06</forceConstant>
+            <momentConstant>0.016</momentConstant>
+            <direction>1</direction>
+          </rotor>
+          <rotor>
+            <jointName>X3/rotor_1_joint</jointName>
+            <forceConstant>8.54858e-06</forceConstant>
+            <momentConstant>0.016</momentConstant>
+            <direction>1</direction>
+          </rotor>
+          <rotor>
+            <jointName>X3/rotor_2_joint</jointName>
+            <forceConstant>8.54858e-06</forceConstant>
+            <momentConstant>0.016</momentConstant>
+            <direction>-1</direction>
+          </rotor>
+          <rotor>
+            <jointName>X3/rotor_3_joint</jointName>
+            <forceConstant>8.54858e-06</forceConstant>
+            <momentConstant>0.016</momentConstant>
+            <direction>-1</direction>
+          </rotor>
+        </rotorConfiguration>
+      </plugin>
+    </include>
+
+  </world>
+</sdf>

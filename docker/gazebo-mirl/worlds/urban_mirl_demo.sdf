@@ -1,0 +1,359 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="urban_mirl_demo">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Bright Scene & Lighting -->
+    <scene>
+      <ambient>0.8 0.8 0.85 1</ambient>
+      <background>0.5 0.7 0.95 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- Sun -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>30 30 80 0 0 0</pose>
+      <diffuse>1.0 0.98 0.95 1</diffuse>
+      <specular>0.8 0.8 0.75 1</specular>
+      <direction>-0.3 -0.3 -0.9</direction>
+    </light>
+
+    <!-- Fill light -->
+    <light type="directional" name="fill">
+      <cast_shadows>false</cast_shadows>
+      <pose>-30 -30 50 0 0 0</pose>
+      <diffuse>0.5 0.52 0.6 1</diffuse>
+      <direction>0.3 0.4 -0.6</direction>
+    </light>
+
+    <!-- Ground -->
+    <model name="ground">
+      <static>true</static>
+      <link name="link">
+        <collision name="col">
+          <geometry><plane><normal>0 0 1</normal><size>200 200</size></plane></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><plane><normal>0 0 1</normal><size>200 200</size></plane></geometry>
+          <material>
+            <ambient>0.35 0.38 0.32 1</ambient>
+            <diffuse>0.38 0.42 0.35 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- East-West Road (Y=0, X from -70 to 70) -->
+    <model name="road_ew">
+      <static>true</static>
+      <link name="link">
+        <visual name="surface">
+          <pose>0 0 0.01 0 0 0</pose>
+          <geometry><box><size>140 12 0.02</size></box></geometry>
+          <material><ambient>0.2 0.2 0.22 1</ambient><diffuse>0.22 0.22 0.25 1</diffuse></material>
+        </visual>
+        <visual name="center_line">
+          <pose>0 0 0.02 0 0 0</pose>
+          <geometry><box><size>140 0.2 0.01</size></box></geometry>
+          <material><ambient>0.95 0.9 0.2 1</ambient><diffuse>0.98 0.92 0.25 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- North-South Road (X=0, Y from -70 to 70) -->
+    <model name="road_ns">
+      <static>true</static>
+      <link name="link">
+        <visual name="surface">
+          <pose>0 0 0.01 0 0 0</pose>
+          <geometry><box><size>12 140 0.02</size></box></geometry>
+          <material><ambient>0.2 0.2 0.22 1</ambient><diffuse>0.22 0.22 0.25 1</diffuse></material>
+        </visual>
+        <visual name="center_line">
+          <pose>0 0 0.02 0 0 0</pose>
+          <geometry><box><size>0.2 140 0.01</size></box></geometry>
+          <material><ambient>0.95 0.9 0.2 1</ambient><diffuse>0.98 0.92 0.25 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Buildings - NE Quadrant -->
+    <model name="tower_ne1">
+      <static>true</static>
+      <link name="link">
+        <visual name="main"><pose>30 30 25 0 0 0</pose>
+          <geometry><box><size>16 16 50</size></box></geometry>
+          <material><ambient>0.22 0.42 0.78 1</ambient><diffuse>0.28 0.5 0.88 1</diffuse><specular>0.6 0.6 0.7 1</specular></material>
+        </visual>
+        <visual name="windows"><pose>30 22 25 0 0 0</pose>
+          <geometry><box><size>15 0.2 45</size></box></geometry>
+          <material><ambient>0.6 0.75 0.95 1</ambient><diffuse>0.65 0.8 1.0 1</diffuse><specular>0.8 0.8 0.9 1</specular></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="tower_ne2">
+      <static>true</static>
+      <link name="link">
+        <visual name="main"><pose>50 20 17.5 0 0 0</pose>
+          <geometry><box><size>14 12 35</size></box></geometry>
+          <material><ambient>0.18 0.58 0.58 1</ambient><diffuse>0.22 0.65 0.65 1</diffuse><specular>0.5 0.6 0.6 1</specular></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Buildings - NW Quadrant -->
+    <model name="tower_nw1">
+      <static>true</static>
+      <link name="link">
+        <visual name="main"><pose>-35 30 20 0 0 0</pose>
+          <geometry><box><size>18 14 40</size></box></geometry>
+          <material><ambient>0.85 0.87 0.9 1</ambient><diffuse>0.9 0.92 0.95 1</diffuse><specular>0.5 0.5 0.5 1</specular></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Buildings - SE Quadrant -->
+    <model name="tower_se1">
+      <static>true</static>
+      <link name="link">
+        <visual name="main"><pose>30 -30 22.5 0 0 0</pose>
+          <geometry><box><size>16 16 45</size></box></geometry>
+          <material><ambient>0.15 0.28 0.58 1</ambient><diffuse>0.18 0.32 0.68 1</diffuse><specular>0.6 0.6 0.7 1</specular></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Buildings - SW Quadrant -->
+    <model name="tower_sw1">
+      <static>true</static>
+      <link name="link">
+        <visual name="main"><pose>-30 -30 17.5 0 0 0</pose>
+          <geometry><box><size>14 14 35</size></box></geometry>
+          <material><ambient>0.48 0.32 0.62 1</ambient><diffuse>0.55 0.38 0.70 1</diffuse><specular>0.5 0.4 0.6 1</specular></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Base Station on tower_ne1 (height 50) -->
+    <model name="base_station">
+      <static>true</static>
+      <link name="link">
+        <visual name="pole"><pose>30 30 55 0 0 0</pose>
+          <geometry><cylinder><radius>0.3</radius><length>10</length></cylinder></geometry>
+          <material><ambient>0.65 0.2 0.2 1</ambient><diffuse>0.75 0.25 0.25 1</diffuse></material>
+        </visual>
+        <visual name="ant1"><pose>30.8 30 58 0 0 0</pose>
+          <geometry><box><size>0.3 0.8 1.5</size></box></geometry>
+          <material><ambient>0.42 0.42 0.45 1</ambient><diffuse>0.48 0.48 0.52 1</diffuse></material>
+        </visual>
+        <visual name="ant2"><pose>29.3 30.7 58 0 0 0.52</pose>
+          <geometry><box><size>0.3 0.8 1.5</size></box></geometry>
+          <material><ambient>0.42 0.42 0.45 1</ambient><diffuse>0.48 0.48 0.52 1</diffuse></material>
+        </visual>
+        <visual name="beacon"><pose>30 30 60.5 0 0 0</pose>
+          <geometry><sphere><radius>0.4</radius></sphere></geometry>
+          <material><ambient>0.98 0.18 0.12 1</ambient><diffuse>1.0 0.22 0.15 1</diffuse><specular>0.5 0.2 0.2 1</specular></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Cars on E-W Road (properly aligned, yaw=0 or 3.14159) -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Hatchback red</uri>
+      <name>car_red_ew1</name>
+      <pose>-25 -3 0 0 0 0</pose>
+      <static>true</static>
+    </include>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/SUV</uri>
+      <name>car_suv_ew</name>
+      <pose>15 3 0 0 0 3.14159</pose>
+      <static>true</static>
+    </include>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pickup</uri>
+      <name>car_pickup_ew</name>
+      <pose>40 -3 0 0 0 0</pose>
+      <static>true</static>
+    </include>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Prius Hybrid</uri>
+      <name>car_prius_ew</name>
+      <pose>-45 3 0 0 0 3.14159</pose>
+      <static>true</static>
+    </include>
+
+    <!-- Cars on N-S Road (properly aligned, yaw=1.5708 or -1.5708) -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Hatchback blue</uri>
+      <name>car_blue_ns</name>
+      <pose>-3 -25 0 0 0 1.5708</pose>
+      <static>true</static>
+    </include>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Hatchback</uri>
+      <name>car_silver_ns</name>
+      <pose>3 20 0 0 0 -1.5708</pose>
+      <static>true</static>
+    </include>
+
+    <!-- UAV Relay - Smaller scale (5x instead of 15x) -->
+    <model name="uav_relay">
+      <static>true</static>
+      <pose>20 15 30 0 0 0.3</pose>
+      <link name="body">
+        <visual name="x3_body">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>5 5 5</scale>
+              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/x3 uav/6/files/meshes/x3.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="prop0">
+          <pose>0.65 -1.1 0.12 0 0 0</pose>
+          <geometry><mesh><scale>0.8 0.8 0.8</scale>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/x3 uav/6/files/meshes/propeller_ccw.dae</uri>
+          </mesh></geometry>
+        </visual>
+        <visual name="prop1">
+          <pose>-0.65 1.0 0.12 0 0 0</pose>
+          <geometry><mesh><scale>0.8 0.8 0.8</scale>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/x3 uav/6/files/meshes/propeller_ccw.dae</uri>
+          </mesh></geometry>
+        </visual>
+        <visual name="prop2">
+          <pose>0.65 1.1 0.12 0 0 0</pose>
+          <geometry><mesh><scale>0.8 0.8 0.8</scale>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/x3 uav/6/files/meshes/propeller_cw.dae</uri>
+          </mesh></geometry>
+        </visual>
+        <visual name="prop3">
+          <pose>-0.65 -1.0 0.12 0 0 0</pose>
+          <geometry><mesh><scale>0.8 0.8 0.8</scale>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/x3 uav/6/files/meshes/propeller_cw.dae</uri>
+          </mesh></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Ground Users (people near intersection) -->
+    <model name="user1">
+      <static>true</static>
+      <link name="link">
+        <visual name="body"><pose>-12 8 1.0 0 0 0</pose>
+          <geometry><cylinder><radius>0.5</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0.92 0.18 0.12 1</ambient><diffuse>0.96 0.22 0.15 1</diffuse></material>
+        </visual>
+        <visual name="head"><pose>-12 8 2.3 0 0 0</pose>
+          <geometry><sphere><radius>0.4</radius></sphere></geometry>
+          <material><ambient>0.88 0.72 0.58 1</ambient><diffuse>0.92 0.78 0.62 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="user2">
+      <static>true</static>
+      <link name="link">
+        <visual name="body"><pose>25 -10 1.0 0 0 0</pose>
+          <geometry><cylinder><radius>0.5</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0.12 0.82 0.22 1</ambient><diffuse>0.15 0.88 0.28 1</diffuse></material>
+        </visual>
+        <visual name="head"><pose>25 -10 2.3 0 0 0</pose>
+          <geometry><sphere><radius>0.4</radius></sphere></geometry>
+          <material><ambient>0.88 0.72 0.58 1</ambient><diffuse>0.92 0.78 0.62 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="user3">
+      <static>true</static>
+      <link name="link">
+        <visual name="body"><pose>-8 -18 1.0 0 0 0</pose>
+          <geometry><cylinder><radius>0.5</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0.96 0.58 0.08 1</ambient><diffuse>1.0 0.62 0.12 1</diffuse></material>
+        </visual>
+        <visual name="head"><pose>-8 -18 2.3 0 0 0</pose>
+          <geometry><sphere><radius>0.4</radius></sphere></geometry>
+          <material><ambient>0.88 0.72 0.58 1</ambient><diffuse>0.92 0.78 0.62 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="user4">
+      <static>true</static>
+      <link name="link">
+        <visual name="body"><pose>10 22 1.0 0 0 0</pose>
+          <geometry><cylinder><radius>0.5</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0.96 0.88 0.12 1</ambient><diffuse>1.0 0.92 0.18 1</diffuse></material>
+        </visual>
+        <visual name="head"><pose>10 22 2.3 0 0 0</pose>
+          <geometry><sphere><radius>0.4</radius></sphere></geometry>
+          <material><ambient>0.88 0.72 0.58 1</ambient><diffuse>0.92 0.78 0.62 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="user5">
+      <static>true</static>
+      <link name="link">
+        <visual name="body"><pose>38 10 1.0 0 0 0</pose>
+          <geometry><cylinder><radius>0.5</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0.88 0.12 0.68 1</ambient><diffuse>0.92 0.18 0.72 1</diffuse></material>
+        </visual>
+        <visual name="head"><pose>38 10 2.3 0 0 0</pose>
+          <geometry><sphere><radius>0.4</radius></sphere></geometry>
+          <material><ambient>0.88 0.72 0.58 1</ambient><diffuse>0.92 0.78 0.62 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Camera for screenshots/video -->
+    <model name="scene_camera">
+      <static>true</static>
+      <pose>-70 -70 65 0 0.6 0.78</pose>
+      <link name="link">
+        <sensor name="camera" type="camera">
+          <camera>
+            <horizontal_fov>1.2</horizontal_fov>
+            <image>
+              <width>1920</width>
+              <height>1080</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip><near>0.5</near><far>500</far></clip>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <visualize>false</visualize>
+          <topic>/scene_camera</topic>
+        </sensor>
+      </link>
+    </model>
+
+    <!-- GUI camera starting position -->
+    <gui fullscreen="0">
+      <camera name="user_camera">
+        <pose>-70 -70 65 0 0.6 0.78</pose>
+      </camera>
+    </gui>
+
+  </world>
+</sdf>
