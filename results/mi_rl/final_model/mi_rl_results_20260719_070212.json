@@ -1,0 +1,170 @@
+{
+  "config": {
+    "episodes": 50000,
+    "hidden_dim": 256,
+    "sca_weight": 0.3,
+    "use_safety": false
+  },
+  "training_history": [
+    {
+      "episode": 0,
+      "throughput": 195.06433445638058,
+      "fairness": 0.749170325269957
+    },
+    {
+      "episode": 2500,
+      "throughput": 195.14630215496803,
+      "fairness": 0.7491171800460636
+    },
+    {
+      "episode": 5000,
+      "throughput": 195.25113723125963,
+      "fairness": 0.7490380668785271
+    },
+    {
+      "episode": 7500,
+      "throughput": 194.87098131984158,
+      "fairness": 0.7481816776858207
+    },
+    {
+      "episode": 10000,
+      "throughput": 194.28290930448406,
+      "fairness": 0.750626546217871
+    },
+    {
+      "episode": 12500,
+      "throughput": 191.5161607225217,
+      "fairness": 0.7510984628939452
+    },
+    {
+      "episode": 15000,
+      "throughput": 193.5838776691671,
+      "fairness": 0.7471871766136144
+    },
+    {
+      "episode": 17500,
+      "throughput": 194.3489333013301,
+      "fairness": 0.7473660701829685
+    },
+    {
+      "episode": 20000,
+      "throughput": 194.16932665576576,
+      "fairness": 0.7468049450941409
+    },
+    {
+      "episode": 22500,
+      "throughput": 194.25787259109381,
+      "fairness": 0.7472367648188113
+    },
+    {
+      "episode": 25000,
+      "throughput": 195.06973585226928,
+      "fairness": 0.7470899450527642
+    },
+    {
+      "episode": 27500,
+      "throughput": 193.91502380125942,
+      "fairness": 0.7463421843227787
+    },
+    {
+      "episode": 30000,
+      "throughput": 192.36051650240526,
+      "fairness": 0.7537327399284857
+    },
+    {
+      "episode": 32500,
+      "throughput": 194.68372205748335,
+      "fairness": 0.7496529645177715
+    },
+    {
+      "episode": 35000,
+      "throughput": 194.05688047335417,
+      "fairness": 0.7517924876664535
+    },
+    {
+      "episode": 37500,
+      "throughput": 194.35295830693886,
+      "fairness": 0.7505109030387216
+    },
+    {
+      "episode": 40000,
+      "throughput": 194.01139484645543,
+      "fairness": 0.7490378637867744
+    },
+    {
+      "episode": 42500,
+      "throughput": 193.64525570982357,
+      "fairness": 0.7499126978782823
+    },
+    {
+      "episode": 45000,
+      "throughput": 192.99345216362346,
+      "fairness": 0.7477152527264049
+    },
+    {
+      "episode": 47500,
+      "throughput": 190.75856315039132,
+      "fairness": 0.7544350276914638
+    },
+    {
+      "episode": 50000,
+      "throughput": 189.7484921716389,
+      "fairness": 0.7536224616641725
+    }
+  ],
+  "final_results": {
+    "Analytical": {
+      "method": "Analytical",
+      "avg_throughput": 110.40966354334367,
+      "avg_fairness": 0.8058266525128323,
+      "avg_coverage": 0.2930952380952381,
+      "avg_latency_ms": 0.07644891738891602
+    },
+    "Random": {
+      "method": "Random",
+      "avg_throughput": 97.27652366703731,
+      "avg_fairness": 0.9277720371209147,
+      "avg_coverage": 0.27845238095238095,
+      "avg_latency_ms": 0.003039836883544922
+    },
+    "Static": {
+      "method": "Static",
+      "avg_throughput": 110.77246097095056,
+      "avg_fairness": 0.9543700538370086,
+      "avg_coverage": 0.3527380952380952,
+      "avg_latency_ms": 0.0015139579772949219
+    },
+    "SCA-5": {
+      "method": "SCA-5",
+      "avg_throughput": 187.78090477183702,
+      "avg_fairness": 0.7530485170657036,
+      "avg_coverage": 0.630952380952381,
+      "avg_latency_ms": 3.747701644897461,
+      "convergence_rate": 0.0
+    },
+    "SCA-20": {
+      "method": "SCA-20",
+      "avg_throughput": 195.27214939964236,
+      "avg_fairness": 0.7497366677804029,
+      "avg_coverage": 0.6338095238095239,
+      "avg_latency_ms": 12.710273265838623,
+      "convergence_rate": 0.0
+    },
+    "SCA-50": {
+      "method": "SCA-50",
+      "avg_throughput": 195.27214939964236,
+      "avg_fairness": 0.7497366677804029,
+      "avg_coverage": 0.6338095238095239,
+      "avg_latency_ms": 30.84414005279541,
+      "convergence_rate": 0.0
+    },
+    "SGAC": {
+      "method": "SGAC (MI-RL)",
+      "avg_throughput": 189.7484921716389,
+      "avg_fairness": 0.7536224616641725,
+      "avg_coverage": 0.6380952380952382,
+      "avg_latency_ms": 17.248177528381348
+    }
+  },
+  "timestamp": "20260719_070212"
+}
