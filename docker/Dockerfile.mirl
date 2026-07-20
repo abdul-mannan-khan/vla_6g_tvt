@@ -1,0 +1,42 @@
+# MI-RL 6G UAV Relay Positioning - Docker Image
+#
+# Build: docker build -t mirl-6g:latest -f Dockerfile.mirl ..
+# Run:   docker run --gpus all mirl-6g:latest python3 run_mirl_simulation.py
+#
+FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
+
+LABEL maintainer="MI-RL Research Team"
+LABEL description="Math-Informed RL for 6G UAV Relay Positioning"
+LABEL version="1.0"
+
+# Prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /workspace
+
+# Install Python dependencies
+RUN pip install --no-cache-dir \
+    numpy>=1.24.0 \
+    scipy>=1.10.0 \
+    matplotlib>=3.7.0 \
+    pandas>=2.0.0
+
+# Copy source code
+COPY scripts/ /workspace/scripts/
+
+# Create results directory
+RUN mkdir -p /workspace/results/simulation /workspace/results/validation
+
+# Set Python path
+ENV PYTHONPATH=/workspace/scripts:$PYTHONPATH
+
+# Default command - run simulation
+CMD ["python3", "scripts/run_mirl_simulation.py", "--scenarios", "50", "--episodes", "500"]
