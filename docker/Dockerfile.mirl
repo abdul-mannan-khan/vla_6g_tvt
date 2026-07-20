@@ -1,7 +1,8 @@
 # MI-RL 6G UAV Relay Positioning - Docker Image
 #
-# Build: docker build -t mirl-6g:latest -f Dockerfile.mirl ..
-# Run:   docker run --gpus all mirl-6g:latest python3 run_mirl_simulation.py
+# Build: docker build -t abdulmannan617/mirl-6g:latest -f Dockerfile.mirl ..
+# Push:  docker push abdulmannan617/mirl-6g:latest
+# Run:   docker run --gpus all abdulmannan617/mirl-6g:latest
 #
 FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 
