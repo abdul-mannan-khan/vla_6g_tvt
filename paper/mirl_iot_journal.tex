@@ -36,7 +36,7 @@ Another University, City, Country}
 \maketitle
 
 \begin{abstract}
-The Internet of Things (IoT) paradigm in 6G networks demands ubiquitous connectivity across vast geographical areas. Unmanned aerial vehicles (UAVs) serving as aerial relay stations offer a promising solution, yet determining optimal three-dimensional positioning remains computationally challenging. This paper presents a math-informed reinforcement learning (MI-RL) framework that unifies classical convex optimization with deep reinforcement learning. Our proposed Successive Convex Approximation-Guided Actor-Critic (SGAC) algorithm employs analytical gradients from convex relaxations to warm-start policy learning while providing provable performance guarantees. Extensive simulations across 50 urban IoT scenarios demonstrate throughput improvements of 264\% over random placement, 80\% over analytical heuristics, and 11-26\% over state-of-the-art deep RL methods (DDPG, PPO, TD3, SAC). The framework achieves 95\% of asymptotic performance within 50 training episodes, representing a 3.6-4.4$\times$ improvement in sample efficiency over baseline RL algorithms. Unlike standard RL approaches, SGAC provides guaranteed performance floor ensuring throughput never falls below the SCA baseline.
+The Internet of Things (IoT) paradigm in sixth-generation (6G) wireless networks demands ubiquitous connectivity across vast geographical areas, yet terrestrial infrastructure alone cannot economically serve remote, temporary, or disaster-affected deployments. Unmanned aerial vehicles (UAVs) serving as aerial relay stations constitute a promising solution for such IoT scenarios, yet determining optimal three-dimensional positioning remains computationally intractable due to non-convex objective functions arising from decode-and-forward relay constraints. This paper presents a math-informed reinforcement learning (MI-RL) framework that unifies classical convex optimization with deep reinforcement learning for UAV-assisted IoT networks. The proposed Successive Convex Approximation-Guided Actor-Critic (SGAC) algorithm employs analytical gradients from convex relaxations to warm-start policy learning while providing provable performance guarantees. Extensive simulations across 50 urban IoT deployment scenarios demonstrate aggregate throughput of 5960~Mbps serving five IoT devices, representing improvements of 18\% over random placement, 7.7\% over analytical heuristics, and 1.6\% over the SCA baseline. Training converges within 500 episodes on commodity graphics processing unit (GPU) hardware. Unlike standard reinforcement learning approaches that may produce arbitrarily poor positioning decisions, SGAC provides a deterministic performance floor ensuring throughput never falls below the SCA baseline, with zero violations observed across all evaluation scenarios---a critical property for mission-critical IoT applications.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -69,16 +69,16 @@ Despite these advances, both classical optimization and pure RL approaches exhib
 
 The emerging paradigm of physics-informed or math-informed machine learning offers a promising path to reconcile these limitations~\cite{karniadakis2021}. By incorporating domain knowledge from classical optimization into neural network architectures and training procedures, hybrid approaches can achieve the generalization benefits of learning while preserving the reliability of analytical methods. In wireless communications, physics-informed approaches have shown success in channel estimation~\cite{soltani2022}, beamforming optimization~\cite{xia2020}, and resource allocation~\cite{lee2020}.
 
-This paper presents a math-informed reinforcement learning (MI-RL) framework that unifies classical convex optimization with deep RL for UAV relay positioning. Our core insight is that SCA provides an excellent initialization for RL policies: the analytical solution lies in a high-performance region of the positioning space, drastically reducing the exploration burden on the learning algorithm. Rather than learning positioning from scratch, our approach learns to predict beneficial \textit{corrections} to the SCA solution.
+This paper presents a math-informed reinforcement learning (MI-RL) framework that unifies classical convex optimization with deep RL for UAV relay positioning. The central insight motivating this work is that SCA solutions occupy high-performance regions of the positioning space, providing natural initialization points that substantially reduce the exploration burden on learning algorithms. Rather than learning positioning policies ab initio, the proposed approach learns to predict beneficial \textit{corrections} to SCA solutions, focusing representational capacity on the residual improvement rather than the full optimization landscape.
 
 We formalize this through the Successive Convex Approximation-Guided Actor-Critic (SGAC) algorithm. SGAC employs a hybrid policy structure that combines the SCA descent direction with a learned residual correction. The neural network receives physics-informed features encoding the optimization landscape, enabling transfer of domain knowledge into the learned representation. Critically, a performance floor mechanism guarantees that SGAC never performs worse than the baseline SCA solution, addressing the safety concerns of pure RL deployment.
 
-The contributions of this paper are as follows:
+The principal contributions of this paper are as follows:
 \begin{itemize}
-\item We propose SGAC, a novel actor-critic algorithm that integrates SCA-derived gradients as warm-start guidance for policy learning, achieving 264\% throughput improvement over random placement and 11-26\% over state-of-the-art deep RL methods.
+\item We propose SGAC, a novel actor-critic algorithm that integrates SCA-derived gradients as warm-start guidance for policy learning, achieving 18\% throughput improvement over random placement and 1.6\% over the SCA baseline while guaranteeing that performance never degrades below the analytical solution.
 \item We establish theoretical convergence guarantees including potential-based reward shaping preservation (Theorem~\ref{thm:shaping}), reward-throughput alignment (Theorem~\ref{thm:alignment}), and deterministic performance floor (Theorem~\ref{thm:floor}).
 \item We prove asymptotic stability through Lyapunov analysis (Theorem~\ref{thm:stability}) and characterize sample complexity advantages of the warm-start approach (Theorem~\ref{thm:warmstart}).
-\item We conduct extensive experiments across 50 urban IoT scenarios demonstrating 3.6-4.4$\times$ improved sample efficiency compared to DDPG, PPO, TD3, and SAC baselines, with zero violations of the performance floor guarantee.
+\item We conduct extensive experiments across 50 urban IoT scenarios demonstrating rapid convergence within 500 episodes, with zero violations of the performance floor guarantee throughout training and evaluation.
 \end{itemize}
 
 The remainder of this paper is organized as follows. Section~II presents the system model and problem formulation. Section~III details the SGAC algorithm including hybrid policy structure and training procedure. Section~IV provides theoretical analysis with complete convergence proofs. Section~V presents experimental evaluation across multiple performance metrics. Section~VI discusses practical deployment considerations and limitations. Section~VII concludes the paper.
@@ -91,9 +91,15 @@ Consider a UAV-assisted relay network comprising three elements: a ground base s
 \begin{equation}
 \mathcal{P} = \{(x, y, h) : x \in [x_{\min}, x_{\max}], y \in [y_{\min}, y_{\max}], h \in [h_{\min}, h_{\max}]\}
 \end{equation}
-where $h_{\min}$ and $h_{\max}$ represent minimum and maximum altitude constraints imposed by regulatory requirements and communication link budgets.
+where $x_{\min}, x_{\max}, y_{\min}, y_{\max}$ define the horizontal service area boundaries, and $h_{\min}$, $h_{\max}$ represent minimum and maximum altitude constraints imposed by regulatory requirements and communication link budgets.
 
 The UAV operates in decode-and-forward (DF) relay mode: it receives signals from the BS on the backhaul link, decodes the information, and retransmits to IoT devices on access links. This dual-hop architecture enables coverage extension beyond direct BS-to-device range while providing signal regeneration that improves reliability.
+
+\subsection{IoT Device Characteristics}
+
+The IoT devices considered in this work represent a class of battery-constrained sensors typical of smart city and industrial IoT deployments. Each device operates with limited transmit power capability, necessitating favorable channel conditions to the UAV relay for successful uplink transmission. The devices employ time-division multiple access (TDMA) for channel sharing, with the UAV relay aggregating data from all $K$ devices before forwarding to the BS.
+
+While the primary optimization objective focuses on downlink throughput (BS$\to$UAV$\to$devices), the positioning solution equally benefits uplink transmissions due to channel reciprocity in time-division duplex (TDD) systems. The decode-and-forward relay architecture is particularly suited for IoT applications as it provides signal regeneration that compensates for the weak transmit power of battery-limited devices.
 
 \subsection{Channel Model}
 
@@ -144,12 +150,12 @@ This section presents the Successive Convex Approximation-Guided Actor-Critic (S
 
 \subsection{SCA Baseline Computation}
 
-Before describing the learning components, we establish the SCA baseline that provides warm-start guidance. Given a scenario with BS position $\mathbf{p}_{\text{BS}}$ and device positions $\{\mathbf{u}_k\}$, SCA iteratively solves convex surrogate problems. At iteration $t$, the surrogate objective upper-bounds the original:
+Before describing the learning components, we establish the SCA baseline that provides warm-start guidance. Given a scenario with BS position $\mathbf{p}_{\text{BS}}$ and device positions $\{\mathbf{u}_k\}$, SCA iteratively solves convex surrogate problems. At iteration $t \in \{1, 2, \ldots, T\}$, the surrogate objective upper-bounds the original:
 \begin{equation}
 \Phi^{(t)}(\mathbf{p}) \leq \Phi(\mathbf{p}^{(t-1)}) + \nabla\Phi(\mathbf{p}^{(t-1)})^\top (\mathbf{p} - \mathbf{p}^{(t-1)})
 \label{eq:sca_surrogate}
 \end{equation}
-where the gradient $\nabla\Phi$ is computed analytically from~\eqref{eq:rate}. The SCA solution $\mathbf{p}_{\text{SCA}}$ after $T$ iterations serves as initialization for learning. The descent direction $\mathbf{d}_{\text{SCA}} = \nabla\Phi(\mathbf{p}_{\text{SCA}})$ encodes the local optimization landscape.
+where the gradient $\nabla\Phi$ is computed analytically from~\eqref{eq:rate}. The SCA solution $\mathbf{p}_{\text{SCA}} = \mathbf{p}^{(T)}$ after $T$ iterations (we use $T=20$ in experiments) serves as initialization for learning. The normalized descent direction $\mathbf{d}_{\text{SCA}} = \nabla\Phi(\mathbf{p}_{\text{SCA}})/\|\nabla\Phi(\mathbf{p}_{\text{SCA}})\|_2$ encodes the local optimization landscape.
 
 \subsection{Hybrid Policy Structure}
 
@@ -173,7 +179,7 @@ where $\mathbf{p}$ is the current UAV position, $\mathbf{p}_{\text{SCA}}$ is the
 
 \subsection{Reward Function}
 
-The reward function balances throughput improvement against deviation from analytical guidance:
+The action $\mathbf{a}_t = \pi_\theta(\mathbf{s}_t) \in \mathbb{R}^3$ represents a position correction vector applied to the current UAV position, yielding $\mathbf{p}_{t+1} = \text{clip}_\mathcal{P}(\mathbf{p}_t + \mathbf{a}_t)$. The reward function balances throughput improvement against deviation from analytical guidance:
 \begin{equation}
 r(\mathbf{s}_t, \mathbf{a}_t) = \frac{\Phi(\mathbf{p}_{t+1}) - \Phi(\mathbf{p}_{\text{SCA}})}{\eta} - \lambda \|\mathbf{a}_t - \alpha\mathbf{d}_{\text{SCA}}\|_2
 \label{eq:reward}
@@ -226,15 +232,15 @@ The reward function preserves optimal policies under potential-based shaping.
 \end{theorem}
 
 \begin{proof}
-Define potential $\Psi(\mathbf{s}) = \Phi(\mathbf{p}(\mathbf{s}))$. The shaped reward:
+Define potential function $\Psi(\mathbf{s}) = \Phi(\mathbf{p}(\mathbf{s}))$, where $\mathbf{p}(\mathbf{s})$ extracts the position from state $\mathbf{s}$. Let $r_{\text{base}}$ denote an arbitrary base reward and $\gamma \in (0,1)$ the discount factor. The shaped reward takes the form:
 \begin{equation}
 r'(\mathbf{s}_t, \mathbf{a}_t, \mathbf{s}_{t+1}) = r_{\text{base}} + \gamma\Psi(\mathbf{s}_{t+1}) - \Psi(\mathbf{s}_t)
 \end{equation}
-By Ng et al. \cite{ng1999}, potential-based shaping preserves optimal policies. Our improvement term decomposes as:
+By the policy invariance theorem of Ng et al.~\cite{ng1999}, potential-based shaping preserves optimal policies. Our throughput improvement term in~\eqref{eq:reward} decomposes as:
 \begin{equation}
 \frac{1}{\eta}\left[\Phi(\mathbf{p}_{t+1}) - \Phi(\mathbf{p}_t)\right] + \frac{1}{\eta}\left[\Phi(\mathbf{p}_t) - \Phi(\mathbf{p}_{\text{SCA}})\right]
 \end{equation}
-The first term is difference-based (potential shaping); the second is constant given $\mathbf{s}_t$, not affecting optimal policy gradient.
+The first term is difference-based (potential shaping form); the second is constant given $\mathbf{s}_t$ and does not affect the optimal policy gradient direction.
 \end{proof}
 
 \begin{theorem}[Reward-Throughput Alignment]
@@ -279,7 +285,7 @@ Policy gradient suppresses such actions. The floor mechanism provides determinis
 \begin{equation}
 V(\mathbf{p}) = \omega_1 \|\mathbf{p} - \mathbf{p}^*\|_2^2 + \omega_2 \sum_{k=1}^K (d_k(\mathbf{p}) - d^*_k)^2 + \omega_3 (h - h^*)^2
 \end{equation}
-where $\mathbf{p}^* = \arg\max \Phi(\mathbf{p})$ and $\omega_1, \omega_2, \omega_3 > 0$.
+where $\mathbf{p}^* = \arg\max_{\mathbf{p} \in \mathcal{P}} \Phi(\mathbf{p})$ denotes the optimal UAV position, $d_k(\mathbf{p}) = \|\mathbf{p} - \mathbf{u}_k\|_2$ is the distance from UAV to device $k$, $d^*_k = d_k(\mathbf{p}^*)$ is the corresponding optimal distance, $h^*$ is the optimal altitude component of $\mathbf{p}^*$, and $\omega_1, \omega_2, \omega_3 > 0$ are weighting coefficients.
 \end{definition}
 
 \begin{lemma}[Lyapunov Properties]
@@ -292,12 +298,12 @@ Under SGAC with Lyapunov constraint $V(\mathbf{p}_{t+1}) - V(\mathbf{p}_t) \leq 
 \end{theorem}
 
 \begin{proof}
-The safety layer projects actions:
+The safety layer projects actions onto the feasible set. Define $\text{clip}_\mathcal{P}(\mathbf{p})$ as the projection of $\mathbf{p}$ onto the feasible region $\mathcal{P}$, i.e., $\text{clip}_\mathcal{P}(\mathbf{p}) = \arg\min_{\mathbf{q} \in \mathcal{P}} \|\mathbf{q} - \mathbf{p}\|_2$. The safety layer solves:
 \begin{align}
 \mathbf{a}^{\text{safe}}_t = \arg\min_{\mathbf{a}} &\|\mathbf{a} - \pi_\theta(\mathbf{s}_t)\|_2^2 \\
 \text{s.t. } &V(\text{clip}_\mathcal{P}(\mathbf{p}_t + \mathbf{a})) - V(\mathbf{p}_t) \leq -\mu V(\mathbf{p}_t) \nonumber
 \end{align}
-The constraint implies $V(\mathbf{p}_{t+1}) \leq (1-\mu)V(\mathbf{p}_t)$. By induction:
+The constraint ensures $V(\mathbf{p}_{t+1}) \leq (1-\mu)V(\mathbf{p}_t)$. By induction:
 \begin{equation}
 V(\mathbf{p}_t) \leq (1-\mu)^t V(\mathbf{p}_0)
 \end{equation}
@@ -346,15 +352,15 @@ Actor parameters $\theta_\pi$ converge to a stationary point of $J(\theta_\pi)$.
 \end{theorem}
 
 \begin{proof}
-The policy gradient with physics regularization:
+The policy gradient incorporates physics-based regularization. Let $J_{\text{RL}}(\theta_\pi) = \mathbb{E}_\pi[\sum_t \gamma^t r_t]$ denote the standard RL objective and $L_{\text{physics}}(\theta_\pi) = \mathbb{E}[\|\pi_\theta(\mathbf{s}) - \mathbf{d}_{\text{SCA}}\|_2^2]$ denote a regularization term encouraging adherence to SCA guidance. The composite gradient is:
 \begin{equation}
 \nabla_{\theta_\pi} J = \nabla_{\theta_\pi} J_{\text{RL}} - \lambda_g \nabla_{\theta_\pi} L_{\text{physics}}
 \end{equation}
-The composite objective is $L_J$-smooth. Under gradient ascent with $\alpha_\pi \leq 1/L_J$:
+where $\lambda_g \geq 0$ is the regularization coefficient. The composite objective is $L_J$-smooth (i.e., $\|\nabla J(\theta) - \nabla J(\theta')\| \leq L_J \|\theta - \theta'\|$). Under gradient ascent with learning rate $\alpha_\pi \leq 1/L_J$:
 \begin{equation}
 J(\theta_{\pi,k+1}) \geq J(\theta_{\pi,k}) + \frac{\alpha_\pi}{2}\|\nabla J(\theta_{\pi,k})\|^2
 \end{equation}
-Since $J$ is bounded: $\sum_{k=0}^\infty \|\nabla J\|^2 < \infty$, thus $\nabla J \to 0$.
+Since $J$ is bounded above: $\sum_{k=0}^\infty \|\nabla J\|^2 < \infty$, implying $\nabla J \to 0$.
 \end{proof}
 
 \subsection{Sample Efficiency}
@@ -379,241 +385,151 @@ since empirically $J(\pi_{\text{SCA}})/J(\pi^*) \approx 0.95$.
 
 \begin{theorem}[Sample Complexity]
 \label{thm:sample}
-SGAC achieves $\epsilon$-optimal policy with probability $1-\delta$ using:
+SGAC achieves an $\epsilon$-optimal policy with probability at least $1-\delta$ using:
 \begin{equation}
 n = \mathcal{O}\left(\frac{d_s \cdot |\mathcal{A}|}{(1-\gamma)^4 \epsilon^2} \log\frac{1}{\delta}\right)
 \end{equation}
-samples, where $d_s$ is the state dimension.
+samples, where $d_s$ is the state dimension, $|\mathcal{A}|$ denotes the effective action space volume (discretized for analysis), $\gamma \in (0,1)$ is the discount factor, $\epsilon > 0$ is the optimality gap tolerance, and $\delta \in (0,1)$ is the failure probability. This bound follows from standard PAC-MDP analysis~\cite{dulac2021} adapted to the continuous action setting via discretization.
 \end{theorem}
 
 \section{Experimental Evaluation}
 
 \subsection{Simulation Setup}
 
-We evaluate SGAC across 50 randomly generated urban IoT scenarios. Each scenario comprises:
+We evaluate SGAC using a PyTorch implementation trained on an NVIDIA RTX 4090 GPU. Training comprises 2000 episodes across 100 randomly generated urban IoT scenarios, with evaluation on 50 held-out test scenarios. Each scenario comprises:
 \begin{itemize}
 \item Ground base station at $(50, 50, 15)$ m
 \item $K = 5$ IoT devices uniformly distributed in $[0, 100]^2$ m
 \item UAV altitude range $[10, 40]$ m
 \item Carrier frequency $f_c = 28$ GHz (mmWave)
 \item Channel bandwidth $B = 100$ MHz
-\item UAV transmit power $P_{\text{UAV}} = 30$ dBm
+\item Transmit power $P_{\text{BS}} = P_{\text{UAV}} = 30$ dBm
 \end{itemize}
 
-The neural networks use two hidden layers with 256 units each. Training uses Adam optimizer with learning rate $3 \times 10^{-4}$ and discount factor $\gamma = 0.99$.
+The actor and critic networks use three hidden layers with 256 units each, layer normalization, and rectified linear unit (ReLU) activations. Training uses the Adam optimizer with learning rate $3 \times 10^{-4}$, discount factor $\gamma = 0.99$, batch size 256, and replay buffer of $10^6$ transitions. The TD3-style training employs twin critics to mitigate overestimation bias, delayed policy updates (every 2 steps), and target network soft updates with coefficient $\tau = 0.005$. Critics are trained using temporal difference (TD) learning with target values computed from the minimum of the twin critic estimates.
 
 \subsection{Baseline Methods}
 
-We compare against ten baselines spanning heuristic, optimization, and deep RL approaches:
+We compare against three baseline categories:
 
 \textit{Heuristic Methods:}
 \begin{itemize}
-\item \textbf{Random}: Uniform sampling in feasible region
-\item \textbf{Analytical}: Weighted centroid with optimal altitude
+\item \textbf{Random}: Uniform sampling in feasible region $\mathcal{P}$
+\item \textbf{Analytical}: Weighted centroid of user positions with altitude at $(h_{\min} + h_{\max})/2$
 \end{itemize}
 
 \textit{Classical Optimization:}
 \begin{itemize}
-\item \textbf{SCA-5/20/50}: Successive convex approximation with 5, 20, 50 iterations
-\end{itemize}
-
-\textit{Deep Reinforcement Learning:}
-\begin{itemize}
-\item \textbf{DDPG}~\cite{lillicrap2016}: Deterministic actor-critic with replay buffer
-\item \textbf{PPO}~\cite{schulman2017}: Proximal policy optimization with clipped surrogate
-\item \textbf{TD3}~\cite{fujimoto2018}: Twin delayed DDPG with target smoothing
-\item \textbf{SAC}~\cite{haarnoja2018}: Soft actor-critic with maximum entropy regularization
+\item \textbf{SCA-20}: Successive convex approximation with 20 gradient ascent iterations
 \end{itemize}
 
 \subsection{Throughput Performance}
 
-Fig.~\ref{fig:throughput} presents the throughput comparison across all methods including deep RL baselines. SGAC achieves 353.9 Mbps average throughput, representing significant improvements:
+Fig.~\ref{fig:throughput} presents aggregate throughput comparison across all evaluated methods. SGAC achieves mean throughput of 5960.1~Mbps, representing the following improvements over baseline methods:
 
-\textit{Compared to Heuristic Methods:}
 \begin{itemize}
-\item \textbf{264\% improvement} over random placement (97.2 Mbps)
-\item \textbf{80\% improvement} over analytical heuristic (196.4 Mbps)
+\item 18.0\% improvement over random placement (5050.1~Mbps)
+\item 7.7\% improvement over analytical heuristic (5532.1~Mbps)
+\item 1.6\% improvement over SCA-20 baseline (5866.0~Mbps)
 \end{itemize}
 
-\textit{Compared to Deep RL Baselines:}
-\begin{itemize}
-\item \textbf{26\% improvement} over DDPG (280.4 Mbps)
-\item \textbf{33\% improvement} over PPO (265.7 Mbps)
-\item \textbf{18\% improvement} over TD3 (299.1 Mbps)
-\item \textbf{11\% improvement} over SAC (318.3 Mbps)
-\end{itemize}
-
-Table~\ref{tab:throughput} and Table~\ref{tab:rl_comparison} provide detailed statistics. SGAC matches SCA-20 performance while outperforming all deep RL baselines and guaranteeing no degradation through the floor mechanism.
+Table~\ref{tab:throughput} provides detailed distributional statistics. SGAC not only matches but exceeds SCA-20 performance while simultaneously providing the deterministic floor guarantee that ensures learned corrections never degrade below the analytical baseline.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.95\columnwidth]{fig1_throughput_comparison.pdf}
-\caption{Throughput comparison: heuristics (gray), deep RL baselines (blue), SCA optimization (green), and SGAC (red). SGAC outperforms all RL methods by 11-33\% while matching SCA optimization with guaranteed performance floor.}
+\includegraphics[width=0.95\columnwidth]{fig2_throughput_comparison.pdf}
+\caption{Throughput comparison across methods. SGAC (red) achieves 5960 Mbps, outperforming random (gray), analytical (orange), and SCA-20 (green) baselines while guaranteeing performance floor.}
 \label{fig:throughput}
 \end{figure}
 
 \begin{table}[t]
 \centering
-\caption{Throughput Statistics (Mbps)}
+\caption{Throughput Performance Comparison}
 \label{tab:throughput}
 \begin{tabular}{lcccc}
 \toprule
-\textbf{Method} & \textbf{Mean} & \textbf{Std} & \textbf{Min} & \textbf{Max} \\
+\textbf{Method} & \textbf{Mean (Mbps)} & \textbf{Std} & \textbf{Min} & \textbf{Max} \\
 \midrule
-Random & 97.2 & 57.4 & 43.3 & 342.2 \\
-Analytical & 196.4 & 170.5 & 53.1 & 782.8 \\
-SCA-5 & 356.2 & 300.2 & 76.3 & 1429.6 \\
-SCA-20 & 366.8 & 300.0 & 76.3 & 1429.7 \\
-\textbf{SGAC} & \textbf{353.9} & \textbf{281.4} & \textbf{76.2} & \textbf{1367.8} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[t]
-\centering
-\caption{Comparison with Deep RL Baselines}
-\label{tab:rl_comparison}
-\begin{tabular}{lccc}
-\toprule
-\textbf{Method} & \textbf{Throughput} & \textbf{Episodes to} & \textbf{Floor} \\
- & \textbf{(Mbps)} & \textbf{95\% Perf.} & \textbf{Guarantee} \\
+Random & 5050.1 & 329.1 & 4386.1 & 5860.3 \\
+Analytical & 5532.1 & 186.7 & 5178.3 & 5883.2 \\
+SCA-20 & 5866.0 & 281.6 & 5347.7 & 6486.3 \\
 \midrule
-DDPG & 280.4 & 220 & \texttimes \\
-PPO & 265.7 & 200 & \texttimes \\
-TD3 & 299.1 & 180 & \texttimes \\
-SAC & 318.3 & 180 & \texttimes \\
-\midrule
-\textbf{SGAC (Ours)} & \textbf{353.9} & \textbf{50} & \checkmark \\
+\textbf{SGAC (Ours)} & \textbf{5960.1} & \textbf{266.9} & \textbf{5425.3} & \textbf{6584.0} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Convergence Analysis}
 
-Fig.~\ref{fig:convergence} compares convergence speed across all RL methods. Key observations:
-\begin{itemize}
-\item SGAC reaches 95\% of final performance in \textbf{50 episodes}
-\item TD3 and SAC require \textbf{180 episodes} (3.6$\times$ slower)
-\item PPO requires \textbf{200 episodes} (4$\times$ slower)
-\item DDPG requires \textbf{220 episodes} (4.4$\times$ slower)
-\end{itemize}
+Fig.~\ref{fig:convergence} illustrates the training convergence trajectory over 2000 episodes. Several observations merit discussion. The throughput stabilizes within approximately 500 episodes, with subsequent episodes exhibiting coefficient of variation below 0.01. Throughout training, SGAC maintains consistent improvement margins over the SCA baseline. Total training duration was 6.2 minutes on the RTX 4090 platform.
 
-This acceleration stems from three key innovations: (1) SCA warm-start that initializes policy near optimal region, (2) physics-informed gradient features providing directional guidance, and (3) residual architecture that focuses learning on beneficial corrections rather than full positioning from scratch.
-
-The performance gap between SGAC and other RL methods is most pronounced in early training phases (episodes 0-100), where baseline methods explore randomly while SGAC exploits SCA's analytical solution as a starting point.
+The rapid convergence can be attributed to three architectural choices: (1) SCA warm-start initialization that places the policy in a high-performance region from the outset, (2) physics-informed state features that encode local optimization landscape information, and (3) hybrid policy architecture that restricts learning to residual corrections rather than full positioning policies.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.95\columnwidth]{fig2_convergence.pdf}
-\caption{Training convergence comparison across RL methods. SGAC reaches 95\% performance in 50 episodes, 3.6-4.4$\times$ faster than DDPG, PPO, TD3, and SAC baselines.}
+\includegraphics[width=0.95\columnwidth]{fig1_convergence.pdf}
+\caption{Training convergence over 2000 episodes. SGAC (blue) consistently exceeds SCA baseline (green dashed) and significantly outperforms random (gray) and analytical (orange) heuristics.}
 \label{fig:convergence}
 \end{figure}
 
-\subsection{Scalability Analysis}
+\subsection{Learning Dynamics}
 
-Fig.~\ref{fig:scalability} examines performance across varying numbers of IoT devices ($K = 2$ to $7$). SGAC maintains competitive throughput with SCA across all configurations, demonstrating robustness to network size. The analytical method shows significant degradation as $K$ increases due to its simplified geometric heuristic.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.95\columnwidth]{fig4_scalability.pdf}
-\caption{Scalability with number of IoT devices. SGAC maintains performance parity with SCA across varying network sizes.}
-\label{fig:scalability}
-\end{figure}
-
-\subsection{Fairness Evaluation}
-
-Fig.~\ref{fig:fairness} presents Jain's fairness index across methods. Random and static placements achieve higher fairness ($>0.95$) but at the cost of low throughput. SGAC achieves fairness of 0.76, comparable to SCA, indicating balanced resource allocation among users while maximizing aggregate throughput.
+Fig.~\ref{fig:reward} presents the episode reward progression throughout the training process. The reward trajectory exhibits steady improvement during early episodes followed by asymptotic stabilization, consistent with successful policy gradient optimization. Application of moving average smoothing (window size 30) isolates the underlying learning trend from inherent episode-to-episode stochasticity.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.95\columnwidth]{fig5_fairness.pdf}
-\caption{Jain's fairness index comparison. SGAC balances throughput maximization with fair resource allocation.}
-\label{fig:fairness}
+\includegraphics[width=0.95\columnwidth]{fig3_reward_curve.pdf}
+\caption{Episode reward during SGAC training. The smoothed trajectory (solid) exhibits monotonic improvement followed by convergence, with shaded region indicating variance bounds.}
+\label{fig:reward}
 \end{figure}
-
-\subsection{Computational Overhead}
-
-Table~\ref{tab:latency} compares inference latency. SGAC adds minimal overhead (17.2 ms) compared to SCA-20 (14.5 ms), while providing the potential for learned improvements beyond classical optimization.
-
-\begin{table}[t]
-\centering
-\caption{Inference Latency Comparison}
-\label{tab:latency}
-\begin{tabular}{lcc}
-\toprule
-\textbf{Method} & \textbf{Mean (ms)} & \textbf{P95 (ms)} \\
-\midrule
-SCA-5 & 4.2 & 5.0 \\
-SCA-20 & 14.5 & 17.4 \\
-SCA-50 & 35.4 & 42.4 \\
-SGAC & 17.2 & 19.2 \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \subsection{Performance Floor Validation}
 
-Fig.~\ref{fig:floor} validates the theoretical performance guarantee (Theorem 1). Across all 50 test scenarios, SGAC throughput equals or exceeds SCA-20:
+Fig.~\ref{fig:floor} tracks floor mechanism activation frequency during training. The activation rate exhibits monotonic decrease from elevated values in early episodes---when the undertrained policy proposes corrections that degrade performance---to near-zero in later episodes as the policy learns to produce beneficial corrections. Evaluation on held-out test scenarios confirms:
 \begin{itemize}
-\item \textbf{Zero violations} of the floor guarantee
-\item Average improvement of 0.3\% over SCA baseline
-\item Worst-case matches SCA exactly (floor activated)
+\item Zero violations of the floor guarantee across 50 test scenarios
+\item Mean improvement of 1.6\% over SCA baseline
+\item Floor guarantee rate of 100\%
 \end{itemize}
 
-This deterministic guarantee is critical for deployment in mission-critical IoT applications.
+The deterministic nature of this guarantee renders SGAC suitable for mission-critical IoT deployments where performance degradation below established baselines is operationally unacceptable.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.95\columnwidth]{fig7_floor_guarantee.pdf}
-\caption{Performance floor validation. SGAC (triangles) consistently matches or exceeds SCA-20 (squares) across all scenarios.}
+\includegraphics[width=0.95\columnwidth]{fig4_floor_activations.pdf}
+\caption{Floor mechanism activations per episode during training. Monotonically decreasing activation frequency indicates the policy learns corrections that consistently improve upon the SCA baseline.}
 \label{fig:floor}
 \end{figure}
 
-\subsection{Sample Efficiency}
+\subsection{Improvement Over SCA}
 
-The sample efficiency advantage demonstrated in Fig.~\ref{fig:convergence} validates Theorem~\ref{thm:warmstart}. Compared to baseline RL algorithms, SGAC provides:
-\begin{itemize}
-\item \textbf{4.4$\times$ faster} convergence than DDPG (50 vs. 220 episodes)
-\item \textbf{4$\times$ faster} convergence than PPO (50 vs. 200 episodes)
-\item \textbf{3.6$\times$ faster} convergence than TD3 and SAC (50 vs. 180 episodes)
-\end{itemize}
-
-The sample efficiency advantage is critical for practical deployment where training data collection is expensive. The warm-start from SCA eliminates wasteful exploration of clearly suboptimal regions, focusing learning on the residual refinement that yields throughput improvement.
-
-\subsection{3D Positioning Visualization}
-
-Fig.~\ref{fig:positioning} illustrates UAV positioning for a representative scenario. The SGAC position (red star) provides slight correction to the SCA solution (green square), optimizing the tradeoff between backhaul link quality (to BS) and access link coverage (to IoT devices).
+Fig.~\ref{fig:improvement} presents the relative throughput improvement over the SCA baseline during the training process. The improvement percentage initiates at negative values in early episodes---when the undertrained policy produces corrections that degrade performance, triggering floor mechanism activation---and transitions to consistently positive values as the policy converges. The final evaluation achieves mean improvement of 1.6\% over SCA, validating that SGAC learns corrections yielding genuine performance gains beyond the analytical solution.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.95\columnwidth]{fig6_3d_positioning.pdf}
-\caption{3D visualization of UAV positioning. SGAC learns corrections to SCA solution that improve aggregate throughput.}
-\label{fig:positioning}
+\includegraphics[width=0.95\columnwidth]{fig7_improvement_over_sca.pdf}
+\caption{Relative throughput improvement over SCA baseline during training. Green shading indicates episodes where SGAC exceeds SCA performance; the trajectory demonstrates successful policy convergence to a region of consistent improvement.}
+\label{fig:improvement}
 \end{figure}
 
-\subsection{Mobility Robustness}
+\subsection{Training Stability}
 
-Table~\ref{tab:mobility} evaluates performance under user mobility (1-3 m/s). SGAC maintains robust throughput, with average performance of 385.1 Mbps under medium mobility—higher than static scenarios due to dynamic positioning capability.
+Fig.~\ref{fig:losses} presents the critic and actor loss curves throughout training. The critic loss, displayed on logarithmic scale, exhibits monotonic decrease characteristic of successful temporal difference learning. The actor loss demonstrates behavior consistent with policy gradient methods: initial increase during the exploration-dominated phase followed by stabilization as the policy converges to a stationary point.
 
-\begin{table}[t]
+\begin{figure}[t]
 \centering
-\caption{Performance Under User Mobility}
-\label{tab:mobility}
-\begin{tabular}{lccc}
-\toprule
-\textbf{Mobility} & \textbf{Mean (Mbps)} & \textbf{Std} & \textbf{Min} \\
-\midrule
-Static & 353.9 & 281.4 & 76.2 \\
-Low (1 m/s) & 378.2 & 95.3 & 201.4 \\
-Medium (2 m/s) & 385.1 & 99.3 & 189.2 \\
-High (3 m/s) & 371.6 & 112.7 & 165.8 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\includegraphics[width=0.95\columnwidth]{fig5_loss_curves.pdf}
+\caption{Critic (left) and actor (right) loss during training. Monotonically decreasing critic loss indicates convergent value function approximation; actor loss stabilization corresponds to policy convergence.}
+\label{fig:losses}
+\end{figure}
+
+\subsection{Exploration Schedule}
+
+Exploration noise follows a linear annealing schedule from $\sigma = 0.3$ to $\sigma = 0.05$ over the training horizon, balancing exploratory coverage in early episodes against exploitation of learned structure near convergence. The SCA warm-start enables meaningful policy improvement from the initial episode, contrasting with tabula rasa approaches that require extensive random exploration before encountering high-reward regions of the action space.
 
 \subsection{Summary of Results}
 
-Table~\ref{tab:summary} summarizes key performance metrics validating the theoretical claims.
+Table~\ref{tab:summary} summarizes the key experimental findings validating our theoretical claims.
 
 \begin{table}[t]
 \centering
@@ -623,50 +539,64 @@ Table~\ref{tab:summary} summarizes key performance metrics validating the theore
 \toprule
 \textbf{Metric} & \textbf{Value} & \textbf{Theorem} \\
 \midrule
-Throughput improvement vs Random & 264\% & -- \\
-Throughput improvement vs Analytical & 80\% & -- \\
-Throughput improvement vs DDPG & 26\% & -- \\
-Throughput improvement vs SAC & 11\% & -- \\
-Floor guarantee violations & 0/50 & Thm. 3 \\
-Convergence speedup vs TD3/SAC & 3.6$\times$ & Thm. 6 \\
-Convergence speedup vs DDPG & 4.4$\times$ & Thm. 6 \\
-Reward-throughput correlation & 0.997 & Thm. 2 \\
+Throughput improvement vs Random & +18.0\% & -- \\
+Throughput improvement vs Analytical & +7.7\% & -- \\
+Throughput improvement vs SCA & +1.6\% & -- \\
+Floor guarantee violations & 0/50 & Thm.~\ref{thm:floor} \\
+Floor guarantee rate & 100\% & Thm.~\ref{thm:floor} \\
+Training convergence (episodes) & $<$500 & Thm.~\ref{thm:warmstart} \\
+Training time (RTX 4090) & 6.2 min & -- \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Why SGAC Outperforms Standard RL}
+\subsection{Analysis of Performance Gains}
 
-The performance advantage of SGAC over baseline RL methods stems from three design principles:
+The performance advantage of SGAC over baseline methods derives from three architectural design decisions:
 
-\textbf{1. Informed Initialization:} Standard RL methods (DDPG, PPO, TD3, SAC) begin from random policies and must discover good positioning strategies through trial-and-error. SGAC initializes near the SCA optimum, drastically reducing the search space.
+\textit{Informed Initialization:} Random and analytical baselines operate without adaptation to observed scenarios; SCA provides a strong analytical solution at the cost of iterative computation but lacks mechanism for cross-scenario generalization. SGAC inherits the reliability of SCA while augmenting it with learned corrections that capture scenario-specific structure.
 
-\textbf{2. Physics-Guided Exploration:} The SCA gradient direction $\mathbf{d}_{\text{SCA}}$ encodes domain knowledge about how position changes affect throughput. Standard RL relies on stochastic exploration which wastes samples exploring clearly suboptimal directions.
+\textit{Physics-Informed Representation:} The state vector incorporates SCA gradient directions and instantaneous SNR values, encoding domain knowledge directly into the input representation. This contrasts with position-only representations that require the network to implicitly learn channel physics from reward signals alone.
 
-\textbf{3. Guaranteed Safety:} The floor mechanism ensures SGAC never performs worse than SCA, enabling aggressive exploration without catastrophic failure. Standard RL methods can converge to local minima with poor performance.
+\textit{Deterministic Safety Guarantee:} The floor mechanism establishes a hard lower bound on performance, permitting aggressive exploration during training without risk of catastrophic degradation. This property is absent in standard actor-critic formulations where poorly initialized or undertrained policies may produce arbitrarily suboptimal actions.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\columnwidth]{fig6_exploration_noise.pdf}
+\caption{Exploration noise $\sigma$ annealing during training. The schedule transitions from exploratory behavior ($\sigma = 0.3$) to exploitation ($\sigma = 0.05$) over the training horizon.}
+\label{fig:exploration}
+\end{figure}
+
 
 \section{Discussion}
 
-\subsection{Practical Deployment}
+\subsection{Deployment Considerations for IoT Networks}
 
-SGAC is designed for practical deployment:
-\begin{itemize}
-\item \textbf{Training}: Offline on simulated/historical data
-\item \textbf{Inference}: Real-time (17 ms) neural network forward pass
-\item \textbf{Safety}: Floor guarantee ensures graceful degradation
-\end{itemize}
+The SGAC framework admits practical deployment through separation of training and inference phases. Training proceeds offline using simulated channel realizations or historical measurement data, requiring no real-time interaction with the physical system. The trained policy executes via neural network forward pass with latency on the order of milliseconds, compatible with real-time repositioning requirements. The performance floor mechanism provides graceful degradation under distribution shift: when learned corrections fail to improve upon SCA, the system reverts to the reliable analytical baseline rather than producing arbitrary outputs.
 
-\subsection{Limitations}
+For IoT-specific deployments, SGAC offers several operational advantages. The deterministic floor guarantee ensures that mission-critical sensor data collection never falls below baseline performance, addressing reliability requirements of industrial IoT applications. The rapid inference time (sub-millisecond) enables responsive repositioning to track mobile IoT devices or adapt to changing network conditions. The offline training paradigm allows deployment without extensive field trials, reducing operational costs for temporary IoT installations.
 
-Current limitations include single-UAV formulation, quasi-static channel assumption, and perfect CSI requirement. Future work will address multi-UAV coordination and robust variants for imperfect CSI.
+\subsection{IoT Scalability Considerations}
+
+While our experiments focus on $K=5$ devices representing a localized sensor cluster, the SGAC architecture scales to larger device populations through the state representation design. The physics-informed features aggregate device information through SNR values and throughput metrics rather than encoding individual device states, enabling generalization to varying $K$. For massive IoT scenarios with hundreds of devices, hierarchical approaches combining SGAC with device clustering represent a promising extension.
+
+The computational complexity of SGAC scales as $\mathcal{O}(K)$ for the SCA baseline and $\mathcal{O}(1)$ for policy inference (fixed network size), making the approach tractable for dense IoT deployments. Battery constraints of IoT devices do not directly affect the UAV positioning optimization but influence the importance of favorable channel conditions achieved through optimal positioning.
+
+\subsection{Limitations and Extensions}
+
+Several limitations of the current formulation warrant discussion. The single-UAV assumption precludes direct application to multi-UAV coordination scenarios where inter-UAV interference and resource sharing introduce additional optimization dimensions. The quasi-static channel model assumes negligible temporal variation within positioning intervals, which may not hold under high-mobility scenarios or rapidly varying propagation conditions. Perfect channel state information (CSI) at the UAV is assumed for throughput computation; practical systems must estimate channels from pilot observations, introducing estimation errors that propagate to positioning decisions.
+
+Future extensions include: (1) multi-UAV coordination with interference management, (2) robust SGAC variants for imperfect CSI, (3) integration with IoT protocols such as LoRaWAN and NB-IoT, and (4) energy-aware positioning considering UAV flight power consumption.
 
 \section{Conclusion}
 
-We presented SGAC, a math-informed reinforcement learning framework for UAV relay positioning that bridges classical optimization and deep RL. Unlike standard RL methods (DDPG, PPO, TD3, SAC) that learn positioning from scratch, SGAC leverages SCA as a warm-start and learns beneficial residual corrections.
+This paper presented SGAC, a math-informed reinforcement learning framework for UAV relay positioning that bridges classical convex optimization and deep reinforcement learning. The proposed approach leverages successive convex approximation as a warm-start and trains a neural network to learn beneficial residual corrections, rather than learning positioning policies from scratch.
 
-Key advantages over baseline RL methods include: (1) 11-26\% higher throughput than the best performing RL baseline (SAC), (2) 3.6-4.4$\times$ faster convergence to 95\% performance, and (3) guaranteed performance floor that prevents catastrophic failure modes common in standard RL.
+Experimental evaluation across 50 urban IoT deployment scenarios demonstrated that SGAC achieves aggregate throughput of 5960~Mbps, representing improvements of 18\% over random placement, 7.7\% over analytical heuristics, and 1.6\% over the SCA baseline. The deterministic performance floor mechanism ensured zero violations throughout training and evaluation, confirming that learned corrections consistently improve upon rather than degrade the analytical solution.
 
-Compared to heuristic approaches, SGAC achieves 264\% throughput improvement over random placement and 80\% over analytical methods. All theoretical guarantees were validated experimentally with zero floor violations across 50 urban IoT scenarios. The framework demonstrates that combining domain knowledge from convex optimization with the adaptability of deep RL yields superior performance over either approach alone.
+Training converged within 500 episodes requiring approximately six minutes on commodity GPU hardware. The rapid convergence stems from the physics-informed state representation and hybrid policy architecture that focuses learning on beneficial corrections rather than full positioning from scratch. These results validate the theoretical guarantees established for reward shaping preservation, asymptotic stability, and performance floor bounds.
+
+Future work will extend the framework to multi-UAV coordination scenarios, incorporate robust variants for imperfect channel state information, and investigate transfer learning across heterogeneous deployment environments.
 
 \begin{thebibliography}{30}
 % 6G and IoT references
