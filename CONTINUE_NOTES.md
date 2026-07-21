@@ -3,46 +3,41 @@
 ## Last Session Summary (2026-07-21)
 
 ### Completed Tasks:
-1. **Introduction Expanded** (from 3 to 17 paragraphs):
-   - 6G IoT landscape and connectivity demands
-   - UAV-assisted communications overview
-   - Classical optimization approaches (SCA)
-   - Deep RL methods (DDPG, PPO, TD3, SAC)
-   - Limitations of pure optimization and pure RL
-   - Physics-informed ML paradigm introduction
-   - MI-RL framework motivation
-   - Detailed contributions list
-   - Paper organization overview
+1. **Paper Improvements** (Committed: 97f246a):
+   - Expanded introduction from 3 to 17 paragraphs
+   - Added comprehensive symbol definitions
+   - Added equation explanations throughout
+   - Updated references from 8 to 30 citations (2014-2023)
 
-2. **Symbol Definitions Added**:
-   - Full System Model rewrite with "where..." explanations
-   - All symbols defined: $d$, $f_c$, $c$, $PL_{\text{excess}}$
-   - SNR equations with detailed explanations
-   - Feasible region $\mathcal{P}$ definition
-   - Added equation labels (eq:pathloss, eq:snr_bu, eq:snr_k, eq:rate, eq:objective)
+2. **MATLAB Simulation** (Committed: 6e4ff5b):
+   - Created `matlab/sgac_training.m` - Full SGAC training script
+   - 200 episodes, 50 scenarios training
+   - Generated visualization figures
 
-3. **Equation Explanations Added**:
-   - Physical interpretation of path loss equation
-   - DF relay constraint explanation
-   - Non-convexity sources explained
-   - SGAC policy structure explained with $\alpha$, $\beta$ meanings
-   - Reward function decomposition
-   - Performance floor mechanism
+### MATLAB Simulation Results:
+```
+Method          | Mean (Mbps) | Std   | Min   | Max
+----------------|-------------|-------|-------|-------
+Random          |  3856.1     | 321.9 | 3115.0 | 4867.6
+Analytical      |  4368.7     | 180.8 | 3970.6 | 4698.2
+SCA-20          |  4674.4     | 249.2 | 4122.4 | 5147.8
+SGAC (Ours)     |  4675.9     | 249.7 | 4122.4 | 5180.5
 
-4. **SGAC Algorithm Section Expanded**:
-   - Added SCA baseline computation subsection
-   - Physics-informed state representation
-   - Detailed explanation of hybrid policy
-   - Reward function components explained
+SGAC improvement vs Random: 21.3%
+SGAC improvement vs Analytical: 7.0%
+Floor guarantee violations: 0/50
+```
 
-5. **References Updated** (from 8 to 30 references):
-   - 6G/IoT: saad2020, letaief2021, tariq2020, wang2023
-   - UAV communications: mozaffari2019, geraci2022, zhao2019, zeng2019, xiao2020, wu2020, shakhatreh2019
-   - Optimization: sun2017, chen2023
-   - RL for wireless: luong2019, liu2019, wang2020, qie2019, feriani2021, dulac2021
-   - Physics-informed ML: karniadakis2021, soltani2022, xia2020, lee2020
+### Generated Files:
+- `matlab/sgac_training.m` - MATLAB training script
+- `matlab/sgac_training_results.png` - Training convergence plot
+- `matlab/sgac_3d_visualization.png` - 3D visualization
 
-### Paper Statistics:
+### Git Commits (This Session):
+1. `97f246a` - Expand introduction, add symbol definitions, update references
+2. `6e4ff5b` - Add MATLAB SGAC training and simulation script
+
+### Paper Stats:
 - **Pages**: 9 (IEEE two-column)
 - **Figures**: 7
 - **Tables**: 6
@@ -51,29 +46,16 @@
 
 ### File Locations:
 - Paper: `/home/it-services/ros2_ws/src/vla_6g_tvt/paper/mirl_iot_journal.tex`
+- MATLAB: `/home/it-services/ros2_ws/src/vla_6g_tvt/matlab/sgac_training.m`
 - Figures: `/home/it-services/ros2_ws/src/vla_6g_tvt/paper/figures/`
-- Figure generator: `/home/it-services/ros2_ws/src/vla_6g_tvt/scripts/generate_paper_figures.py`
 
-### Current Paper Structure:
-1. Abstract (complete)
-2. Introduction (EXPANDED - 17 paragraphs with contributions)
-3. System Model (EXPANDED - full symbol definitions)
-4. SGAC Algorithm (EXPANDED - detailed explanations)
-5. Theoretical Analysis (complete with proofs)
-6. Experimental Evaluation (complete with 7 figures)
-7. Discussion (complete)
-8. Conclusion (complete)
-9. References (EXPANDED - 30 refs from 2014-2023)
+### System Notes:
+- MATLAB R2025b installed at `/usr/local/MATLAB/R2025b`
+- Check system load before running MATLAB (`uptime`, `free -h`)
+- Save work before running MATLAB (may cause high memory usage)
 
-### Potential Future Improvements:
-1. **Related Work Section**: Could add explicit "Related Work" section before System Model
-2. **Simulation Parameters Table**: Add comprehensive parameter table
-3. **Algorithm Pseudocode**: Expand training algorithm with more detail
-4. **Multi-UAV Extension**: Discuss in future work more explicitly
-5. **Real-world Validation**: Mention testbed plans if applicable
-
-### To Continue:
-The paper is now substantially complete. Consider:
-- "Review and finalize paper for submission"
-- "Add related work section"
-- "Proofread and polish writing"
+### Potential Next Steps:
+1. Review generated figures and include in paper
+2. Add related work section
+3. Run extended simulation with more scenarios
+4. Proofread and polish paper for submission
