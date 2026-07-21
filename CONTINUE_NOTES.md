@@ -1,76 +1,65 @@
 # MI-RL Paper - Continuation Notes
 
-## Last Session Summary (2026-07-21)
+## Session Summary (2026-07-21)
 
-### Completed Tasks:
+### SGAC Training Complete - Real PyTorch Results
 
-1. **Paper Improvements** (Committed: 97f246a):
-   - Expanded introduction from 3 to 17 paragraphs
-   - Added comprehensive symbol definitions
-   - Updated references from 8 to 30 citations
-
-2. **MATLAB Demo Script** (Committed: 6e4ff5b):
-   - Created simplified MATLAB visualization (not real training)
-   - Results showed ~21% improvement vs random
-
-3. **PyTorch SGAC Implementation** (Committed: e59d06d):
-   - `sgac_pytorch/environment.py` - UAV relay environment with SCA solver
-   - `sgac_pytorch/networks.py` - Actor, Twin Critic, SGAC policy, Replay buffer
-   - `sgac_pytorch/sgac_agent.py` - Full TD3-style SGAC agent
-   - `sgac_pytorch/train.py` - Training script with evaluation
-   - `sgac_pytorch/deploy_vastai.sh` - Deployment script
-
-### Active Training on Vast.ai:
-
-**Instance:** 45466580
-- **GPU:** RTX 4090
-- **Location:** Netherlands
-- **Price:** $0.35/hr
-- **Status:** Running
-
-**Monitor with:**
-```bash
-export VAST_API_KEY=$(cat .secrets/vastai_api_key)
-vastai logs 45466580 --tail 100
-vastai show instances
-```
-
-**Download results when complete:**
-```bash
-vastai copy 45466580:/workspace/results ./results_vastai/
-```
-
-**Stop/destroy instance:**
-```bash
-vastai stop instance 45466580
-vastai destroy instance 45466580
-```
-
-### Training Configuration:
+**Training Configuration:**
+- Platform: Vast.ai RTX 4090 (California, USA)
 - Episodes: 2000
-- Scenarios: 100 training, 50 evaluation
-- Batch size: 256
-- Learning rate: 3e-4
-- SGAC weights: alpha=0.7, beta=0.3
+- Training Time: 6.2 minutes
+- GPU Cost: ~$0.04 (0.1 hours @ $0.35/hr)
 
-### Early Baseline Results:
-- Random: 5050 Mbps
-- Analytical: 5532 Mbps
-- SCA: 5866 Mbps
+**Final Results:**
+| Method | Throughput (Mbps) | Std | Improvement |
+|--------|------------------|-----|-------------|
+| **SGAC (Ours)** | **5960.10** | 266.87 | - |
+| SCA-20 | 5865.96 | 281.61 | -1.6% |
+| Analytical | 5532.07 | 186.74 | -7.7% |
+| Random | 5050.13 | 329.05 | -18.0% |
 
-### Key Files:
-- Paper: `/home/it-services/ros2_ws/src/vla_6g_tvt/paper/mirl_iot_journal.tex`
-- PyTorch: `/home/it-services/ros2_ws/src/vla_6g_tvt/sgac_pytorch/`
-- MATLAB: `/home/it-services/ros2_ws/src/vla_6g_tvt/matlab/sgac_training.m`
+**Key Metrics:**
+- SGAC improvement vs Random: **+18.0%**
+- SGAC improvement vs Analytical: **+7.7%**
+- SGAC improvement vs SCA: **+1.63%**
+- Floor Guarantee: **100%** (0/50 violations)
+- Floor activation rate: 0.74 per episode (learning beneficial corrections)
 
-### Git Commits (This Session):
+### Commits This Session:
 1. `97f246a` - Expand introduction, add symbol definitions, update references
-2. `6e4ff5b` - Add MATLAB SGAC training and simulation script
-3. `44a2610` - Update continuation notes with MATLAB simulation results
+2. `6e4ff5b` - Add MATLAB SGAC demo script
+3. `44a2610` - Update continuation notes
 4. `e59d06d` - Add comprehensive PyTorch SGAC implementation
+5. `291dd27` - Update notes with Vast.ai status
+6. `b267dac` - Add SGAC training results from Vast.ai
+
+### Files Created:
+- `sgac_pytorch/` - Full PyTorch implementation
+  - `environment.py` - UAV relay environment with SCA solver
+  - `networks.py` - Actor, Twin Critic, SGAC policy, Replay buffer
+  - `sgac_agent.py` - Full TD3-style SGAC agent
+  - `train.py` - Training script
+- `results_vastai/sgac_final/` - Training results
+  - `final_results.json` - Evaluation metrics
+  - `config.json` - Training config
+  - `history.json` - 2000 episode training history
+  - `best_model.pt` - Best model checkpoint (local only, gitignored)
+
+### Paper Status:
+- 9 pages, 30 references, 7 figures, 8 theorems
+- Introduction expanded (17 paragraphs)
+- All symbols defined
+- **Now has real experimental results to validate claims**
 
 ### Next Steps:
-1. Monitor Vast.ai training progress
-2. Download results when training completes
-3. Generate proper figures from training data
-4. Update paper with real experimental results
+1. Generate publication-quality figures from `history.json`
+2. Update paper experimental section with real numbers
+3. Verify theoretical claims against experimental results
+4. Proofread and polish for submission
+
+### Key Insight:
+The SGAC algorithm achieves:
+- Reliable +1.6% improvement over SCA baseline
+- 100% floor guarantee (never worse than SCA)
+- Fast training (6 min on RTX 4090)
+- Significant improvement over naive baselines (+18% vs random)
