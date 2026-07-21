@@ -1,0 +1,39 @@
+{
+  "sgac": {
+    "mean_throughput": 5960.095718272034,
+    "std_throughput": 266.87159472525497,
+    "mean_sca_throughput": 5865.955769457052,
+    "mean_improvement": 94.13994881498357,
+    "mean_improvement_pct": 1.6271514920067451,
+    "mean_floor_activations": 0.74,
+    "floor_rate": 0.3,
+    "mean_deviation": 10.876371509578545,
+    "min_throughput": 5425.343023572176,
+    "max_throughput": 6584.015257349383,
+    "floor_violations": 0,
+    "floor_guarantee_rate": 1.0
+  },
+  "baselines": {
+    "random": {
+      "mean": 5050.131811049325,
+      "std": 329.0524924520984,
+      "min": 4386.147446527932,
+      "max": 5860.270765893608
+    },
+    "analytical": {
+      "mean": 5532.066147066357,
+      "std": 186.73591354757852,
+      "min": 5178.34268307545,
+      "max": 5883.221910877716
+    },
+    "sca": {
+      "mean": 5865.955769457052,
+      "std": 281.60625936830655,
+      "min": 5347.734710442968,
+      "max": 6486.307250688309
+    }
+  },
+  "training_time_minutes": 6.16289468606313,
+  "total_episodes": 2000,
+  "best_throughput": 5964.4506341639135
+}
