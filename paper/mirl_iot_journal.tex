@@ -45,59 +45,156 @@ UAV communications, 6G networks, Internet of Things, reinforcement learning, con
 
 \section{Introduction}
 
-\IEEEPARstart{T}{he} sixth generation (6G) of wireless networks is expected to support over 500 billion connected IoT devices by 2030. This massive deployment poses significant challenges for network infrastructure. Unmanned aerial vehicles (UAVs) equipped with communication payloads have emerged as a flexible solution for on-demand coverage enhancement.
+\IEEEPARstart{T}{he} sixth generation (6G) of wireless networks is expected to support over 500 billion connected Internet of Things (IoT) devices by 2030, representing a tenfold increase from current 5G deployments~\cite{saad2020}. This massive scale introduces unprecedented challenges in network design, resource allocation, and coverage optimization. Unlike previous generations focused primarily on human-centric communications, 6G must simultaneously serve diverse machine-type applications spanning industrial automation, precision agriculture, environmental monitoring, and smart city infrastructure~\cite{letaief2021}.
 
-The fundamental problem in UAV-assisted IoT communications is determining the optimal three-dimensional position for the aerial relay. The objective function exhibits non-convexity due to logarithmic rate expressions and minimum operations in dual-hop relay links.
+The IoT landscape in 6G networks exhibits extreme heterogeneity in device characteristics, traffic patterns, and quality-of-service (QoS) requirements. Ultra-reliable low-latency communication (URLLC) applications demand sub-millisecond delays with $10^{-9}$ packet error rates, while massive machine-type communication (mMTC) scenarios prioritize energy efficiency and connection density over latency~\cite{tariq2020}. This diversity necessitates flexible network architectures capable of adaptive resource provisioning across varied deployment scenarios.
 
-This paper bridges classical optimization and reinforcement learning through a math-informed approach. We formalize this through the SGAC algorithm, which treats SCA solutions as a warm-start and trains neural networks to predict beneficial corrections.
+A fundamental challenge in achieving ubiquitous 6G coverage lies in the economics and physics of terrestrial infrastructure deployment. Dense urban environments require massive small-cell deployments to overcome millimeter-wave (mmWave) propagation limitations, while rural and remote areas remain economically infeasible for traditional cellular coverage~\cite{wang2023}. Natural disasters, public events, and temporary industrial sites create dynamic connectivity demands that static infrastructure cannot efficiently address.
+
+Unmanned aerial vehicles (UAVs) equipped with communication payloads have emerged as a transformative solution for these coverage challenges~\cite{zeng2016, mozaffari2019}. Operating as aerial base stations or relay nodes, UAVs offer unique advantages: three-dimensional mobility enables on-demand positioning, elevated altitudes provide favorable line-of-sight (LoS) propagation conditions, and rapid deployment timescales match dynamic connectivity requirements. The global UAV communications market is projected to exceed \$50 billion by 2030, driven primarily by cellular network augmentation applications~\cite{geraci2022}.
+
+UAV-assisted relay communications have attracted substantial research attention over the past decade. Early work established fundamental capacity limits and optimal altitude characterizations for single-UAV scenarios~\cite{alhourani2014}. Subsequent studies addressed trajectory optimization for mobile UAVs serving ground users~\cite{wu2018}, multi-UAV coordination for coverage maximization~\cite{zhao2019}, and energy-efficient deployment strategies balancing communication performance against flight power consumption~\cite{zeng2019}. Recent advances incorporate mmWave and terahertz bands enabling multi-gigabit aerial links suitable for 6G applications~\cite{xiao2020}.
+
+The optimal positioning of UAV relays constitutes a non-convex optimization problem with multiple local optima~\cite{wu2018}. The objective function—typically aggregate throughput or minimum user rate—involves logarithmic Shannon capacity expressions and minimum operations for dual-hop decode-and-forward relay links. These mathematical structures preclude closed-form solutions and gradient-based methods may converge to suboptimal local minima depending on initialization.
+
+Classical optimization approaches address this non-convexity through successive convex approximation (SCA) techniques~\cite{wu2018, sun2017}. SCA iteratively constructs convex surrogate problems that upper-bound the original objective, enabling efficient solution via interior-point methods. While SCA provides convergence guarantees to stationary points, the solution quality depends heavily on initialization and the algorithm may terminate at local optima significantly inferior to the global optimum~\cite{chen2023}.
+
+Alternative optimization frameworks include block coordinate descent~\cite{zeng2019}, branch-and-bound methods for global optimality~\cite{wu2020}, and metaheuristic approaches such as particle swarm optimization and genetic algorithms~\cite{shakhatreh2019}. Each approach offers distinct tradeoffs between solution quality, computational complexity, and convergence guarantees. However, all classical methods operate point-wise on individual problem instances, unable to exploit statistical regularities across deployment scenarios.
+
+Deep reinforcement learning (RL) has emerged as a powerful paradigm for sequential decision-making in wireless networks~\cite{luong2019}. RL agents learn policies mapping states to actions through interaction with the environment, optimizing cumulative rewards without explicit mathematical models. For UAV positioning, RL naturally handles the sequential nature of trajectory planning and can generalize across scenarios through learned representations~\cite{liu2019}.
+
+Recent work has applied various deep RL algorithms to UAV communications problems. Deep deterministic policy gradient (DDPG)~\cite{lillicrap2016} enables continuous action spaces required for 3D positioning. Proximal policy optimization (PPO)~\cite{schulman2017} provides stable training through trust-region updates. Twin delayed DDPG (TD3)~\cite{fujimoto2018} addresses overestimation bias in value function approximation. Soft actor-critic (SAC)~\cite{haarnoja2018} incorporates maximum entropy regularization for improved exploration. These methods have demonstrated success in UAV trajectory planning~\cite{wang2020}, multi-UAV coordination~\cite{qie2019}, and resource allocation~\cite{feriani2021}.
+
+Despite these advances, both classical optimization and pure RL approaches exhibit significant limitations for practical UAV relay deployment. SCA methods provide reliable baseline performance but cannot adapt to novel scenarios outside their design assumptions. The iterative nature of SCA also introduces latency that may be problematic for real-time repositioning. Conversely, deep RL methods require extensive training samples, exhibit high variance during learning, and provide no performance guarantees~\cite{dulac2021}. A trained RL policy may perform catastrophically on out-of-distribution scenarios, a critical concern for safety-sensitive aerial systems.
+
+The emerging paradigm of physics-informed or math-informed machine learning offers a promising path to reconcile these limitations~\cite{karniadakis2021}. By incorporating domain knowledge from classical optimization into neural network architectures and training procedures, hybrid approaches can achieve the generalization benefits of learning while preserving the reliability of analytical methods. In wireless communications, physics-informed approaches have shown success in channel estimation~\cite{soltani2022}, beamforming optimization~\cite{xia2020}, and resource allocation~\cite{lee2020}.
+
+This paper presents a math-informed reinforcement learning (MI-RL) framework that unifies classical convex optimization with deep RL for UAV relay positioning. Our core insight is that SCA provides an excellent initialization for RL policies: the analytical solution lies in a high-performance region of the positioning space, drastically reducing the exploration burden on the learning algorithm. Rather than learning positioning from scratch, our approach learns to predict beneficial \textit{corrections} to the SCA solution.
+
+We formalize this through the Successive Convex Approximation-Guided Actor-Critic (SGAC) algorithm. SGAC employs a hybrid policy structure that combines the SCA descent direction with a learned residual correction. The neural network receives physics-informed features encoding the optimization landscape, enabling transfer of domain knowledge into the learned representation. Critically, a performance floor mechanism guarantees that SGAC never performs worse than the baseline SCA solution, addressing the safety concerns of pure RL deployment.
+
+The contributions of this paper are as follows:
+\begin{itemize}
+\item We propose SGAC, a novel actor-critic algorithm that integrates SCA-derived gradients as warm-start guidance for policy learning, achieving 264\% throughput improvement over random placement and 11-26\% over state-of-the-art deep RL methods.
+\item We establish theoretical convergence guarantees including potential-based reward shaping preservation (Theorem~\ref{thm:shaping}), reward-throughput alignment (Theorem~\ref{thm:alignment}), and deterministic performance floor (Theorem~\ref{thm:floor}).
+\item We prove asymptotic stability through Lyapunov analysis (Theorem~\ref{thm:stability}) and characterize sample complexity advantages of the warm-start approach (Theorem~\ref{thm:warmstart}).
+\item We conduct extensive experiments across 50 urban IoT scenarios demonstrating 3.6-4.4$\times$ improved sample efficiency compared to DDPG, PPO, TD3, and SAC baselines, with zero violations of the performance floor guarantee.
+\end{itemize}
+
+The remainder of this paper is organized as follows. Section~II presents the system model and problem formulation. Section~III details the SGAC algorithm including hybrid policy structure and training procedure. Section~IV provides theoretical analysis with complete convergence proofs. Section~V presents experimental evaluation across multiple performance metrics. Section~VI discusses practical deployment considerations and limitations. Section~VII concludes the paper.
 
 \section{System Model}
 
 \subsection{Network Architecture}
 
-Consider a UAV-assisted relay network with a ground base station at $\mathbf{p}_{\text{BS}} \in \mathbb{R}^3$, $K$ IoT devices at positions $\{\mathbf{u}_k\}_{k=1}^K$, and a UAV relay at position $\mathbf{p} = (x, y, h)$ within feasible region $\mathcal{P}$.
+Consider a UAV-assisted relay network comprising three elements: a ground base station (BS), multiple IoT devices, and an aerial UAV relay. The base station is located at fixed position $\mathbf{p}_{\text{BS}} \in \mathbb{R}^3$, representing the backhaul connection to the core network. A set of $K$ IoT devices are distributed at ground-level positions $\{\mathbf{u}_k\}_{k=1}^K$, where each $\mathbf{u}_k = (x_k, y_k, 0) \in \mathbb{R}^3$ denotes the location of device $k$. The UAV relay operates at position $\mathbf{p} = (x, y, h)$ within a feasible region $\mathcal{P} \subset \mathbb{R}^3$ defined by:
+\begin{equation}
+\mathcal{P} = \{(x, y, h) : x \in [x_{\min}, x_{\max}], y \in [y_{\min}, y_{\max}], h \in [h_{\min}, h_{\max}]\}
+\end{equation}
+where $h_{\min}$ and $h_{\max}$ represent minimum and maximum altitude constraints imposed by regulatory requirements and communication link budgets.
+
+The UAV operates in decode-and-forward (DF) relay mode: it receives signals from the BS on the backhaul link, decodes the information, and retransmits to IoT devices on access links. This dual-hop architecture enables coverage extension beyond direct BS-to-device range while providing signal regeneration that improves reliability.
 
 \subsection{Channel Model}
 
-The path loss follows:
+The air-to-ground channel between the UAV and ground nodes follows a probabilistic line-of-sight (LoS) model incorporating both free-space path loss and environment-dependent excess loss~\cite{alhourani2014}. The total path loss in dB is:
 \begin{equation}
 PL(d) = 20\log_{10}(d) + 20\log_{10}(f_c) + 20\log_{10}\left(\frac{4\pi}{c}\right) + PL_{\text{excess}}
+\label{eq:pathloss}
 \end{equation}
+where $d$ is the three-dimensional Euclidean distance between transmitter and receiver in meters, $f_c$ is the carrier frequency in Hz, $c = 3 \times 10^8$ m/s is the speed of light, and $PL_{\text{excess}}$ captures additional losses from atmospheric absorption, antenna misalignment, and non-line-of-sight (NLoS) propagation. For mmWave frequencies, $PL_{\text{excess}}$ is modeled as a function of elevation angle and environment type (urban, suburban, rural).
 
-The achievable rate for device $k$ through decode-and-forward relay:
+The first three terms in~\eqref{eq:pathloss} constitute the free-space path loss (Friis equation), representing signal attenuation due to geometric spreading. The logarithmic dependence on distance implies that path loss increases by 20 dB for every tenfold increase in distance, characteristic of unobstructed propagation.
+
+The received signal-to-noise ratio (SNR) for the backhaul link (BS to UAV) is:
+\begin{equation}
+\gamma_{\text{BU}}(\mathbf{p}) = \frac{P_{\text{BS}} G_{\text{BS}} G_{\text{UAV}}}{N_0 B \cdot 10^{PL(d_{\text{BU}})/10}}
+\label{eq:snr_bu}
+\end{equation}
+where $P_{\text{BS}}$ is the BS transmit power in watts, $G_{\text{BS}}$ and $G_{\text{UAV}}$ are antenna gains at the BS and UAV respectively, $N_0$ is the noise power spectral density in W/Hz, $B$ is the channel bandwidth in Hz, and $d_{\text{BU}} = \|\mathbf{p} - \mathbf{p}_{\text{BS}}\|_2$ is the BS-UAV distance.
+
+Similarly, the SNR for the access link from UAV to IoT device $k$ is:
+\begin{equation}
+\gamma_k(\mathbf{p}) = \frac{P_{\text{UAV}} G_{\text{UAV}} G_k}{N_0 B \cdot 10^{PL(d_k)/10}}
+\label{eq:snr_k}
+\end{equation}
+where $P_{\text{UAV}}$ is the UAV transmit power, $G_k$ is the antenna gain of device $k$, and $d_k = \|\mathbf{p} - \mathbf{u}_k\|_2$ is the UAV-device distance.
+
+For the decode-and-forward relay protocol, the end-to-end achievable rate is limited by the weaker of the two hops. The achievable rate for device $k$ is given by the Shannon capacity:
 \begin{equation}
 R_k(\mathbf{p}) = B \cdot \log_2\left(1 + \min\{\gamma_{\text{BU}}(\mathbf{p}), \gamma_{k}(\mathbf{p})\}\right)
+\label{eq:rate}
 \end{equation}
+where the minimum operation reflects the DF relay constraint: the UAV can only forward information at the rate it successfully decodes from the backhaul link. This creates a fundamental tradeoff in UAV positioning—moving closer to the BS improves backhaul quality but degrades access links to distant IoT devices, and vice versa.
 
 \subsection{Optimization Objective}
 
+The UAV positioning problem seeks to maximize aggregate network throughput:
 \begin{equation}
 \max_{\mathbf{p} \in \mathcal{P}} \Phi(\mathbf{p}) = \sum_{k=1}^{K} R_k(\mathbf{p})
+\label{eq:objective}
 \end{equation}
+where $\Phi(\mathbf{p})$ denotes the total throughput in bits per second achieved when the UAV is positioned at $\mathbf{p}$.
+
+This optimization problem is non-convex due to two structural properties. First, the logarithmic rate expressions in~\eqref{eq:rate} are concave in SNR but the SNR itself depends non-convexly on position through the path loss model. Second, the minimum operation in the DF constraint creates non-smooth boundaries where the bottleneck switches between backhaul and access links. These characteristics preclude direct application of convex optimization techniques and motivate our hybrid approach combining SCA with reinforcement learning.
 
 \section{SGAC Algorithm}
 
+This section presents the Successive Convex Approximation-Guided Actor-Critic (SGAC) algorithm, detailing the hybrid policy architecture, physics-informed state representation, reward shaping, and the performance floor mechanism.
+
+\subsection{SCA Baseline Computation}
+
+Before describing the learning components, we establish the SCA baseline that provides warm-start guidance. Given a scenario with BS position $\mathbf{p}_{\text{BS}}$ and device positions $\{\mathbf{u}_k\}$, SCA iteratively solves convex surrogate problems. At iteration $t$, the surrogate objective upper-bounds the original:
+\begin{equation}
+\Phi^{(t)}(\mathbf{p}) \leq \Phi(\mathbf{p}^{(t-1)}) + \nabla\Phi(\mathbf{p}^{(t-1)})^\top (\mathbf{p} - \mathbf{p}^{(t-1)})
+\label{eq:sca_surrogate}
+\end{equation}
+where the gradient $\nabla\Phi$ is computed analytically from~\eqref{eq:rate}. The SCA solution $\mathbf{p}_{\text{SCA}}$ after $T$ iterations serves as initialization for learning. The descent direction $\mathbf{d}_{\text{SCA}} = \nabla\Phi(\mathbf{p}_{\text{SCA}})$ encodes the local optimization landscape.
+
 \subsection{Hybrid Policy Structure}
 
-The SGAC policy combines SCA guidance with learned residual:
+The SGAC policy combines analytical SCA guidance with a learned neural network residual:
 \begin{equation}
 \pi_\theta(\mathbf{s}) = \alpha \cdot \mathbf{d}_{\text{SCA}}(\mathbf{s}) + \beta \cdot f_\theta(\mathbf{s})
+\label{eq:policy}
 \end{equation}
+where $\alpha \in [0, 1]$ is the guidance weight controlling reliance on the SCA direction, $\beta \in [0, 1]$ is the learning weight for the neural network correction, $\mathbf{d}_{\text{SCA}}(\mathbf{s}) \in \mathbb{R}^3$ is the normalized SCA gradient direction, and $f_\theta(\mathbf{s}) \in \mathbb{R}^3$ is the output of the actor network with parameters $\theta$.
+
+This hybrid structure ensures that even with an untrained network ($f_\theta \approx 0$), the policy produces reasonable actions following the SCA gradient. As training progresses, the network learns corrections that improve upon the analytical solution. Setting $\alpha = 1, \beta = 0$ recovers pure SCA; setting $\alpha = 0, \beta = 1$ recovers pure RL.
+
+\subsection{Physics-Informed State Representation}
+
+The state vector $\mathbf{s}$ incorporates physics-informed features derived from the optimization landscape:
+\begin{equation}
+\mathbf{s} = [\mathbf{p}, \mathbf{p}_{\text{SCA}}, \mathbf{d}_{\text{SCA}}, \{\gamma_{\text{BU}}, \gamma_1, \ldots, \gamma_K\}, \Phi(\mathbf{p}), \Phi(\mathbf{p}_{\text{SCA}})]
+\label{eq:state}
+\end{equation}
+where $\mathbf{p}$ is the current UAV position, $\mathbf{p}_{\text{SCA}}$ is the SCA solution, $\mathbf{d}_{\text{SCA}}$ is the SCA gradient direction, $\{\gamma_{\text{BU}}, \gamma_k\}$ are the current SNR values, and $\Phi(\cdot)$ values provide throughput context. This representation transfers domain knowledge into the neural network input, enabling faster learning compared to raw position-only states.
 
 \subsection{Reward Function}
 
+The reward function balances throughput improvement against deviation from analytical guidance:
 \begin{equation}
 r(\mathbf{s}_t, \mathbf{a}_t) = \frac{\Phi(\mathbf{p}_{t+1}) - \Phi(\mathbf{p}_{\text{SCA}})}{\eta} - \lambda \|\mathbf{a}_t - \alpha\mathbf{d}_{\text{SCA}}\|_2
+\label{eq:reward}
 \end{equation}
+where the first term rewards throughput improvement relative to the SCA baseline, normalized by scaling factor $\eta > 0$ to maintain appropriate reward magnitude. The second term penalizes deviation from the SCA direction with regularization weight $\lambda \geq 0$. When $\lambda = 0$, the policy freely explores; larger $\lambda$ values encourage staying close to analytical guidance.
+
+This reward structure provides dense feedback: the agent receives positive reward for any position achieving higher throughput than SCA, incentivizing beneficial corrections. The deviation penalty ensures learned corrections remain small when SCA already performs well, preventing unnecessary drift from reliable analytical solutions.
 
 \subsection{Performance Floor Guarantee}
 
+A critical innovation in SGAC is the deterministic performance floor mechanism that prevents the learned policy from degrading below SCA performance:
 \begin{equation}
 \mathbf{p}_{\text{final}} = \begin{cases}
 \mathbf{p}_{\text{SCA}} + \boldsymbol{\delta} & \text{if } \Phi(\mathbf{p}_{\text{SCA}} + \boldsymbol{\delta}) \geq \Phi(\mathbf{p}_{\text{SCA}}) \\
 \mathbf{p}_{\text{SCA}} & \text{otherwise}
 \end{cases}
+\label{eq:floor}
 \end{equation}
+where $\boldsymbol{\delta} = \pi_\theta(\mathbf{s})$ is the learned correction. The floor mechanism evaluates throughput at the corrected position; if improvement is achieved, the correction is applied. Otherwise, the system reverts to the SCA solution.
+
+This guarantee is essential for practical deployment: unlike pure RL methods that may produce arbitrarily poor actions, SGAC ensures performance never falls below the reliable SCA baseline. The floor operates during both training (providing a safety net for exploration) and inference (guaranteeing deployment reliability).
 
 \begin{algorithm}[t]
 \caption{SGAC Training Algorithm}
@@ -571,15 +668,51 @@ Key advantages over baseline RL methods include: (1) 11-26\% higher throughput t
 
 Compared to heuristic approaches, SGAC achieves 264\% throughput improvement over random placement and 80\% over analytical methods. All theoretical guarantees were validated experimentally with zero floor violations across 50 urban IoT scenarios. The framework demonstrates that combining domain knowledge from convex optimization with the adaptability of deep RL yields superior performance over either approach alone.
 
-\begin{thebibliography}{10}
-\bibitem{zeng2016} Y. Zeng, R. Zhang, and T. J. Lim, ``Wireless communications with unmanned aerial vehicles,'' \textit{IEEE Commun. Mag.}, vol. 54, no. 5, 2016.
-\bibitem{wu2018} Q. Wu and R. Zhang, ``Common throughput maximization in UAV-enabled OFDMA systems,'' \textit{IEEE Trans. Commun.}, vol. 66, no. 12, 2018.
-\bibitem{lillicrap2016} T. P. Lillicrap \textit{et al.}, ``Continuous control with deep reinforcement learning,'' \textit{ICLR}, 2016.
-\bibitem{fujimoto2018} S. Fujimoto \textit{et al.}, ``Addressing function approximation error in actor-critic methods,'' \textit{ICML}, 2018.
-\bibitem{schulman2017} J. Schulman \textit{et al.}, ``Proximal policy optimization algorithms,'' \textit{arXiv:1707.06347}, 2017.
-\bibitem{haarnoja2018} T. Haarnoja \textit{et al.}, ``Soft actor-critic: Off-policy maximum entropy deep RL,'' \textit{ICML}, 2018.
-\bibitem{ng1999} A. Y. Ng \textit{et al.}, ``Policy invariance under reward transformations,'' \textit{ICML}, 1999.
-\bibitem{alhourani2014} A. Al-Hourani \textit{et al.}, ``Optimal LAP altitude for maximum coverage,'' \textit{IEEE Wireless Commun. Lett.}, vol. 3, no. 6, 2014.
+\begin{thebibliography}{30}
+% 6G and IoT references
+\bibitem{saad2020} W. Saad, M. Bennis, and M. Chen, ``A vision of 6G wireless systems: Applications, enabling technologies, and research challenges,'' \textit{IEEE Netw.}, vol. 34, no. 3, pp. 134--142, 2020.
+\bibitem{letaief2021} K. B. Letaief \textit{et al.}, ``Edge artificial intelligence for 6G: Vision, enabling technologies, and applications,'' \textit{IEEE J. Sel. Areas Commun.}, vol. 40, no. 1, pp. 5--36, 2022.
+\bibitem{tariq2020} F. Tariq \textit{et al.}, ``A speculative study on 6G,'' \textit{IEEE Wireless Commun.}, vol. 27, no. 4, pp. 118--125, 2020.
+\bibitem{wang2023} C.-X. Wang \textit{et al.}, ``On the road to 6G: Visions, requirements, key technologies, and testbeds,'' \textit{IEEE Commun. Surv. Tutorials}, vol. 25, no. 2, pp. 905--974, 2023.
+
+% UAV communications
+\bibitem{zeng2016} Y. Zeng, R. Zhang, and T. J. Lim, ``Wireless communications with unmanned aerial vehicles: Opportunities and challenges,'' \textit{IEEE Commun. Mag.}, vol. 54, no. 5, pp. 36--42, 2016.
+\bibitem{mozaffari2019} M. Mozaffari \textit{et al.}, ``A tutorial on UAVs for wireless networks: Applications, challenges, and open problems,'' \textit{IEEE Commun. Surv. Tutorials}, vol. 21, no. 3, pp. 2334--2360, 2019.
+\bibitem{geraci2022} G. Geraci \textit{et al.}, ``What will the future of UAV cellular communications be? A flight from 5G to 6G,'' \textit{IEEE Commun. Surv. Tutorials}, vol. 24, no. 3, pp. 1304--1335, 2022.
+\bibitem{wu2018} Q. Wu and R. Zhang, ``Common throughput maximization in UAV-enabled OFDMA systems with delay consideration,'' \textit{IEEE Trans. Commun.}, vol. 66, no. 12, pp. 6614--6627, 2018.
+\bibitem{zhao2019} N. Zhao \textit{et al.}, ``UAV-assisted emergency networks in disasters,'' \textit{IEEE Wireless Commun.}, vol. 26, no. 1, pp. 45--51, 2019.
+\bibitem{zeng2019} Y. Zeng, J. Xu, and R. Zhang, ``Energy minimization for wireless communication with rotary-wing UAV,'' \textit{IEEE Trans. Wireless Commun.}, vol. 18, no. 4, pp. 2329--2345, 2019.
+\bibitem{xiao2020} Z. Xiao \textit{et al.}, ``A survey on millimeter-wave beamforming enabled UAV communications and networking,'' \textit{IEEE Commun. Surv. Tutorials}, vol. 24, no. 1, pp. 557--610, 2022.
+\bibitem{wu2020} Q. Wu, J. Xu, and R. Zhang, ``Capacity characterization of UAV-enabled two-user broadcast channel,'' \textit{IEEE J. Sel. Areas Commun.}, vol. 36, no. 9, pp. 1955--1971, 2020.
+\bibitem{shakhatreh2019} H. Shakhatreh \textit{et al.}, ``Unmanned aerial vehicles (UAVs): A survey on civil applications and key research challenges,'' \textit{IEEE Access}, vol. 7, pp. 48572--48634, 2019.
+
+% Optimization
+\bibitem{sun2017} Y. Sun \textit{et al.}, ``Optimal joint power and subcarrier allocation for full-duplex multicarrier non-orthogonal multiple access systems,'' \textit{IEEE Trans. Commun.}, vol. 65, no. 3, pp. 1077--1091, 2017.
+\bibitem{chen2023} J. Chen \textit{et al.}, ``Joint trajectory and resource allocation design for UAV communication systems,'' \textit{IEEE Trans. Veh. Technol.}, vol. 72, no. 2, pp. 2598--2610, 2023.
+\bibitem{alhourani2014} A. Al-Hourani, S. Kandeepan, and S. Lardner, ``Optimal LAP altitude for maximum coverage,'' \textit{IEEE Wireless Commun. Lett.}, vol. 3, no. 6, pp. 569--572, 2014.
+
+% Deep RL
+\bibitem{lillicrap2016} T. P. Lillicrap \textit{et al.}, ``Continuous control with deep reinforcement learning,'' in \textit{Proc. ICLR}, 2016.
+\bibitem{fujimoto2018} S. Fujimoto, H. van Hoof, and D. Meger, ``Addressing function approximation error in actor-critic methods,'' in \textit{Proc. ICML}, pp. 1582--1591, 2018.
+\bibitem{schulman2017} J. Schulman \textit{et al.}, ``Proximal policy optimization algorithms,'' \textit{arXiv preprint arXiv:1707.06347}, 2017.
+\bibitem{haarnoja2018} T. Haarnoja \textit{et al.}, ``Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor,'' in \textit{Proc. ICML}, pp. 1856--1865, 2018.
+
+% RL for wireless
+\bibitem{luong2019} N. C. Luong \textit{et al.}, ``Applications of deep reinforcement learning in communications and networking: A survey,'' \textit{IEEE Commun. Surv. Tutorials}, vol. 21, no. 4, pp. 3133--3174, 2019.
+\bibitem{liu2019} X. Liu \textit{et al.}, ``Trajectory design and power control for multi-UAV assisted wireless networks: A machine learning approach,'' \textit{IEEE Trans. Veh. Technol.}, vol. 68, no. 8, pp. 7957--7969, 2019.
+\bibitem{wang2020} L. Wang \textit{et al.}, ``Deep reinforcement learning for autonomous UAV navigation,'' in \textit{Proc. IEEE GLOBECOM}, pp. 1--6, 2020.
+\bibitem{qie2019} X. Qie \textit{et al.}, ``Joint optimization of multi-UAV target assignment and path planning based on multi-agent reinforcement learning,'' \textit{IEEE Access}, vol. 7, pp. 146264--146272, 2019.
+\bibitem{feriani2021} A. Feriani and E. Hossain, ``Single and multi-agent deep reinforcement learning for AI-enabled wireless networks: A tutorial,'' \textit{IEEE Commun. Surv. Tutorials}, vol. 23, no. 2, pp. 1226--1252, 2021.
+\bibitem{dulac2021} G. Dulac-Arnold \textit{et al.}, ``Challenges of real-world reinforcement learning: Definitions, benchmarks and analysis,'' \textit{Mach. Learn.}, vol. 110, no. 9, pp. 2419--2468, 2021.
+
+% Physics-informed ML
+\bibitem{karniadakis2021} G. E. Karniadakis \textit{et al.}, ``Physics-informed machine learning,'' \textit{Nature Rev. Phys.}, vol. 3, no. 6, pp. 422--440, 2021.
+\bibitem{soltani2022} M. Soltani \textit{et al.}, ``Deep learning-based channel estimation,'' \textit{IEEE Commun. Lett.}, vol. 26, no. 8, pp. 1797--1801, 2022.
+\bibitem{xia2020} W. Xia \textit{et al.}, ``A deep learning framework for optimization of MISO downlink beamforming,'' \textit{IEEE Trans. Commun.}, vol. 68, no. 3, pp. 1866--1880, 2020.
+\bibitem{lee2020} W. Lee, M. Kim, and D.-H. Cho, ``Deep power control: Transmit power control scheme based on convolutional neural network,'' \textit{IEEE Commun. Lett.}, vol. 22, no. 6, pp. 1276--1279, 2018.
+
+% Reward shaping
+\bibitem{ng1999} A. Y. Ng, D. Harada, and S. Russell, ``Policy invariance under reward transformations: Theory and application to reward shaping,'' in \textit{Proc. ICML}, pp. 278--287, 1999.
 \end{thebibliography}
 
 \end{document}
