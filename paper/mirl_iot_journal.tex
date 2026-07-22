@@ -513,18 +513,18 @@ The rapid convergence can be attributed to three architectural choices: (1) SCA 
 
 \subsection{Learning Dynamics}
 
-Fig.~\ref{fig:reward} presents the episode reward progression throughout the training process. The reward trajectory exhibits steady improvement during early episodes followed by asymptotic stabilization, consistent with successful policy gradient optimization. Application of moving average smoothing (window size 30) isolates the underlying learning trend from inherent episode-to-episode stochasticity.
+Fig.~\ref{fig:reward} presents the episode reward progression throughout the training process. Due to SCA warm-start initialization, SGAC begins training in a high-performance region, resulting in relatively stable rewards from the outset. The moving average reveals gradual improvement over the training horizon, while the high variance reflects the diversity of randomly generated scenarios rather than policy instability. This behavior contrasts with standard RL algorithms that start from random initialization and require extensive exploration before achieving comparable performance.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\columnwidth]{fig3_reward_curve.pdf}
-\caption{Episode reward during SGAC training. The smoothed trajectory (solid) exhibits monotonic improvement followed by convergence, with shaded region indicating variance bounds.}
+\caption{Episode reward during SGAC training. Due to SCA warm-start initialization, SGAC begins in a high-performance region. The moving average (solid red) shows stable performance with gradual improvement, while shaded region indicates episode-to-episode variance from scenario diversity.}
 \label{fig:reward}
 \end{figure}
 
 \subsection{Performance Floor Validation}
 
-Fig.~\ref{fig:floor} tracks floor mechanism activation frequency during training. The activation rate exhibits monotonic decrease from elevated values in early episodes---when the undertrained policy proposes corrections that degrade performance---to near-zero in later episodes as the policy learns to produce beneficial corrections. Evaluation on held-out test scenarios confirms:
+Fig.~\ref{fig:floor} tracks floor mechanism activation frequency during training. The activation rate exhibits a decreasing trend over the training horizon, with 33\% fewer activations in the final 500 episodes compared to the first 500. Non-zero activations throughout training reflect both exploration noise and inherently challenging scenarios where learned corrections do not outperform SCA---in such cases, the floor mechanism ensures SCA-level performance is maintained. Evaluation on held-out test scenarios confirms:
 \begin{itemize}
 \item Zero violations of the floor guarantee across 50 test scenarios
 \item Mean improvement of 1.6\% over SCA baseline
@@ -536,7 +536,7 @@ The deterministic nature of this guarantee renders SGAC suitable for mission-cri
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.95\columnwidth]{fig4_floor_activations.pdf}
-\caption{Floor mechanism activations per episode during training. Monotonically decreasing activation frequency indicates the policy learns corrections that consistently improve upon the SCA baseline.}
+\caption{Floor mechanism activations per episode during training. The downward trend (orange line) shows 33\% reduction in activations from first to last 500 episodes, indicating the policy increasingly learns corrections that improve upon SCA. Non-zero activations are expected during exploration and in challenging scenarios.}
 \label{fig:floor}
 \end{figure}
 
